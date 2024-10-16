@@ -32,6 +32,7 @@
 	/* ------------------- main colors ----------------- */
 	--black: #1b1f21;
 	--white: #fcfaf9;
+	--white-def: #ffffff;
 	--white-tr90: rgba(252, 250, 249, 0.9);
 	--pale: #e8e8e8;
 	--gray80: #434343;
@@ -89,6 +90,7 @@ body {
 	font-size: var(--font-size);
 	font-weight: var(--font-weight);
 	font-style: normal;
+	overflow-x: hidden;
 }
 
 .container {
@@ -100,50 +102,180 @@ body {
 	align-items: center;
 	margin: 0 auto;
 }
+/* ---------------------- btn ------------------------- */
+.btn {
+	display: inline-block;
+	white-space: nowrap;
+	font-size: var(--nunito-fz-15);
+	padding: 8px 18px;
+	border: 1px solid var(--gray15);
+	border-radius: 18px;
+	background-color: var(--white-def);
+	overflow: hidden;
+
+	transition: all 0.2s ease-in-out;
+}
+.design_bgc_active:active,
+.design_bgc_hover:hover {
+	background-color: var(--pink);
+	border-color: var(--pink);
+}
+
+.programming_bgc_active:active,
+.programming_bgc_hover:hover {
+	background-color: var(--sky);
+	border-color: var(--sky);
+}
+
+.gaming_bgc_active:active,
+.gaming_bgc_hover:hover {
+	background-color: var(--grass);
+	border-color: var(--grass);
+}
+
+.marketing_bgc_active:active,
+.marketing_bgc_hover:hover {
+	background-color: var(--tangerine);
+	border-color: var(--tangerine);
+}
+
+.software_bgc_active:active,
+.software_bgc_hover:hover {
+	background-color: var(--turquoise);
+	border-color: var(--turquoise);
+}
+
+.career_bgc_active:active,
+.career_bgc_hover:hover {
+	background-color: var(--mint);
+	border-color: var(--mint);
+}
+/* ---------------------- link ------------------------- */
+.link::before {
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 1px;
+	background-color: var(--grass);
+	top: 100%;
+	left: 0;
+	pointer-events: none;
+}
+
+.link_metis::before {
+	transform-origin: 100% 50%;
+	transform: scale3d(0, 1, 1);
+	transition: transform 0.3s;
+}
+
+.link_metis:hover::before {
+	transform-origin: 0% 50%;
+	transform: scale3d(1, 1, 1);
+}
+
+/* ---------------------- icon ------------------------- */
+.icon {
+	display: flex;
+	align-items: center;
+	justify-content: end;
+}
+
+.icon-search {
+}
+.icon-arrow {
+}
+
+/* ---------------------- header ------------------------- */
 .header {
+	width: 100%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-
-	padding: 10px 20px;
-	background-color: #f8f8f8;
-	/* position: fixed; */
-
-	width: 100%;
-	max-width: 1208px;
-	height: 72px;
-	/* top: -100px; */
-	transition: top 0.3s;
+	gap: 1rem;
+	padding: 16px 8px;
 }
 
 .header__nav {
 	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	width: 100%;
+	margin: 0 8px;
 }
 
 .header__button {
-	margin: 0 5px;
-	padding: 10px 15px;
-	background-color: #007bff;
-	color: white;
-	border: none;
-	cursor: pointer;
+}
+
+.header__right-search-block {
+	display: flex;
+	align-items: center;
+
+	width: 100%;
+	max-width: 114px;
 }
 
 .header__search-icon {
-	font-size: 24px;
+	margin-right: 26px;
+}
+
+.header__search-btn {
+	display: flex;
+	align-items: center;
+	justify-content: end;
+	width: 22px;
+	height: 24px;
+}
+
+.header__transition {
+}
+
+.transition-header {
+	position: relative;
+	top: 0;
+	left: 0;
 	cursor: pointer;
 }
 
+.transition-header__name {
+	display: flex;
+	align-items: center;
+	text-transform: uppercase;
+}
+.transition-header__text {
+	margin-right: 8px;
+}
+.transition-header__icon {
+	display: flex;
+	align-items: center;
+	justify-content: end;
+}
 /* ---------------------- logo ------------------------- */
 .logo {
+	text-align: center;
+	width: 100%;
+	max-width: 108px;
+	height: 100%;
+	max-height: 40px;
+	margin-right: 1rem;
 }
+
 .logo__header {
-	display: block;
-	width: 108px;
-	height: 40px;
-	background-image: url('./images/logo/logo-ebac.svg');
-	background-repeat: no-repeat;
-	background-size: cover;
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+
+	background-color: var(--white-def);
+}
+
+.logo_color_hover svg path,
+.logo_color_active svg path {
+	transition: fill 0.2s ease-in-out;
+}
+
+.logo_color_hover:hover svg path,
+.logo_color_active:active svg path {
+	fill: var(--pink-dark);
 }
 
 /* ---------------------- main ------------------------- */
@@ -153,21 +285,34 @@ main {
 /* ---------------------- media ------------------------- */
 @media (max-width: 1440px) {
 	.header {
-		padding: 10px 15px;
 	}
 }
 
+@media (max-width: 1010px) {
+	.header {
+		flex-wrap: wrap;
+	}
+
+	.header__nav {
+		order: 3;
+	}
+}
 @media (max-width: 768px) {
-	.header__button {
-		padding: 8px 10px;
+	.header__nav {
+		justify-content: start;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.header__nav a {
+		min-width: fit-content;
+		margin-bottom: 12px;
+	}
+
+	.header__search-icon {
+		margin-right: 22px;
 	}
 }
 
 @media (max-width: 320px) {
-	.header__nav {
-		flex-direction: column;
-	}
-	.header__button {
-		margin: 5px 0;
-	}
 }

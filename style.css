@@ -1,0 +1,87 @@
+body {
+	/* font-family: 'Archivo Black', sans-serif; */
+	/* font-family: 'Nunito', sans-serif; */
+
+	font-size: 18px;
+	font-weight: 400;
+	font-style: normal;
+}
+.container {
+	max-width: 1208px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0 auto;
+}
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	padding: 10px 20px;
+	background-color: #f8f8f8;
+	/* position: fixed; */
+
+	width: 100%;
+	max-width: 1208px;
+	height: 72px;
+	/* top: -100px; */
+	transition: top 0.3s;
+}
+
+.header__nav {
+	display: flex;
+}
+
+.header__button {
+	margin: 0 5px;
+	padding: 10px 15px;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	cursor: pointer;
+}
+
+.header__search-icon {
+	font-size: 24px;
+	cursor: pointer;
+}
+
+/* ---------------------- logo ------------------------- */
+.logo {
+}
+.logo__header {
+	display: block;
+	width: 108px;
+	height: 40px;
+	background-image: url('./images/logo/logo-ebac.svg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+/* ---------------------- main ------------------------- */
+main {
+	padding-top: 72px;
+}
+/* ---------------------- media ------------------------- */
+@media (max-width: 1440px) {
+	.header {
+		padding: 10px 15px;
+	}
+}
+
+@media (max-width: 768px) {
+	.header__button {
+		padding: 8px 10px;
+	}
+}
+
+@media (max-width: 320px) {
+	.header__nav {
+		flex-direction: column;
+	}
+	.header__button {
+		margin: 5px 0;
+	}
+}

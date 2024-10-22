@@ -1,24 +1,36 @@
 // умный хедер
 let lastScrollTop = 0
-const header = document.querySelector('.header')
+const header = document.querySelector('#header-cnt')
+const scrollHeaderTop = window.addEventListener('scroll', showHeaderScrollTop)
 
-// window.addEventListener('scroll', function () {
-// 	const scrollTop = window.pageYOffset || document.documentElement.scrollTop
-// 	if (scrollTop > lastScrollTop) {
-// 		header.style.top = '-100px' // Hide header
-// 	} else {
-// 		header.style.top = '0' // Show header
-// 	}
-// 	lastScrollTop = scrollTop
-// })
-
-// формы
 const formSubscribe = document.querySelector('#form-subscribe')
 const submitFormSubscribe = formSubscribe.addEventListener(
 	'submit',
 	formActions
 )
 
+function showHeaderScrollTop() {
+	const currentScroll = window.scrollY
+	if (currentScroll <= 0) {
+		if (header.classList.contains('header_header-scroll')) {
+			header.classList.remove('header_header-scroll')
+		}
+		return
+	}
+
+	if (currentScroll > lastScrollTop) {
+		if (!header.classList.contains('header_header-scroll')) {
+			header.classList.add('header_header-scroll')
+		}
+	} else if (currentScroll < lastScrollTop) {
+		if (header.classList.contains('header_header-scroll')) {
+			header.classList.remove('header_header-scroll')
+		}
+	}
+	lastScrollTop = currentScroll
+}
+
+// формы
 // валидация email
 function validateEmail(email) {
 	const emailRegex =
@@ -55,12 +67,14 @@ function formActions(e) {
 			emailInput.style.borderWidth = '2px'
 			successMessage.innerHTML = `Formato de email inválido, verifique a ortografia.` // не поставили галочку о соглашении
 			inpEmailSubscribeWrp.classList.add('error-inp-wrp')
+			inpEmailSubscribeWrp.classList.remove('correct-inp-wrp')
 			return
 		} else {
 			emailInput.style.borderColor = 'var(--grass)'
 			emailInput.style.borderWidth = '2px'
 			successMessage.innerHTML = ''
 			inpEmailSubscribeWrp.classList.add('correct-inp-wrp')
+			inpEmailSubscribeWrp.classList.remove('error-inp-wrp')
 			// отправляем formData на сервер (Object.fromEntries(formData) для просмотра здесь)
 
 			// имитация отправки на сервер через 1000ms

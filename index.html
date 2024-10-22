@@ -1105,7 +1105,9 @@
 				</div>
 
 				<div class="container articles-cnt">
-					<article class="articles__cards articles-cards cards">
+					<article
+						class="articles__cards articles-cards cards articles-cards_m_b_40"
+					>
 						<div class="articles-cards__card card">
 							<div class="card__img-wrapper">
 								<div
@@ -3972,18 +3974,26 @@
 								</div>
 								<div class="section-subscribe__form-block form-block">
 									<form
+										id="form-subscribe"
 										class="section-subscribe__form form-subscribe"
-										action="files/sendmail/sendmail.php"
+										action="/registration"
 										method="POST"
 									>
 										<div class="form-subscribe__send">
-											<input
-												type="email"
-												name="form[email]"
-												data-error="Error"
-												placeholder="Su correo electrónico"
-												class="form-subscribe__input input"
-											/>
+											<div
+												id="inp-email-subscribe-wrp"
+												class="form-subscribe__input-wrp"
+											>
+												<input
+													id="inp-email-subscribe"
+													type="email"
+													name="form-subscribe[email]"
+													data-error="Error"
+													placeholder="Su correo electrónico"
+													class="form-subscribe__input input form-subscribe-input_focus form-subscribe-input_disabled"
+												/>
+											</div>
+
 											<button
 												type="submit"
 												class="form-subscribe__btn btn subscribe-btn subscribe_bgc_active subscribe_bgc_hover subscribe_bgc_focus subscribe_bgc_disabled"
@@ -3991,6 +4001,7 @@
 												Enviar
 											</button>
 										</div>
+										<div class="form-subscribe__success-message"></div>
 										<div class="form-subscribe__chb">
 											<input
 												class="form-subscribe__inp-chb"
@@ -4011,6 +4022,7 @@
 											>
 										</div>
 									</form>
+
 									<div class="form-block__subscr-successful subscr-successful">
 										<div class="subscr-successful__block">
 											<p class="subscr-successful__text">
@@ -4039,201 +4051,6 @@
 		<footer class="footer">
 			<div class="marquee-wrp marquee-footer">
 				<div class="marquee-items marquee">
-					<div class="marquee-item">
-						<span>Descuento para cursos 20%</span>
-						<svg
-							width="40"
-							height="58"
-							viewBox="0 0 45 61"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								d="M21.3204 10.6625L27.0718 25.6025L42.6668 29.2186L27.7268 34.97L24.1107 50.5651L18.3593 35.625L2.76427 32.0089L17.7043 26.2575L21.3204 10.6625Z"
-								fill="#1B1F21"
-							/>
-						</svg>
-					</div>
-					<div class="marquee-item">
-						<span>Descuento para cursos 20%</span>
-						<svg
-							width="40"
-							height="58"
-							viewBox="0 0 45 61"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								d="M21.3204 10.6625L27.0718 25.6025L42.6668 29.2186L27.7268 34.97L24.1107 50.5651L18.3593 35.625L2.76427 32.0089L17.7043 26.2575L21.3204 10.6625Z"
-								fill="#1B1F21"
-							/>
-						</svg>
-					</div>
-					<div class="marquee-item">
-						<span>Descuento para cursos 20%</span>
-						<svg
-							width="40"
-							height="58"
-							viewBox="0 0 45 61"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								d="M21.3204 10.6625L27.0718 25.6025L42.6668 29.2186L27.7268 34.97L24.1107 50.5651L18.3593 35.625L2.76427 32.0089L17.7043 26.2575L21.3204 10.6625Z"
-								fill="#1B1F21"
-							/>
-						</svg>
-					</div>
-					<div class="marquee-item">
-						<span>Descuento para cursos 20%</span>
-						<svg
-							width="40"
-							height="58"
-							viewBox="0 0 45 61"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								d="M21.3204 10.6625L27.0718 25.6025L42.6668 29.2186L27.7268 34.97L24.1107 50.5651L18.3593 35.625L2.76427 32.0089L17.7043 26.2575L21.3204 10.6625Z"
-								fill="#1B1F21"
-							/>
-						</svg>
-					</div>
-					<div class="marquee-item">
-						<span>Descuento para cursos 20%</span>
-						<svg
-							width="40"
-							height="58"
-							viewBox="0 0 45 61"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								d="M21.3204 10.6625L27.0718 25.6025L42.6668 29.2186L27.7268 34.97L24.1107 50.5651L18.3593 35.625L2.76427 32.0089L17.7043 26.2575L21.3204 10.6625Z"
-								fill="#1B1F21"
-							/>
-						</svg>
-					</div>
-					<div class="marquee-item">
-						<span>Descuento para cursos 20%</span>
-						<svg
-							width="40"
-							height="58"
-							viewBox="0 0 45 61"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								d="M21.3204 10.6625L27.0718 25.6025L42.6668 29.2186L27.7268 34.97L24.1107 50.5651L18.3593 35.625L2.76427 32.0089L17.7043 26.2575L21.3204 10.6625Z"
-								fill="#1B1F21"
-							/>
-						</svg>
-					</div>
-					<div class="marquee-item">
-						<span>Descuento para cursos 20%</span>
-						<svg
-							width="40"
-							height="58"
-							viewBox="0 0 45 61"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								d="M21.3204 10.6625L27.0718 25.6025L42.6668 29.2186L27.7268 34.97L24.1107 50.5651L18.3593 35.625L2.76427 32.0089L17.7043 26.2575L21.3204 10.6625Z"
-								fill="#1B1F21"
-							/>
-						</svg>
-					</div>
-					<div class="marquee-item">
-						<span>Descuento para cursos 20%</span>
-						<svg
-							width="40"
-							height="58"
-							viewBox="0 0 45 61"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								d="M21.3204 10.6625L27.0718 25.6025L42.6668 29.2186L27.7268 34.97L24.1107 50.5651L18.3593 35.625L2.76427 32.0089L17.7043 26.2575L21.3204 10.6625Z"
-								fill="#1B1F21"
-							/>
-						</svg>
-					</div>
-					<div class="marquee-item">
-						<span>Descuento para cursos 20%</span>
-						<svg
-							width="40"
-							height="58"
-							viewBox="0 0 45 61"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								d="M21.3204 10.6625L27.0718 25.6025L42.6668 29.2186L27.7268 34.97L24.1107 50.5651L18.3593 35.625L2.76427 32.0089L17.7043 26.2575L21.3204 10.6625Z"
-								fill="#1B1F21"
-							/>
-						</svg>
-					</div>
-					<div class="marquee-item">
-						<span>Descuento para cursos 20%</span>
-						<svg
-							width="40"
-							height="58"
-							viewBox="0 0 45 61"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								d="M21.3204 10.6625L27.0718 25.6025L42.6668 29.2186L27.7268 34.97L24.1107 50.5651L18.3593 35.625L2.76427 32.0089L17.7043 26.2575L21.3204 10.6625Z"
-								fill="#1B1F21"
-							/>
-						</svg>
-					</div>
-					<div class="marquee-item">
-						<span>Descuento para cursos 20%</span>
-						<svg
-							width="40"
-							height="58"
-							viewBox="0 0 45 61"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								d="M21.3204 10.6625L27.0718 25.6025L42.6668 29.2186L27.7268 34.97L24.1107 50.5651L18.3593 35.625L2.76427 32.0089L17.7043 26.2575L21.3204 10.6625Z"
-								fill="#1B1F21"
-							/>
-						</svg>
-					</div>
-					<div class="marquee-item">
-						<span>Descuento para cursos 20%</span>
-						<svg
-							width="40"
-							height="58"
-							viewBox="0 0 45 61"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								d="M21.3204 10.6625L27.0718 25.6025L42.6668 29.2186L27.7268 34.97L24.1107 50.5651L18.3593 35.625L2.76427 32.0089L17.7043 26.2575L21.3204 10.6625Z"
-								fill="#1B1F21"
-							/>
-						</svg>
-					</div>
-					<div class="marquee-item">
-						<span>Descuento para cursos 20%</span>
-						<svg
-							width="40"
-							height="58"
-							viewBox="0 0 45 61"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								d="M21.3204 10.6625L27.0718 25.6025L42.6668 29.2186L27.7268 34.97L24.1107 50.5651L18.3593 35.625L2.76427 32.0089L17.7043 26.2575L21.3204 10.6625Z"
-								fill="#1B1F21"
-							/>
-						</svg>
-					</div>
 					<div class="marquee-item">
 						<span>Descuento para cursos 20%</span>
 						<svg
@@ -4982,8 +4799,14 @@
 							/>
 						</div>
 					</div>
-					<form class="footer__up-subscribe subscribe" action="" method="post">
+					<form
+						id="formFooter"
+						class="footer__up-subscribe subscribe"
+						action=""
+						method="post"
+					>
 						<input
+							id="inpEmailFooter"
 							class="subscribe__email input input_footer"
 							type="email"
 							name="email"

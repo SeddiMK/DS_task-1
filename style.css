@@ -23,7 +23,7 @@
 
 :root {
 	--max-w-body: 1440px;
-	--max-w-cnt: 1208px;
+	--max-w-cnt: 1188px;
 
 	--font-family: 'Nunito', sans-serif;
 	--font-size: 18px;
@@ -185,7 +185,7 @@ main {
 
 .webinars_bgc_active:active,
 .webinars_bgc_hover:hover {
-	background-color: var(--black);
+	background-color: var(--pink-dark);
 	border-color: var(--black);
 	color: var(--white);
 }
@@ -194,7 +194,8 @@ main {
 	border-color: var(--black);
 }
 .webinars_bgc_focus:focus {
-	border-color: var(--black);
+	background-color: var(--violet-dark);
+	border-color: var(--white);
 }
 
 .subscribe-btn {
@@ -499,7 +500,7 @@ main {
 	padding: 23px 0;
 }
 .marquee-articules {
-	top: -92px;
+	top: -333px;
 	background: var(--turquoise);
 	transform: rotate(-4deg);
 }
@@ -583,14 +584,96 @@ main {
 	border: 1px solid var(--white);
 	background-color: inherit;
 }
+.input_footer:focus {
+	color: var(--white);
+}
 .input_footer::placeholder {
 	color: var(--pale);
 }
+
+.form-subscribe__input-wrp {
+	position: relative;
+	top: 0;
+	left: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.error-inp-wrp:before {
+	content: '';
+	display: block;
+	position: absolute;
+	z-index: 5;
+	right: 18px;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 25px;
+	height: 25px;
+	background-color: transparent;
+	background-image: url('./images/subscribe-block/icon/error-inp.svg');
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+.correct-inp-wrp:before {
+	content: '';
+	display: block;
+	position: absolute;
+	z-index: 5;
+	right: 18px;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 25px;
+	height: 25px;
+	background-color: transparent;
+	background-image: url('./images/subscribe-block/icon/correct-inp.svg');
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+ {
+}
+.form-subscribe__input-wrp::before {
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+	/* -webkit-text-fill-color: #ffffff;
+	-webkit-box-shadow: 0 0 0px 1000px #131414 inset;*/
+	/* transition: background-color 5000s ease-in-out 0s; */
+}
+
 .form-subscribe__input {
+	position: relative;
+	top: 0;
+	left: 0;
 	width: 280px;
 	height: 49px;
-	background-color: transparent;
+	background-color: inherit;
 	padding: 10px 24px;
+}
+.form-subscribe__input:active {
+}
+
+input[type='email']:hover {
+	border-color: var(--white-def);
+	color: var(--white-def);
+}
+input[type='email'] {
+}
+
+.form-subscribe-input_focus:focus {
+	border-color: var(--black);
+	border-width: 2px;
+	outline: none;
+}
+.form-subscribe-input_disabled:disabled {
+	opacity: 0.6;
 }
 .form-subscribe__input::placeholder {
 	color: var(--white);
@@ -671,7 +754,6 @@ main {
 	gap: 40px;
 }
 .articles-cards {
-	margin-bottom: 136px;
 }
 .mask-fashion {
 	mask-image: url(./images/articles/mask/fashion.png);
@@ -777,6 +859,7 @@ input:checked ~ .tab__content {
 	flex-direction: row;
 	gap: 1rem;
 	padding: 16px 0;
+	margin-bottom: 80px;
 }
 
 .header__nav {
@@ -851,9 +934,8 @@ input:checked ~ .tab__content {
 
 .gaming-cnt {
 	flex-direction: row;
-	flex-wrap: wrap;
 	gap: 40px;
-	padding: 80px 0 224px 0;
+	margin-bottom: 448px;
 }
 
 .gaming__img-wrapper {
@@ -941,7 +1023,6 @@ input:checked ~ .tab__content {
 	font-size: var(--nunito-fz-15);
 	font-weight: 400;
 	color: var(--gray35);
-	margin-bottom: 56px;
 }
 .content-info__date-text {
 }
@@ -983,18 +1064,22 @@ input:checked ~ .tab__content {
 	width: 280px;
 	height: 64px;
 }
+
 /* ---------------------- articles ------------------------- */
 .articles {
 	position: relative;
 	top: 0;
 	left: 0;
-	padding: 224px 0 136px 0;
 	background-image: url('./images/bg/bgLineArticulos.svg');
 	background-repeat: no-repeat;
 	background-position: 0px 70px;
 }
+.articles-cnt {
+	gap: 136px;
+	margin-bottom: 215px;
+}
 .design-ux-ui {
-	margin-bottom: 136px;
+	margin-bottom: 15px;
 }
 .design-ux-ui__info {
 }
@@ -1132,6 +1217,7 @@ input:checked ~ .tab__content {
 
 	overflow: hidden;
 	padding: 140px 0 192px 0;
+	margin-bottom: 190px;
 }
 .webinars__up {
 	display: flex;
@@ -1322,7 +1408,7 @@ input:checked ~ .tab__content {
 	justify-content: center;
 	width: 100%;
 	height: 100%;
-	padding: 166px 0 255px 0;
+	margin-bottom: 236px;
 }
 .section-subscribe {
 	display: flex;
@@ -1397,16 +1483,27 @@ input:checked ~ .tab__content {
 	flex-direction: column;
 	align-items: start;
 	justify-content: center;
-	gap: 16px;
-	/* ---------------------------------------------------------------------- */
-	display: none;
+	transition: all 0.3s ease-in-out;
 }
 .form-subscribe__send {
 	display: flex;
 	align-items: center;
 	gap: 16px;
+	position: relative;
+	top: 0;
+	left: 0;
+	margin-bottom: 16px;
 }
-
+.form-subscribe__success-message {
+	display: block;
+	text-align: center;
+	font-size: var(--nunito-fz-13);
+	color: var(--white);
+	position: relative;
+	top: -11px;
+	left: 0px;
+	max-width: 280px;
+}
 .form-subscribe__lbl {
 	color: var(--white);
 	font-size: var(--nunito-fz-15);
@@ -1419,7 +1516,7 @@ input:checked ~ .tab__content {
 	top: 0;
 	left: 0;
 	/* ------------------------------------------------ */
-	display: block;
+	display: none;
 }
 .subscr-successful__block {
 	background-color: var(--white);
@@ -1663,12 +1760,10 @@ input:checked ~ .tab__content {
 }
 
 @media (max-width: 1279px) {
-	.container {
-		padding: 0 32px;
-	}
 	.header-cnt {
 		flex-wrap: wrap;
 		padding: 16px 8px;
+		margin-bottom: 50px;
 	}
 
 	.header__nav {
@@ -1686,7 +1781,7 @@ input:checked ~ .tab__content {
 		flex-direction: column;
 		align-items: center;
 		gap: 24px;
-		padding: 80px 0 224px 0;
+		margin-bottom: 212px;
 	}
 
 	.mask-gaming {
@@ -1758,7 +1853,7 @@ input:checked ~ .tab__content {
 		grid-column-start: 2;
 		grid-row-start: 1;
 		order: 3;
-		margin-bottom: 48px;
+		margin-bottom: 16px;
 	}
 
 	.content-info__link-btn {
@@ -1775,15 +1870,16 @@ input:checked ~ .tab__content {
 
 	/* ------------------- articles ----------------------- */
 	.articles {
-		padding: 140px 0 115px 0;
 		background-image: url('./images/bg/bgLineArticulos-tablet.svg');
 		background-position: 0px 0px;
 		background-size: cover;
 	}
 	.marquee-articules {
-		top: -200px;
+		top: -163px;
 	}
 	.articles-cnt {
+		margin-bottom: 210px;
+		padding-top: 100px;
 	}
 	.mask-fashion {
 		mask-size: 340px 224px;
@@ -1848,8 +1944,8 @@ input:checked ~ .tab__content {
 	.content-info__date {
 		order: 3;
 	}
-	.articles-cards {
-		margin-bottom: 104px;
+	.articles-cards_m_b_40 {
+		margin-bottom: 76px;
 	}
 	.design-ux-ui__img-wrapper {
 		display: flex;
@@ -1888,7 +1984,6 @@ input:checked ~ .tab__content {
 		background-image: url('./images/webinars/bg/line-bg-table.svg');
 		background-repeat: no-repeat;
 		background-position: 0px 47px;
-		padding: 168px 0px 153px 0px;
 	}
 	.webinars:before {
 		content: '';
@@ -1926,6 +2021,7 @@ input:checked ~ .tab__content {
 		flex-direction: row;
 		flex-wrap: wrap;
 		align-items: start;
+		margin-bottom: 210px;
 	}
 
 	.webinars__btn {
@@ -1960,9 +2056,9 @@ input:checked ~ .tab__content {
 	}
 	/* ------------------- subscribe ----------------------- */
 	.subscribe-block {
-		padding: 138px 0 198px 0;
 	}
 	.subscribe-block-cnt {
+		margin-bottom: 215px;
 	}
 
 	.section-subscribe {
@@ -2082,11 +2178,12 @@ input:checked ~ .tab__content {
 		width: 64px;
 		height: 64px;
 	}
+	.container {
+		padding-right: 32px;
+		padding-left: 32px;
+	}
 }
 @media (max-width: 768px) {
-	.container {
-		padding: 8px 8px;
-	}
 	.header-cnt {
 		padding: 12px 8px;
 	}
@@ -2116,7 +2213,6 @@ input:checked ~ .tab__content {
 		flex-direction: column;
 		align-items: center;
 		gap: 24px;
-		padding: 14px 0px 17.5px 0px;
 	}
 
 	.gaming__img-wrp {
@@ -2184,10 +2280,9 @@ input:checked ~ .tab__content {
 
 	/* -------------- articles ---------------- */
 	.articles {
-		padding: 0px 0;
 	}
-	.marquee-wrp {
-		top: -109px;
+	.articles-cnt {
+		margin-bottom: 104px;
 	}
 	.cards {
 		flex-direction: column;
@@ -2296,13 +2391,12 @@ input:checked ~ .tab__content {
 	/* -------------- webinars ---------------- */
 	.webinars {
 		height: 100%;
-		padding: 112px 0 120px 0;
-
 		background-image: none;
 	}
 	.webinars-cnt {
 		flex-direction: column;
 		align-items: center;
+		margin-bottom: 160px;
 	}
 	.webinars__title {
 		margin-bottom: 40px;
@@ -2367,9 +2461,9 @@ input:checked ~ .tab__content {
 	/* -------------- subscribe ---------------- */
 
 	.subscribe-block {
-		padding: 114px 0 180px 0;
 	}
 	.subscribe-block-cnt {
+		margin-bottom: 220px;
 	}
 
 	.section-subscribe {
@@ -2499,6 +2593,10 @@ input:checked ~ .tab__content {
 	.logo-left-footer {
 		max-width: 173px;
 		max-height: 64px;
+	}
+	.container {
+		padding-right: 8px;
+		padding-left: 8px;
 	}
 }
 

@@ -12,54 +12,64 @@ const header = document.querySelector('.header')
 // 	lastScrollTop = scrollTop
 // })
 
-// На странице есть форма подписки, необходимо реализовать валидацию email, если поле не корректно заполнили подсвечиваем инпут красным, в макетах есть пример текстового поля с ошибкой в секции ui-kit. После успешного заполнения формы и отправки мы должны показать блок успеха и скрыть форму.
+// формы
+const formSubscribe = document.querySelector('#form-subscribe')
+const submitFormSubscribe = formSubscribe.addEventListener(
+	'submit',
+	formActions
+)
 
-// document.querySelector('.form').addEventListener('submit', function (event) {
-//   event.preventDefault()
+// валидация email
+function validateEmail(email) {
+	const emailRegex =
+		/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
 
-//   const name = document.querySelector('#name').value
-//   const email = document.querySelector('#email').value
-//   const phone = document.querySelector('#phone').value
+	return emailRegex.test(email)
+}
+// стилизация по результатам валидации
+function formActions(e) {
+	e.preventDefault()
 
-//   if (!name ||!email ||!phone) {
-//     alert('Please fill all fields')
-//     return
-//   }
+	let formData = new FormData(formSubscribe)
 
-//   // валидация email
-//   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-//   if (!emailRegex.test(email)) {
-//     alert('Please enter a valid email address')
-//     return
-//   }
+	const emailInput = document.querySelector('#inp-email-subscribe')
+	const emailVal = emailInput.value.toLowerCase()
+	const chbSubscribeChd = document.querySelector('#chb-subscribe').checked
+	const subscrSuccessful = document.querySelector('.subscr-successful')
+	const successMessage = document.querySelector(
+		'.form-subscribe__success-message'
+	)
+	const inpEmailSubscribeWrp = document.querySelector(
+		'#inp-email-subscribe-wrp'
+	)
 
-// отправка формы
-document.querySelector('.form').addEventListener('submit', function (event) {
-	event.preventDefault()
-
-	const name = document.querySelector('#name').value
-	const emailInput = document.querySelector('#email')
-	const email = emailInput.value
-	const phone = document.querySelector('#phone').value
-	const successMessage = document.querySelector('.success-message')
-	const form = document.querySelector('.form')
-
-	if (!name || !email || !phone) {
-		alert('Please fill all fields')
+	if (!chbSubscribeChd || !emailVal) {
+		successMessage.innerText = `No ha introducido el correo electrónico o no ha aceptado los términos.`
 		return
 	}
 
-	// Email validation
-	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-	if (!emailRegex.test(email)) {
-		emailInput.style.borderColor = 'red' // Highlight input in red
-		alert('Please enter a valid email address')
-		return
-	} else {
-		emailInput.style.borderColor = '' // Reset input border color
-	}
+	if (emailVal !== '') {
+		const validEmail = validateEmail(emailVal)
+		if (!validEmail) {
+			emailInput.style.borderColor = 'var(--tangerine)'
+			emailInput.style.borderWidth = '2px'
+			successMessage.innerHTML = `Formato de email inválido, verifique a ortografia.` // не поставили галочку о соглашении
+			inpEmailSubscribeWrp.classList.add('error-inp-wrp')
+			return
+		} else {
+			emailInput.style.borderColor = 'var(--grass)'
+			emailInput.style.borderWidth = '2px'
+			successMessage.innerHTML = ''
+			inpEmailSubscribeWrp.classList.add('correct-inp-wrp')
+			// отправляем formData на сервер (Object.fromEntries(formData) для просмотра здесь)
 
-	// Show success message and hide form
-	successMessage.style.display = 'block'
-	form.style.display = 'none'
-})
+			// имитация отправки на сервер через 1000ms
+			setTimeout(() => {
+				subscrSuccessful.style.display = 'block'
+				formSubscribe.style.display = 'none'
+				console.log('Форма отправлена через 1000ms !')
+			}, 1000)
+		}
+	}
+	clearTimeout()
+}

@@ -82,7 +82,7 @@ body {
 	font-size: var(--font-size);
 	font-weight: var(--font-weight);
 	font-style: normal;
-	background-color: purple;
+	background-color: var(--white);
 	overflow: hidden;
 }
 main {
@@ -366,7 +366,7 @@ main {
 	align-items: center;
 	-webkit-box-pack: end;
 	-ms-flex-pack: end;
-	justify-content: end;
+	justify-content: start;
 }
 .icon-separator-run-line {
 	display: inline-block;
@@ -515,7 +515,7 @@ main {
 	transform: rotate(-4deg);
 }
 .marquee-webinars {
-	top: 0;
+	top: 3px;
 	left: -24vw;
 	-webkit-transform: rotate(-3deg);
 	-ms-transform: rotate(-3deg);
@@ -523,7 +523,7 @@ main {
 	background: var(--tangerine);
 }
 .marquee-subscribe-block {
-	bottom: 19px;
+	bottom: 16px;
 	left: -24vw;
 	background: var(--coral-dark);
 	-webkit-transform: rotate(2deg);
@@ -1128,7 +1128,7 @@ input:checked ~ .tab__content {
 .text-info {
 	max-width: 610px;
 	margin-right: 90px;
-	margin-bottom: 15px;
+	margin-bottom: 21px;
 }
 .text-info__title {
 	font-family: var(--font-family-title);
@@ -1228,8 +1228,8 @@ input:checked ~ .tab__content {
 	-webkit-background-size: 100% 100%;
 }
 .articles-cnt {
-	gap: 136px;
-	margin-bottom: 172px;
+	gap: 138px;
+	margin-bottom: 170px;
 	padding: 0;
 }
 .img-wrp__stiker-articles svg {
@@ -1365,7 +1365,10 @@ input:checked ~ .tab__content {
 	height: 325px;
 }
 .cards_m_t {
-	margin-top: -14px;
+	margin-top: -18px;
+}
+.cards-buttom .text-info {
+	margin-bottom: 18px;
 }
 .stiker-marketing {
 	left: -63px;
@@ -1442,8 +1445,8 @@ input:checked ~ .tab__content {
 	color: var(--white);
 	background-color: var(--black);
 	background-image: url('./images/webinars/bg/line-bg-center.svg');
-	background-repeat: no-repeat;
-	background-position: center center;
+	background-repeat: repeat;
+	background-position: 50% -88px;
 }
 .webinars-wrp::before {
 	content: url('./images/webinars/bg/line-bg-left.svg');
@@ -1546,8 +1549,22 @@ input:checked ~ .tab__content {
 .card-mini-two {
 	background-color: var(--coral-dark);
 }
+.card-mini-two .top-card-mini__name {
+	margin-bottom: 0px;
+	margin-top: 2px;
+}
 .card-mini-three {
 	background-color: var(--tangerine-dark);
+}
+.card-mini-three .top-card-mini__name {
+	margin-bottom: 0px;
+	margin-top: 1px;
+}
+.card-mini-three .learn-time__date-text {
+	max-width: 100%;
+}
+.card-mini-three .learn-time-icon {
+	width: 16px;
 }
 .card-mini-bg-one {
 	background-image: url('./images/webinars/card/bd-card/line-bg-one.svg');
@@ -1562,8 +1579,9 @@ input:checked ~ .tab__content {
 .card-mini-bg-three {
 	background-image: url('./images/webinars/card/bd-card/line-bg-three.svg');
 	background-repeat: no-repeat;
-	background-position: 0 0;
+	background-position: 0 20px;
 }
+
 .top-card-mini {
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -1595,6 +1613,8 @@ input:checked ~ .tab__content {
 .top-card-mini__name {
 	font-family: var(--font-family-title);
 	font-size: 26px;
+	margin-bottom: 6px;
+	margin-top: 2px;
 }
 .top-card-mini__specialization {
 	font-size: 15px;
@@ -1617,7 +1637,6 @@ input:checked ~ .tab__content {
 }
 .bottom-card-mini {
 	font-size: 15px;
-	height: 75px;
 	width: 100%;
 }
 .horizon {
@@ -1656,7 +1675,7 @@ input:checked ~ .tab__content {
 	max-width: 200px;
 }
 .learn-time-icon {
-	width: 20px;
+	width: 28px;
 	color: var(--black);
 }
 .learn-time svg path {
@@ -2224,8 +2243,8 @@ input:checked ~ .tab__content {
 	/*  ---------------------- articles ---------------------- */
 	.articles {
 		background-image: url('./images/bg/bgLineArticulos-tablet.svg');
-		background-size: cover;
-		background-position: -58px 220px;
+		background-size: 100% 100%;
+		background-position: 0px 143px;
 	}
 	.marquee-wrp {
 		font-size: 30px;
@@ -2481,8 +2500,8 @@ input:checked ~ .tab__content {
 		padding: 99px 0 48px 0;
 	}
 	.webinars-wrp .container {
-		padding-right: 0;
-		padding-left: 0;
+		/* padding-right: 0;
+		padding-left: 0; */
 	}
 	.webinars__btn {
 		margin-bottom: 0;
@@ -2609,12 +2628,9 @@ input:checked ~ .tab__content {
 		height: 498px;
 	}
 	.section-subscribe__wrp {
-		overflow: hidden;
-		background-color: var(--turquoise-dark);
-		background-image: url(./images/subscribe-block/bg/line-bg.svg);
-		background-repeat: no-repeat;
-		background-position: -185px -155px;
-		border-radius: 24px;
+		background-image: url(./images/subscribe-block/bg/line-bg-tablet.svg);
+		background-position: 0px 0px;
+		border-radius: 30px;
 		padding: 40px 165px 40px 24px;
 		border-top-right-radius: 60px;
 		border-bottom-right-radius: 60px;
@@ -2785,7 +2801,13 @@ input:checked ~ .tab__content {
 		gap: 5px;
 		padding: 12px 8px;
 	}
-
+	.logo {
+		max-width: 130px;
+		max-height: 48px;
+		padding-left: 0px;
+		margin-right: 0px;
+		margin-bottom: 10px;
+	}
 	.logo__link svg {
 		width: 100%;
 		height: 100%;
@@ -2808,8 +2830,8 @@ input:checked ~ .tab__content {
 		margin-bottom: 12px;
 	}
 	.header__right-search-block {
-		padding-top: 7px;
-		padding-bottom: 19px;
+		padding-top: 12px;
+		padding-bottom: 23px;
 		margin-right: -4px;
 	}
 	.header__search-icon {
@@ -2959,8 +2981,8 @@ input:checked ~ .tab__content {
 	.articles {
 		background-image: url('./images/bg/bgLineArticulos-mobile.svg'),
 			url('./images/bg/bgLineArticulos-mobile-2.svg');
+		background-position: 0 -3%, 0 93%;
 		background-size: 100% 50%;
-		background-position: top center, center 89%;
 		-khtml-background-size: 100% 50%;
 		-moz-background-size: 100% 50%;
 		-ms-background-size: 100% 50%;
@@ -3305,9 +3327,15 @@ input:checked ~ .tab__content {
 	}
 	.date-text__txt {
 		max-width: 151px;
-		margin-right: 20px;
+		margin-right: 9px;
+	}
+	.card-mini-bg-one {
+		background-image: url(./images/webinars/card/bd-card/line-bg-one-mobile.svg);
+		background-position: 63px 32px;
 	}
 	.card-mini-two {
+		background-image: url(./images/webinars/card/bd-card/line-bg-two-mobile.svg);
+		background-position: 62px 2px;
 		padding: 29px 24px 24px 24px;
 	}
 	.card-mini-bg-two .date-text {
@@ -3327,6 +3355,8 @@ input:checked ~ .tab__content {
 		width: 20px;
 	}
 	.card-mini-three {
+		background-image: url(./images/webinars/card/bd-card/line-bg-three-mobile.svg);
+		background-position: 62px 51px;
 		padding: 29px 24px 24px 24px;
 	}
 	.link-btn-webinars {
@@ -3364,7 +3394,7 @@ input:checked ~ .tab__content {
 		background-color: var(--turquoise-dark);
 		background-image: url(./images/subscribe-block/bg/line-bg-mobile.svg);
 		background-repeat: no-repeat;
-		background-position: -185px -155px;
+		background-position: 0px -29px;
 		width: 100%;
 		max-width: 304px;
 		padding: 65px 24px 1038px 24px;

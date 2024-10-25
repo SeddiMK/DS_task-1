@@ -115,10 +115,8 @@ main {
 	-ms-flex-align: center;
 	align-items: center;
 	padding: 0 10px 0 10px;
-	margin: 0px auto;
+	margin: 0 auto;
 }
-
-/* --------------------------------- btn ------------------------------ */
 .btn {
 	display: inline-block;
 	white-space: nowrap;
@@ -226,8 +224,6 @@ main {
 	background-color: var(--coral-dark);
 	border-color: var(--black);
 }
-
-/* --------------------------------- link ------------------------------ */
 .link-btn-gaming {
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -265,8 +261,6 @@ main {
 .link-btn-gaming_focus:focus {
 	outline-offset: 0;
 }
-
-/* --------------------------------- list ------------------------------ */
 .list-gaming {
 	color: var(--grass-dark);
 }
@@ -356,7 +350,6 @@ main {
 .content-info-software .text-info-card {
 	margin-right: 0;
 }
-
 .icon {
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -373,8 +366,6 @@ main {
 	width: 40px;
 	height: 58px;
 }
-
-/* --------------------------------- logo ------------------------------ */
 .logo {
 	text-align: center;
 	width: 100%;
@@ -474,8 +465,6 @@ main {
 	right: -40px;
 	top: -52.5px;
 }
-
-/* --------------------------------- marquee ------------------------------ */
 .marquee-wrp {
 	position: absolute;
 	z-index: 10;
@@ -594,8 +583,6 @@ main {
 		transform: translate3d(-50%, 0, 0);
 	}
 }
-
-/* --------------------------------- input ------------------------------ */
 .input {
 	display: inline-block;
 	font-size: var(--nunito-fz-18);
@@ -790,8 +777,6 @@ input[type='email']:hover {
 .form-subscribe__inp-chb:disabled + .lbl-subscribe::before {
 	opacity: 0.4;
 }
-
-/* --------------------------------- cards ------------------------------ */
 .cards {
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -843,7 +828,6 @@ input[type='email']:hover {
 	left: 0;
 	margin-bottom: 68px;
 }
-
 .card-design:hover .stiker-design {
 	-webkit-animation: spin 7s infinite linear;
 	animation: spin 7s infinite linear;
@@ -915,8 +899,6 @@ input:checked ~ .tab__content {
 	max-height: 100vh;
 	padding: 8px 0;
 }
-
-/* --------------------------------- header ------------------------------ */
 .header {
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -1003,7 +985,6 @@ input:checked ~ .tab__content {
 	-webkit-box-align: center;
 	-ms-flex-align: center;
 	align-items: center;
-
 	text-transform: uppercase;
 }
 .transition-header__text {
@@ -1023,15 +1004,13 @@ input:checked ~ .tab__content {
 	-ms-flex-pack: end;
 	justify-content: end;
 }
-
-/* --------------------------------- gaming ------------------------------ */
 .gaming {
 	position: relative;
 	top: 0;
 	left: 0;
 	background-image: url(./images/bg/bgLineGaming.svg);
 	background-repeat: no-repeat;
-	background-position: center 0px;
+	background-position: center 0;
 	background-size: cover;
 	min-width: 100vw;
 	-khtml-background-size: cover;
@@ -1062,6 +1041,7 @@ input:checked ~ .tab__content {
 	mask-image: url('./images/gaming/mask-gaming.png');
 }
 .img-gaming {
+	-o-object-position: center 100%;
 	object-position: center 100%;
 }
 .img-wrp__stiker-gaming svg {
@@ -1069,9 +1049,18 @@ input:checked ~ .tab__content {
 	height: 180px;
 }
 .content-info-gaming {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
 	flex-direction: column;
+	-webkit-box-align: start;
+	-ms-flex-align: start;
 	align-items: start;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
 	justify-content: space-between;
 	margin: 56px 6px 55px 0;
 }
@@ -1090,7 +1079,6 @@ input:checked ~ .tab__content {
 	-ms-flex-pack: center;
 	justify-content: center;
 }
-
 .content-info__links {
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -1101,10 +1089,8 @@ input:checked ~ .tab__content {
 	-webkit-box-pack: start;
 	-ms-flex-pack: start;
 	justify-content: start;
-	/* margin-top: 20px; */
 	margin-bottom: 15px;
 }
-
 .content-info__list {
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -1164,7 +1150,6 @@ input:checked ~ .tab__content {
 	letter-spacing: -0.8px;
 	margin-bottom: 70px;
 }
-
 .date-text {
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -1210,8 +1195,6 @@ input:checked ~ .tab__content {
 	width: 280px;
 	height: 64px;
 }
-
-/* --------------------------------- articles ------------------------------ */
 .articles {
 	position: relative;
 	top: 0;
@@ -1257,7 +1240,7 @@ input:checked ~ .tab__content {
 	letter-spacing: -0.7px;
 }
 .design-ux-ui {
-	margin-bottom: 0px;
+	margin-bottom: 0;
 }
 .info-design-ux-ui {
 	display: grid;
@@ -1265,6 +1248,8 @@ input:checked ~ .tab__content {
 	grid-template-columns: 376px 1fr;
 	grid-column-gap: 19px;
 	grid-row-gap: 13px;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
 	align-items: center;
 	width: 100%;
 	height: 100%;
@@ -1299,6 +1284,7 @@ input:checked ~ .tab__content {
 	flex-direction: row-reverse;
 }
 .info-design-ux-ui .links-big-cards {
+	-ms-flex-item-align: start;
 	align-self: start;
 	justify-self: end;
 }
@@ -1308,9 +1294,18 @@ input:checked ~ .tab__content {
 	grid-row-start: 1;
 }
 .text-info-design-ux-ui {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
 	flex-direction: column;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
 	align-items: center;
+	-webkit-box-pack: start;
+	-ms-flex-pack: start;
 	justify-content: start;
 	max-width: 640px;
 	height: 100%;
@@ -1360,7 +1355,6 @@ input:checked ~ .tab__content {
 .sub-text-design-ux-ui {
 	max-width: 100%;
 }
-
 .card_height {
 	height: 325px;
 }
@@ -1377,9 +1371,9 @@ input:checked ~ .tab__content {
 .stiker-marketing svg {
 	width: 286px;
 	height: 214px;
-	-webkit-transform: rotate(0deg);
-	-ms-transform: rotate(0deg);
-	transform: rotate(0deg);
+	-webkit-transform: rotate(0);
+	-ms-transform: rotate(0);
+	transform: rotate(0);
 }
 .img-wrapper-marketing {
 	margin-bottom: 35px;
@@ -1397,9 +1391,6 @@ input:checked ~ .tab__content {
 .text-info-marketing h3 {
 	margin-bottom: 12px;
 }
-.img-wrp-software {
-}
-/* --------------------------------- webinars ------------------------------ */
 .webinars {
 	position: relative;
 	top: 0;
@@ -1475,6 +1466,8 @@ input:checked ~ .tab__content {
 	-webkit-box-align: start;
 	-ms-flex-align: start;
 	align-items: start;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
 	justify-content: space-between;
 	position: relative;
 	top: 0;
@@ -1517,8 +1510,6 @@ input:checked ~ .tab__content {
 	justify-content: center;
 	gap: 40px;
 }
-
-/* --------------------------------- card-mini ------------------------------ */
 .card-mini {
 	position: relative;
 	top: 0;
@@ -1550,14 +1541,14 @@ input:checked ~ .tab__content {
 	background-color: var(--coral-dark);
 }
 .card-mini-two .top-card-mini__name {
-	margin-bottom: 0px;
+	margin-bottom: 0;
 	margin-top: 2px;
 }
 .card-mini-three {
 	background-color: var(--tangerine-dark);
 }
 .card-mini-three .top-card-mini__name {
-	margin-bottom: 0px;
+	margin-bottom: 0;
 	margin-top: 1px;
 }
 .card-mini-three .learn-time__date-text {
@@ -1581,7 +1572,6 @@ input:checked ~ .tab__content {
 	background-repeat: no-repeat;
 	background-position: 0 20px;
 }
-
 .top-card-mini {
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -1681,8 +1671,6 @@ input:checked ~ .tab__content {
 .learn-time svg path {
 	fill: var(--white);
 }
-
-/* --------------------------------- subscribe-block ------------------------------ */
 .subscribe-block-cnt {
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -1857,8 +1845,6 @@ input:checked ~ .tab__content {
 	width: 120px;
 	height: 120px;
 }
-
-/* --------------------------------- footer ------------------------------ */
 .footer {
 	position: relative;
 	top: 0;
@@ -2068,21 +2054,21 @@ input:checked ~ .tab__content {
 	font-size: var(--nunito-fz-13);
 	font-weight: 500;
 }
-
-/* --------------------------------- @media 1279px ------------------------------ */
 @media (max-width: 1279px) {
 	.header-cnt {
 		-ms-flex-wrap: wrap;
+		-webkit-box-pack: justify;
+		-ms-flex-pack: justify;
 		justify-content: space-between;
 		flex-wrap: wrap;
 		gap: 24px;
 		padding: 16px 8px;
 	}
 	.logo {
-		padding-left: 0px;
+		padding-left: 0;
 	}
 	.header__right-search-block {
-		margin-right: 0px;
+		margin-right: 0;
 	}
 	.header-cnt.header_header-scroll {
 		top: -140px;
@@ -2095,7 +2081,7 @@ input:checked ~ .tab__content {
 	}
 	.gaming {
 		background-image: url('./images/bg/bgLineGaming-tablet.svg');
-		background-position: center 0px;
+		background-position: center 0;
 	}
 	.gaming-cnt {
 		-webkit-box-orient: vertical;
@@ -2110,6 +2096,7 @@ input:checked ~ .tab__content {
 		margin-bottom: 190px;
 	}
 	.img-gaming {
+		-o-object-position: center -368px;
 		object-position: center -368px;
 	}
 	.mask-gaming {
@@ -2139,10 +2126,12 @@ input:checked ~ .tab__content {
 		-webkit-column-gap: 24px;
 		-moz-column-gap: 24px;
 		column-gap: 24px;
+		-webkit-box-pack: end;
+		-ms-flex-pack: end;
 		justify-content: end;
 		width: 100%;
 		height: 100%;
-		margin: 0px 0px 0px 0;
+		margin: 0;
 	}
 	.content-info__links {
 		grid-column-start: 1;
@@ -2173,8 +2162,8 @@ input:checked ~ .tab__content {
 		justify-content: end;
 	}
 	.content-info-gaming .date-big-cards {
-		letter-spacing: 0px;
-		margin-bottom: 0px;
+		letter-spacing: 0;
+		margin-bottom: 0;
 	}
 	.date-big-cards {
 		grid-column-start: 1;
@@ -2190,7 +2179,7 @@ input:checked ~ .tab__content {
 		-webkit-box-ordinal-group: 3;
 		-ms-flex-order: 2;
 		order: 2;
-		margin-top: 0px;
+		margin-top: 0;
 	}
 	.date-big-cards .date-text {
 		-webkit-box-orient: horizontal;
@@ -2205,6 +2194,7 @@ input:checked ~ .tab__content {
 		flex-direction: row-reverse;
 	}
 	.info-design-ux-ui .date-big-cards {
+		-ms-flex-item-align: start;
 		align-self: start;
 		margin-top: 16px;
 	}
@@ -2225,6 +2215,8 @@ input:checked ~ .tab__content {
 		order: 4;
 	}
 	.link-btn-gaming {
+		width: -webkit-fit-content;
+		width: -moz-fit-content;
 		width: fit-content;
 	}
 	.text-info-gaming {
@@ -2233,18 +2225,16 @@ input:checked ~ .tab__content {
 	.text-info-gaming h3 {
 		font-size: 26px;
 		line-height: 120%;
-		letter-spacing: 0px;
+		letter-spacing: 0;
 		margin-bottom: 7px;
 	}
 	.text-info {
 		margin-right: 0;
 	}
-
-	/*  ---------------------- articles ---------------------- */
 	.articles {
 		background-image: url('./images/bg/bgLineArticulos-tablet.svg');
 		background-size: 100% 100%;
-		background-position: 0px 143px;
+		background-position: 0 143px;
 	}
 	.marquee-wrp {
 		font-size: 30px;
@@ -2361,7 +2351,7 @@ input:checked ~ .tab__content {
 	}
 	.content-info-design .text-info h3 {
 		line-height: 114%;
-		letter-spacing: 0px;
+		letter-spacing: 0;
 		margin-bottom: 13px;
 	}
 	.link-design {
@@ -2389,6 +2379,7 @@ input:checked ~ .tab__content {
 	.mask-design-ux-ui {
 		width: 704px;
 		height: 338px;
+		-webkit-mask-size: 702px 324px;
 		mask-size: 702px 324px;
 	}
 	.stiker-design-ux-ui {
@@ -2407,6 +2398,8 @@ input:checked ~ .tab__content {
 		margin-bottom: 24px;
 	}
 	.cards-buttom .content-info__date {
+		-webkit-box-ordinal-group: 4;
+		-ms-flex-order: 3;
 		order: 3;
 	}
 	.cards-buttom .text-info__title {
@@ -2417,7 +2410,7 @@ input:checked ~ .tab__content {
 		margin-right: 6px;
 	}
 	.list-marketing {
-		letter-spacing: 0px;
+		letter-spacing: 0;
 		gap: 10px;
 	}
 	.links-big-cards {
@@ -2433,16 +2426,17 @@ input:checked ~ .tab__content {
 		grid-template-rows: 36% 61%;
 		grid-template-columns: auto 461px;
 		grid-column-gap: 25px;
+		-webkit-box-align: center;
+		-ms-flex-align: center;
 		align-items: center;
 		width: 100%;
-
 		height: 100%;
 	}
 	.list-design-ux-ui {
 		grid-column-gap: 10px;
 	}
 	.text-info-design-ux-ui {
-		margin-bottom: 0px;
+		margin-bottom: 0;
 	}
 	.title-design-ux-ui {
 		font-size: 26px;
@@ -2451,7 +2445,6 @@ input:checked ~ .tab__content {
 	.link-design-ux-ui {
 		padding: 7px 18px;
 	}
-	/* ------------------------ webinars ---------------------- */
 	.webinars {
 		top: -8px;
 		margin-bottom: 103px;
@@ -2499,14 +2492,9 @@ input:checked ~ .tab__content {
 		justify-content: space-between;
 		padding: 99px 0 48px 0;
 	}
-	.webinars-wrp .container {
-		/* padding-right: 0;
-		padding-left: 0; */
-	}
 	.webinars__btn {
 		margin-bottom: 0;
 	}
-
 	.webinars__up {
 		margin-bottom: 64px;
 	}
@@ -2523,7 +2511,7 @@ input:checked ~ .tab__content {
 		font-size: 28px;
 	}
 	.link-btn-webinars {
-		letter-spacing: 0px;
+		letter-spacing: 0;
 	}
 	.webinars__cards-mini {
 		display: grid;
@@ -2592,7 +2580,7 @@ input:checked ~ .tab__content {
 		padding-top: 4px;
 	}
 	.card-mini-bg-three .card-mini__title {
-		padding-right: 0px;
+		padding-right: 0;
 	}
 	.card-mini-bg-three .date-text {
 		max-width: 100%;
@@ -2606,15 +2594,12 @@ input:checked ~ .tab__content {
 	.card-mini-bg-three .date-text__txt {
 		letter-spacing: 0.2px;
 	}
-
 	.card-mini__title {
 		padding-right: 36px;
 	}
 	.learn-time-icon {
 		width: 22px;
 	}
-
-	/* ------------------------ subscr-successful ---------------------- */
 	.subscribe-block {
 		width: 100%;
 	}
@@ -2629,7 +2614,7 @@ input:checked ~ .tab__content {
 	}
 	.section-subscribe__wrp {
 		background-image: url(./images/subscribe-block/bg/line-bg-tablet.svg);
-		background-position: 0px 0px;
+		background-position: 0 0;
 		border-radius: 30px;
 		padding: 40px 165px 40px 24px;
 		border-top-right-radius: 60px;
@@ -2654,7 +2639,6 @@ input:checked ~ .tab__content {
 	.top-card-mini__name {
 		margin-bottom: 3px;
 	}
-
 	.subscr-successful__block {
 		border-radius: 24px;
 		width: 280px;
@@ -2681,10 +2665,6 @@ input:checked ~ .tab__content {
 	.lbl-subscribe {
 		font-size: var(--nunito-fz-13);
 	}
-
-	/*  -------------------------- footer --------------------- */
-	.footer {
-	}
 	.footer .marquee-wrp {
 		font-size: 44px;
 		line-height: 110%;
@@ -2692,13 +2672,12 @@ input:checked ~ .tab__content {
 	.marquee-footer {
 		top: -78px;
 	}
-
 	.footer-cnt {
 		-webkit-box-align: center;
 		-ms-flex-align: center;
 		align-items: center;
 		height: 100%;
-		padding: 57px 0px 72px 0px;
+		padding: 57px 0 72px 0;
 	}
 	.footer__up {
 		grid-template-columns: repeat(2, auto);
@@ -2711,6 +2690,8 @@ input:checked ~ .tab__content {
 	.left-footer {
 		grid-column-start: 1;
 		grid-row-start: 1;
+		-webkit-box-pack: start;
+		-ms-flex-pack: start;
 		justify-content: start;
 		gap: 46px;
 		margin-right: 15px;
@@ -2784,6 +2765,8 @@ input:checked ~ .tab__content {
 	}
 	.privicy {
 		width: 100%;
+		-webkit-box-pack: start;
+		-ms-flex-pack: start;
 		justify-content: start;
 		gap: 9px;
 	}
@@ -2793,10 +2776,10 @@ input:checked ~ .tab__content {
 		padding-left: 32px;
 	}
 }
-
-/* --------------------------------- @media 768px ------------------------------ */
 @media (max-width: 768px) {
 	.header-cnt {
+		-webkit-box-pack: justify;
+		-ms-flex-pack: justify;
 		justify-content: space-between;
 		gap: 5px;
 		padding: 12px 8px;
@@ -2804,8 +2787,8 @@ input:checked ~ .tab__content {
 	.logo {
 		max-width: 130px;
 		max-height: 48px;
-		padding-left: 0px;
-		margin-right: 0px;
+		padding-left: 0;
+		margin-right: 0;
 		margin-bottom: 10px;
 	}
 	.logo__link svg {
@@ -2837,8 +2820,6 @@ input:checked ~ .tab__content {
 	.header__search-icon {
 		margin-right: 22px;
 	}
-
-	/*  ------------------------ gaming ----------------------- */
 	.gaming {
 		background-image: url('./images/bg/bgLineGaming-mobile.svg');
 	}
@@ -2861,6 +2842,7 @@ input:checked ~ .tab__content {
 		mask-image: url('./images/gaming/mask-gaming.png');
 	}
 	.img-gaming {
+		-o-object-position: center -90px;
 		object-position: center -90px;
 	}
 	.img-wrp__stiker-gaming svg {
@@ -2928,11 +2910,14 @@ input:checked ~ .tab__content {
 	.text-info-gaming h3 {
 		margin-bottom: 15px;
 	}
-
 	.date-big-cards-gaming .date-text .icon {
+		-webkit-box-ordinal-group: 2;
+		-ms-flex-order: 1;
 		order: 1;
 	}
 	.date-big-cards-gaming .time .icon {
+		-webkit-box-ordinal-group: 2;
+		-ms-flex-order: 1;
 		order: 1;
 	}
 	.content-info-gaming .date-big-cards {
@@ -2976,8 +2961,6 @@ input:checked ~ .tab__content {
 	.link-btn-gaming {
 		padding: 16px 90px;
 	}
-
-	/* ------------------- articles ------------------------- */
 	.articles {
 		background-image: url('./images/bg/bgLineArticulos-mobile.svg'),
 			url('./images/bg/bgLineArticulos-mobile-2.svg');
@@ -3025,7 +3008,6 @@ input:checked ~ .tab__content {
 		-webkit-mask-size: 304px 352px;
 		mask-size: 304px 352px;
 	}
-
 	.stiker-img_l_t_47 {
 		left: 9px;
 		top: 7.5px;
@@ -3050,6 +3032,7 @@ input:checked ~ .tab__content {
 		mask-size: 304px 352px;
 	}
 	.mask-design img {
+		-o-object-position: -50px 0px;
 		object-position: -50px 0px;
 	}
 	.stiker-design {
@@ -3064,6 +3047,7 @@ input:checked ~ .tab__content {
 		height: 352px;
 		mask-image: url(./images/articles/mask/design-ui-mobile.png);
 		-webkit-mask-image: url(./images/articles/mask/design-ui-mobile.png);
+		-webkit-mask-size: 304px 352px;
 		mask-size: 304px 352px;
 	}
 	.img-wrp__stiker-articles svg {
@@ -3144,7 +3128,6 @@ input:checked ~ .tab__content {
 		justify-content: center;
 		gap: 0;
 	}
-
 	.info-design-ux-ui .date-big-cards {
 		display: -webkit-box;
 		display: -ms-flexbox;
@@ -3160,13 +3143,11 @@ input:checked ~ .tab__content {
 		-ms-flex-pack: start;
 		justify-content: start;
 		gap: 24px;
-		margin-bottom: 0px;
+		margin-bottom: 0;
 	}
-
 	.info-design-ux-ui .links-big-cards {
 		margin-bottom: 14px;
 	}
-
 	.content-info__links {
 		-webkit-box-ordinal-group: 2;
 		-ms-flex-order: 1;
@@ -3190,8 +3171,6 @@ input:checked ~ .tab__content {
 	.cards-buttom .card__img-wrapper {
 		margin-bottom: 19px;
 	}
-
-	/* ---------------------- webinars ---------------------- */
 	.webinars {
 		height: 100%;
 		background-image: none;
@@ -3210,6 +3189,8 @@ input:checked ~ .tab__content {
 		transform: rotate(4deg);
 	}
 	.date-big-cards .icon {
+		-webkit-box-ordinal-group: 2;
+		-ms-flex-order: 1;
 		order: 1;
 	}
 	.webinars-wrp {
@@ -3219,8 +3200,15 @@ input:checked ~ .tab__content {
 	.webinars-cnt {
 		-webkit-box-pack: center;
 		-ms-flex-pack: center;
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		-ms-flex-direction: column;
 		flex-direction: column;
+		-webkit-box-align: center;
+		-ms-flex-align: center;
 		align-items: center;
+		-webkit-box-pack: start;
+		-ms-flex-pack: start;
 		justify-content: start;
 		max-width: 304px;
 		max-height: 1586px;
@@ -3235,12 +3223,15 @@ input:checked ~ .tab__content {
 		line-height: 120%;
 	}
 	.card-mini {
+		-webkit-box-pack: start;
+		-ms-flex-pack: start;
 		justify-content: start;
 		width: 304px;
+		max-height: -webkit-fit-content;
+		max-height: -moz-fit-content;
 		max-height: fit-content;
 		padding: 29px 24px 13px 24px;
 	}
-
 	.webinars__cards-mini {
 		display: -webkit-box;
 		display: -ms-flexbox;
@@ -3252,20 +3243,22 @@ input:checked ~ .tab__content {
 		-webkit-box-align: center;
 		-ms-flex-align: center;
 		align-items: center;
+		-webkit-box-pack: center;
+		-ms-flex-pack: center;
 		justify-content: center;
 		gap: 17px;
 		margin-bottom: 64px;
 	}
-
 	.webinars__btn {
 		-webkit-box-ordinal-group: 4;
 		-ms-flex-order: 3;
 		order: 3;
 		margin-bottom: 0;
 	}
-
 	.card-mini:last-child {
 		max-width: 304px;
+		height: -webkit-fit-content;
+		height: -moz-fit-content;
 		height: fit-content;
 	}
 	.top-card-mini__name {
@@ -3316,7 +3309,7 @@ input:checked ~ .tab__content {
 		-webkit-box-pack: start;
 		-ms-flex-pack: start;
 		justify-content: start;
-		gap: 0px;
+		gap: 0;
 		width: 100%;
 	}
 	.learn-time-icon {
@@ -3340,7 +3333,7 @@ input:checked ~ .tab__content {
 	}
 	.card-mini-bg-two .date-text {
 		padding-right: 3px;
-		margin-bottom: 0px;
+		margin-bottom: 0;
 	}
 	.time {
 		margin-left: -9px;
@@ -3360,10 +3353,11 @@ input:checked ~ .tab__content {
 		padding: 29px 24px 24px 24px;
 	}
 	.link-btn-webinars {
+		width: -webkit-fit-content;
+		width: -moz-fit-content;
 		width: fit-content;
 		padding: 9px 74px;
 	}
-	/*  ------------------- subscribe-block --------------- */
 	.subscribe-block-cnt {
 		margin-bottom: 177px;
 	}
@@ -3394,7 +3388,7 @@ input:checked ~ .tab__content {
 		background-color: var(--turquoise-dark);
 		background-image: url(./images/subscribe-block/bg/line-bg-mobile.svg);
 		background-repeat: no-repeat;
-		background-position: 0px -29px;
+		background-position: 0 -29px;
 		width: 100%;
 		max-width: 304px;
 		padding: 65px 24px 1038px 24px;
@@ -3439,7 +3433,11 @@ input:checked ~ .tab__content {
 		height: 49px;
 	}
 	.subscribe-btn {
+		width: -webkit-fit-content;
+		width: -moz-fit-content;
 		width: fit-content;
+		height: -webkit-fit-content;
+		height: -moz-fit-content;
 		height: fit-content;
 		padding: 13px 102px;
 	}
@@ -3459,12 +3457,8 @@ input:checked ~ .tab__content {
 	.title-section-subscribe {
 		margin-bottom: 11px;
 	}
-
-	/*  ------------------- footer ----------------------- */
-	.footer {
-	}
 	.footer-cnt {
-		padding: 28px 0px 72px 0px;
+		padding: 28px 0 72px 0;
 	}
 	.footer__up {
 		display: -webkit-box;
@@ -3497,6 +3491,8 @@ input:checked ~ .tab__content {
 		-webkit-box-ordinal-group: 3;
 		-ms-flex-order: 2;
 		order: 2;
+		-webkit-box-pack: justify;
+		-ms-flex-pack: justify;
 		justify-content: space-between;
 		width: 100%;
 		margin-bottom: 50px;
@@ -3545,6 +3541,8 @@ input:checked ~ .tab__content {
 		-webkit-box-align: center;
 		-ms-flex-align: center;
 		align-items: center;
+		-webkit-box-pack: justify;
+		-ms-flex-pack: justify;
 		justify-content: space-between;
 		margin-bottom: 11px;
 	}
@@ -3565,7 +3563,6 @@ input:checked ~ .tab__content {
 		max-width: 173px;
 		max-height: 64px;
 	}
-
 	.tab__label {
 		padding: 16px 7px 19px 0;
 	}

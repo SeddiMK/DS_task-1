@@ -1,0 +1,88 @@
+@font-face {
+  font-family: ArchivoBlack;
+  font-weight: 400;
+  line-height: 120;
+  src: url(./assets/fonts/Archivo_Black/ArchivoBlack-Regular.ttf)
+    format("truetype");
+}
+@font-face {
+  font-family: Nunito;
+  font-weight: 400;
+  src: url(./assets/fonts/Nunito/Nunito-Regular.ttf) format("truetype");
+}
+@font-face {
+  font-family: Nunito;
+  font-weight: 500;
+  src: url(./assets/fonts/Nunito/Nunito-Medium.ttf) format("truetype");
+}
+@font-face {
+  font-family: Nunito;
+  font-weight: 700;
+  src: url(./assets/fonts/Nunito/Nunito-Bold.ttf) format("truetype");
+}
+:root {
+  --max-w-body: 1440px;
+  --max-w-cnt: 1208px;
+  --max-w-cnt-tablet: 768px;
+  --font-family: "Nunito", sans-serif;
+  --font-size: 18px;
+  --font-weight: 500;
+  --font-family-title: "ArchivoBlack", Arial, sans-serif;
+  --black: #1b1f21;
+  --white: #fcfaf9;
+  --white-def: #ffffff;
+  --white-tr90: rgba(252, 250, 249, 0.9);
+  --pale: #e8e8e8;
+  --gray80: #434343;
+  --gray70: #757778;
+  --gray35: #aeaeae;
+  --gray20: #d9d9d8;
+  --gray15: #e8e8e8;
+  --gray5: #f2f2f2;
+  --gray5-tr20: rgba(242, 242, 242, 0.2);
+  --pink: #ec95b1;
+  --sky: #a4ccfe;
+  --violet: #d0b0fa;
+  --grass: #bedb39;
+  --turquoise: #acd6de;
+  --tangerine: #ffad20;
+  --coral: #fe8968;
+  --mint: #aedfd6;
+  --marine: #90eecb;
+  --pink-dark: #da3369;
+  --sky-dark: #5fa5fd;
+  --violet-dark: #9853f4;
+  --grass-dark: #94ac23;
+  --turquoise-dark: #57acbc;
+  --tangerine-dark: #ef9700;
+  --coral-dark: #fe6d44;
+  --mint-dark: #57bcaa;
+  --marine-dark: #22c98b;
+  --archivo-black-h1-fz: 58px;
+  --archivo-black-h2-fz: 46px;
+  --archivo-black-h3-fz: 36px;
+  --archivo-black-h4-fz: 30px;
+  --archivo-black-h5-fz: 26px;
+  --archivo-black-h5-fz: 26px;
+  --nunito-fz-21: 21px;
+  --nunito-fz-18: 18px;
+  --nunito-fz-15: 15px;
+  --nunito-fz-13: 13px;
+}
+body {
+  width: 100%;
+  margin: 0 auto;
+  height: 100%;
+  background-color: var(--white-def);
+  overflow-x: hidden;
+}
+.wrapper {
+  width: 100%;
+  font-family: Nunito, Arial, sans-serif;
+  color: var(--black);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+  font-style: normal;
+  background-color: var(--white);
+  overflow: hidden;
+}

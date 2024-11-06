@@ -115,10 +115,10 @@ export interface Img {
 export interface Menu {
   logo: string;
   header: HeaderType[];
-  footer: Footer[];
+  footer: FooterType[];
 }
 
-export interface Footer {
+export interface FooterType {
   label: string;
   items: Item[];
 }

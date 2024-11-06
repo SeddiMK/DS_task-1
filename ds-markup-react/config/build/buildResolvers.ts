@@ -8,6 +8,7 @@ export const buildResolvers = (
     extensions: [".tsx", ".ts", ".js"],
     alias: {
       "@": options.paths.src,
+      "@public": options.paths.public,
     },
   };
 };

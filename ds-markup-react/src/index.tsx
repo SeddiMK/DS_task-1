@@ -1,8 +1,8 @@
 import "@/null.css";
-import "../public/assets/fonts/Archivo_Black/ArchivoBlack-Regular.ttf";
-import "../public/assets/fonts/Nunito/Nunito-Regular.ttf";
-import "../public/assets/fonts/Nunito/Nunito-Medium.ttf";
-import "../public/assets/fonts/Nunito/Nunito-Bold.ttf";
+import "@public/assets/fonts/Archivo_Black/ArchivoBlack-Regular.ttf";
+import "@public/assets/fonts/Nunito/Nunito-Regular.ttf";
+import "@public/assets/fonts/Nunito/Nunito-Medium.ttf";
+import "@public/assets/fonts/Nunito/Nunito-Bold.ttf";
 import "@/index.css";
 import { createRoot } from "react-dom/client";
 import { App } from "@/components/app/App";

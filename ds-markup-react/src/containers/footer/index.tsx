@@ -1,35 +1,21 @@
-import React, { useEffect, useState } from "react";
+import "./style.css";
 import { useDB } from "@/hooks/getDB";
-import { Menu } from "@/types/db";
+import { FooterType, Item } from "@/types/db";
 import { Contacts } from "@/containers/contacts";
 import { IconComponent } from "../IconComponent";
-
-// interface FooterMenuItem {
-// 	label: string
-// 	url?: string
-// }
-
-// interface FooterSection {
-// 	label: string
-// 	items: FooterMenuItem[]
-// }
-
-// interface FooterData {
-// 	logo: string
-// 	footer: FooterSection[]
-// }
+import Awards from "@public/assets/images/footer/awards.jpg";
+import { Privicy } from "../privicy";
 
 export const Footer: React.FC = () => {
-  const [footerData, setFooterData] = useState<Menu | null>(null);
-  const { fetchData, loading, error } = useDB("menu");
-  useEffect(() => {
-    console.log(fetchData);
+  const { fetchData } = useDB("menu");
+  const fetchDataContacts = useDB("contacts");
+  const btnEmailPlhr =
+    fetchDataContacts?.fetchData?.subscription["email-placeholder"];
+  const btnSubmitPlhr =
+    fetchDataContacts?.fetchData?.subscription["submit-text"];
 
-    setFooterData(fetchData);
-  }, [fetchData]);
-
-  if (!footerData) {
-    return <footer>Loading...</footer>;
+  if (!fetchData) {
+    return <div>Loading...</div>;
   }
 
   return (
@@ -38,7 +24,10 @@ export const Footer: React.FC = () => {
         <section className="footer__up">
           <div className="footer__up-left left-footer">
             <div className="left-footer__logo logo logo-left-footer">
-              <a href="/" className="logo__link logo_color_white">
+              <a
+                href="/"
+                className="logo__link logo_color_white logo_color_active logo_color_hover"
+              >
                 <IconComponent
                   iconUrl={fetchData?.logo}
                   className="icon-logo"
@@ -48,7 +37,7 @@ export const Footer: React.FC = () => {
             <div className="left-footer__awards img-wrp">
               <img
                 className="left-footer__awards-img img"
-                src="./images/footer/awards.jpg"
+                src={Awards}
                 alt="company awards image"
               />
             </div>
@@ -64,23 +53,23 @@ export const Footer: React.FC = () => {
               className="subscribe__email input input_footer"
               type="email"
               name="email"
-              placeholder="Su correo electrónico"
+              placeholder={btnEmailPlhr || "Su correo electrónico"}
             />
             <button
               className="subscribe__subscribe-to-newsletter btn btn_footer footer_bgc_active footer_bgc_hover footer_bgc_disabled footer_bgc_focus"
               type="submit"
             >
-              Suscribirse al boletín
+              {btnSubmitPlhr || "Suscribirse al boletín"}
             </button>
           </form>
 
           {/* Footer Menu */}
           <div className="footer__up-menu menu-footer">
-            {footerData.footer.map((section) => (
+            {fetchData.footer.map((section: FooterType) => (
               <div key={section.label} className="menu-footer__section">
                 <h3 className="menu-footer__title">{section.label}</h3>
                 <ul className="menu-footer__list list">
-                  {section.items.map((item) => (
+                  {section.items.map((item: Item) => (
                     <li key={item.label} className="list__item">
                       <a
                         href={item.url || "#"}
@@ -96,181 +85,39 @@ export const Footer: React.FC = () => {
           </div>
           <div className="footer__up-menu menu-footer-tabs">
             <div className="tabs">
-              <div className="tab tab-cursor">
-                <input className="tab__inp" type="checkbox" id="chck1" />
-                <label className="tab__label" htmlFor="chck1">
-                  CURSOS
-                </label>
-                <div className="tab__content">
-                  <ul className="menu-footer__list list">
-                    <li className="list__item">
-                      <a
-                        href="#"
-                        className="list__link link link_metis link_metis_color_white"
-                      >
-                        Diseño
-                      </a>
-                    </li>
-                    <li className="list__item">
-                      <a
-                        href="#"
-                        className="list__link link link_metis link_metis_color_white"
-                      >
-                        Programación & Data
-                      </a>
-                    </li>
-                    <li className="list__item">
-                      <a
-                        href="#"
-                        className="list__link link link_metis link_metis_color_white"
-                      >
-                        Gaming
-                      </a>
-                    </li>
-                    <li className="list__item">
-                      <a
-                        href="#"
-                        className="list__link link link_metis link_metis_color_white"
-                      >
-                        Marketing
-                      </a>
-                    </li>
-                    <li className="list__item">
-                      <a
-                        href="#"
-                        className="list__link link link_metis link_metis_color_white"
-                      >
-                        Software
-                      </a>
-                    </li>
-                  </ul>
+              {fetchData.footer.map((section: FooterType, ind: number) => (
+                <div data-tab-cursor={ind} className="tab" key={ind}>
+                  <input
+                    className="tab__inp"
+                    type="checkbox"
+                    id={"chck" + ind}
+                  />
+                  <label className="tab__label" htmlFor={"chck" + ind}>
+                    {section.label}
+                  </label>
+                  <div className="tab__content">
+                    <ul className="menu-footer__list list">
+                      {section.items.map((item: Item) => (
+                        <li key={item.label} className="list__item">
+                          <a
+                            href={item.url || "#"}
+                            className="list__link link link_metis link_metis_color_white"
+                          >
+                            {item.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              </div>
-              <div className="tab tab-webinars">
-                <input className="tab__inp" type="checkbox" id="chck2" />
-                <label className="tab__label" htmlFor="chck2">
-                  WEBINARS
-                </label>
-                <div className="tab__content">
-                  <ul className="menu-footer__list list">
-                    <li className="list__item">
-                      <a
-                        href="#"
-                        className="list__link link link_metis link_metis_color_white"
-                      >
-                        Próximamente
-                      </a>
-                    </li>
-                    <li className="list__item">
-                      <a
-                        href="#"
-                        className="list__link link link_metis link_metis_color_white"
-                      >
-                        Anteriores
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className="tab tab-about">
-                <input className="tab__inp" type="checkbox" id="chck3" />
-                <label className="tab__label" htmlFor="chck3">
-                  SOBRE
-                </label>
-                <div className="tab__content">
-                  <ul className="menu-footer__list list">
-                    <li className="list__item">
-                      <a
-                        href="#"
-                        className="list__link link link_metis link_metis_color_white"
-                      >
-                        Sobre nostros
-                      </a>
-                    </li>
-                    <li className="list__item">
-                      <a
-                        href="#"
-                        className="list__link link link_metis link_metis_color_white"
-                      >
-                        Centro de carreras
-                      </a>
-                    </li>
-                    <li className="list__item">
-                      <a
-                        href="#"
-                        className="list__link link link_metis link_metis_color_white"
-                      >
-                        Vacantes
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className="tab tab-blog">
-                <input className="tab__inp" type="checkbox" id="chck4" />
-                <label className="tab__label" htmlFor="chck4">
-                  BLOG
-                </label>
-                <div className="tab__content">
-                  <ul className="menu-footer__list list">
-                    <li className="list__item">
-                      <a
-                        href="#"
-                        className="list__link link link_metis link_metis_color_white"
-                      >
-                        Diseño
-                      </a>
-                    </li>
-                    <li className="list__item">
-                      <a
-                        href="#"
-                        className="list__link link link_metis link_metis_color_white"
-                      >
-                        Programación & Data
-                      </a>
-                    </li>
-                    <li className="list__item">
-                      <a
-                        href="#"
-                        className="list__link link link_metis link_metis_color_white"
-                      >
-                        Gaming
-                      </a>
-                    </li>
-                    <li className="list__item">
-                      <a
-                        href="#"
-                        className="list__link link link_metis link_metis_color_white"
-                      >
-                        Marketing
-                      </a>
-                    </li>
-                    <li className="list__item">
-                      <a
-                        href="#"
-                        className="list__link link link_metis link_metis_color_white"
-                      >
-                        Software
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
           <Contacts />
         </section>
 
-        <Contacts />
-        {/* Privacy and Terms */}
-        <section className="footer__privacy privicy">
-          <p className="privicy__text">AVISO DE PRIVACIDAD ALUMNOS</p>
-          <span className="privicy__separator">•</span>
-          <p className="privicy__text">AVISO DE PRIVACIDAD PROFESORES</p>
-          <span className="privicy__separator">•</span>
-          <p className="privicy__text">TÉRMINOS Y CONDICIONES</p>
-        </section>
+        <Privicy />
       </div>
     </footer>
   );

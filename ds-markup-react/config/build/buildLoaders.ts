@@ -21,21 +21,37 @@ export const buildLoaders = ({
   };
 
   const cssLoader = {
-    test: /\.css$/,
+    test: /\.((c|sa|sc)ss)$/i,
     use: [
-      // Creates `style` nodes from JS strings
       isDev ? "style-loader" : MiniCssExtractPlugin.loader,
-      // Translates CSS into CommonJS
-      "css-loader",
+      {
+        loader: "css-loader",
+        options: {
+          // Run `postcss-loader` on each CSS `@import` and CSS modules/ICSS imports, do not forget that `sass-loader` compile non CSS `@import`'s into a single file
+          // If you need run `sass-loader` and `postcss-loader` on each CSS `@import` please set it to `2`
+          importLoaders: 1,
+        },
+      },
+      // {
+      //   loader: "postcss-loader",
+      //   options: { plugins: () => [postcssPresetEnv({ stage: 0 })] },
+      // },
+      "sass-loader",
     ],
   };
 
   // png|svg|jpg|jpeg|gif
   const assetLoader = {
-    test: /\.(png|svg|jpg|jpeg|gif)$/i,
-    type: "asset/resource",
-    loader: "file-loader",
-    include: "/*/**",
+    test: /\.(png|jpg|jpeg|gif)$/i,
+    use: [
+      {
+        loader: "url-loader",
+        options: {
+          limit: 8192,
+        },
+      },
+    ],
+    type: "javascript/auto",
   };
 
   const fontsLoader = {
@@ -44,9 +60,9 @@ export const buildLoaders = ({
   };
 
   const svgrLoader = {
-    // test: /\.svg$/i,
-    // issuer: /\.[jt]sx?$/,
-    // use: [{ loader: "@svgr/webpack", options: { icon: true } }],
+    test: /\.svg$/i,
+    issuer: /\.[jt]sx?$/,
+    use: [{ loader: "@svgr/webpack", options: { icon: true } }],
   };
 
   const tsLoader = {
@@ -57,3 +73,6 @@ export const buildLoaders = ({
 
   return [fontsLoader, cssLoader, assetLoader, svgrLoader, tsLoader];
 };
+function postcssPresetEnv(arg0: { stage: number }) {
+  throw new Error("Function not implemented.");
+}

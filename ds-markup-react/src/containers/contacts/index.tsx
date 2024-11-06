@@ -1,88 +1,102 @@
-import React, { useEffect, useState } from "react";
 import { useDB } from "@/hooks/getDB";
-import { ContactsType } from "@/types/db";
+import { useEffect, useState } from "react";
+import { formatPhoneNumber } from "../formatPhoneNumber";
+import IconInstagram from "@public/assets/images/icons/footer/instagram.svg";
+import IconFacebook from "@public/assets/images/icons/footer/facebook.svg";
+import IconYoutube from "@public/assets/images/icons/footer/youtube.svg";
+import IconLinkedin from "@public/assets/images/icons/footer/linkedin.svg";
 
 export const Contacts: React.FC = () => {
-  const [footerDataContacts, setFooterDataContacts] =
-    useState<ContactsType | null>(null);
-  const { fetchData, loading, error } = useDB("contacts");
+  const { fetchData } = useDB("contacts");
+  const [formatPhoneNum, setFormatPhoneNum] = useState(null);
 
   useEffect(() => {
-    console.log(fetchData);
-
-    setFooterDataContacts(fetchData);
+    if (fetchData !== null && fetchData.phone !== "") {
+      setFormatPhoneNum(formatPhoneNumber(fetchData.phone));
+    }
   }, [fetchData]);
 
-  if (!footerDataContacts) {
-    return <footer>Loading...</footer>;
+  if (!fetchData) {
+    return <div>Loading...</div>;
   }
 
   return (
     <>
       {/* Footer Contacts */}
       <div className="footer__up-contacts contacts">
-        <div className="contacts__wsp contacts-item">
-          <p className="contacts-item__title">WhatsApp</p>
-          <a
-            className="list__link link link_metis link_metis_color_white"
-            href="https://wa.me/525592252629?text=Hola! Quiero inscribirme"
-          >
-            +52 55 9225-2629
-          </a>
-        </div>
-        <div className="contacts__tel contacts-item">
-          <p className="contacts-item__title">Telefone</p>
-          <a
-            className="list__link link link_metis link_metis_color_white"
-            href="tel:+525592252629"
-          >
-            +52 55 9225-2629
-          </a>
-        </div>
-        <div className="contacts__email contacts-item">
-          <p className="contacts-item__title">Email</p>
-          <a
-            className="list__link link link_metis link_metis_color_white"
-            href="mailto:ebac.mx@gmail.com"
-          >
-            Ebac.mx@gmail.com
-          </a>
-        </div>
+        {/* WhatsApp */}
+        {fetchData.whatsapp && (
+          <div className="contacts__wsp contacts-item">
+            <p className="contacts-item__title">WhatsApp</p>
+            <a
+              className="list__link link link_metis link_metis_color_white"
+              href={`https://wa.me/${fetchData.whatsapp}?text=Hola! Quiero inscribirme`}
+            >
+              {formatPhoneNum}
+            </a>
+          </div>
+        )}
+
+        {/* Phone */}
+        {fetchData.phone && (
+          <div className="contacts__tel contacts-item">
+            <p className="contacts-item__title">Telefone</p>
+            <a
+              className="list__link link link_metis link_metis_color_white"
+              href={`tel:+${fetchData.phone}`}
+            >
+              {formatPhoneNum}
+            </a>
+          </div>
+        )}
+
+        {/* Email */}
+        {fetchData.email && (
+          <div className="contacts__email contacts-item">
+            <p className="contacts-item__title">Email</p>
+            <a
+              className="list__link link link_metis link_metis_color_white"
+              href={`mailto:${fetchData.email}`}
+            >
+              {fetchData.email}
+            </a>
+          </div>
+        )}
       </div>
 
-      {/* Footer Sosial */}
+      {/* Footer Social Media Links */}
       <div className="footer__up-sosial sosial">
         <ul className="sosial__list list-sosial">
           <li className="list-sosial__item">
             <a
-              href="http://instagram.com"
+              href={fetchData.instagram}
               className="list-sosial__link instagram-icon"
             >
-              svg
+              <IconInstagram />
             </a>
           </li>
           <li className="list-sosial__item">
             <a
-              href="https://facebook.com"
+              href={fetchData.facebook}
               className="list-sosial__link facebook-icon"
             >
-              svg
+              <IconFacebook />
             </a>
           </li>
           <li className="list-sosial__item">
             <a
-              href="https://youtube.com/"
+              href={fetchData.youtube}
               className="list-sosial__link youtube-icon"
             >
-              svg
+              <IconYoutube />
             </a>
           </li>
           <li className="list-sosial__item">
             <a
-              href="https://linkedin.com/"
+              href={fetchData.linkedin}
               className="list-sosial__link linkedin-icon"
             >
-              svg
+              <IconLinkedin />
             </a>
           </li>
         </ul>

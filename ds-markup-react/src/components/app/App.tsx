@@ -1,10 +1,11 @@
+import { Footer } from "@/containers/footer";
+import { Header } from "@/containers/header";
 import * as classes from "./App.module.css";
 
 export const App = () => {
-  console.log(classes);
-
   return (
     <div className="app">
+      <Header />
       <header className="app-header">
         {/* <img src={logo} className="app-logo" alt="logo" /> */}
         <p className={classes.text}>
@@ -19,6 +20,7 @@ export const App = () => {
           Learn React 0000000000000000000000000000000000
         </a>
       </header>
+      <Footer />
     </div>
   );
 };

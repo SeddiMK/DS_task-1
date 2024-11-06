@@ -2,23 +2,23 @@
   font-family: ArchivoBlack;
   font-weight: 400;
   line-height: 120;
-  src: url(./assets/fonts/Archivo_Black/ArchivoBlack-Regular.ttf)
+  src: url(../public/assets/fonts/Archivo_Black/ArchivoBlack-Regular.ttf)
     format("truetype");
 }
 @font-face {
   font-family: Nunito;
   font-weight: 400;
-  src: url(./assets/fonts/Nunito/Nunito-Regular.ttf) format("truetype");
+  src: url(../public/assets/fonts/Nunito/Nunito-Regular.ttf) format("truetype");
 }
 @font-face {
   font-family: Nunito;
   font-weight: 500;
-  src: url(./assets/fonts/Nunito/Nunito-Medium.ttf) format("truetype");
+  src: url(../public/assets/fonts/Nunito/Nunito-Medium.ttf) format("truetype");
 }
 @font-face {
   font-family: Nunito;
   font-weight: 700;
-  src: url(./assets/fonts/Nunito/Nunito-Bold.ttf) format("truetype");
+  src: url(../public/assets/fonts/Nunito/Nunito-Bold.ttf) format("truetype");
 }
 :root {
   --max-w-body: 1440px;
@@ -70,6 +70,7 @@
   --nunito-fz-13: 13px;
 }
 body {
+  font-family: Nunito, Arial, sans-serif;
   width: 100%;
   margin: 0 auto;
   height: 100%;

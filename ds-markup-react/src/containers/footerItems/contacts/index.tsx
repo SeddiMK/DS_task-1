@@ -1,6 +1,6 @@
 import { useDB } from "@/hooks/getDB";
 import { useEffect, useState } from "react";
-import { formatPhoneNumber } from "../formatPhoneNumber";
+import { formatPhoneNumber } from "../../formatPhoneNumber";
 import IconInstagram from "@public/assets/images/icons/footer/instagram.svg";
 import IconFacebook from "@public/assets/images/icons/footer/facebook.svg";
 import IconYoutube from "@public/assets/images/icons/footer/youtube.svg";

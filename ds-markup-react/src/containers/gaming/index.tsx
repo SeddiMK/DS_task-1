@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDB } from "@/hooks/getDB";
-
-import "./style.css";
-
-import MaskedImage from "../maskedImage";
-import MaskImageSrc from "@/mask-gaming.png";
+import StickersGaming from "@public/assets/images/gaming/sticker/sticker-gaming.svg";
+import IconDate from "@public/assets/images/icons/general/calendar.svg";
+import IconTime from "@public/assets/images/icons/general/cloсk.svg";
+import { MaskedImage } from "../maskedImage";
+import MaskImageSrc from "@public/assets/images/gaming/mask/mask-gaming.png";
 import { Item2 } from "@/types/db";
+import "./style.css";
 
 export const Gaming: React.FC = () => {
   const { fetchData } = useDB("sections");
@@ -17,10 +18,10 @@ export const Gaming: React.FC = () => {
     setItem(fetchData?.main.items[0]);
   }, [fetchData]);
 
-  console.log(item);
+  // console.log(item);
 
   if (!item) {
-    return <div>Loading...</div>;
+    return <div>Loading components...</div>;
   }
 
   return (
@@ -31,23 +32,12 @@ export const Gaming: React.FC = () => {
             src={item.img.url}
             alt="imagen de una niña con una computadora portátil en su regazo"
             maskSrc={MaskImageSrc}
-            // maskType={item.img.shape}
             className="mask-gaming gaming__img-wrp"
           />
-          {/* ../../../ */}
-          {/* <div
-            className={`gaming__img-wrp img-wrp mask mask-${item.img.shape}`}
-          >
-            <img
-              className="img-wrp__imamge img img-gaming"
-              src={item.img.url}
-              alt="imagen de una niña con una computadora portátil en su regazo"
-            />
-          </div> */}
           <span
             className={`img-wrp__stiker-gaming stiker-img stiker-img_r_t_0`}
           >
-            {item.stamp.word}
+            <StickersGaming />
           </span>
         </div>
 
@@ -72,11 +62,15 @@ export const Gaming: React.FC = () => {
           </div>
           <div className="content-info__date date-big-cards date-big-cards-gaming">
             <p className="content-info__date-text date-text">
-              <span className="date-text__icon icon">svg</span>
+              <span className="date-text__icon icon">
+                <IconDate />
+              </span>
               <span className="date-text__txt">{item.date}</span>
             </p>
             <p className="content-info__time time">
-              <span className="time__icon icon">svg</span>
+              <span className="time__icon icon">
+                <IconTime />
+              </span>
               <span className="time__text">{item.duration} min</span>
             </p>
           </div>

@@ -16,12 +16,12 @@ interface MaskedImageProps {
   height?: string;
 }
 //  style={{ maskImage: `url(${maskUrl})` }}
-const MaskedImage: React.FC<MaskedImageProps> = ({
+export const MaskedImage: React.FC<MaskedImageProps> = ({
   src,
   alt,
-  maskSrc = "",
-  maskType = "square",
-  className = "",
+  maskSrc,
+  maskType,
+  className,
   width = "300px",
   height = "300px",
 }) => {
@@ -42,5 +42,3 @@ const MaskedImage: React.FC<MaskedImageProps> = ({
     </div>
   );
 };
-
-export default MaskedImage;

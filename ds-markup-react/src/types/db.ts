@@ -66,6 +66,11 @@ export interface Content {
   ticker: Ticker;
 }
 
+export interface ArticleCardProps {
+  article: Item3;
+  index: number;
+}
+
 export interface Item3 {
   title: string;
   text: string;

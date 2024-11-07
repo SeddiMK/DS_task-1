@@ -3,7 +3,7 @@
   position: relative;
   top: 0;
   left: 0;
-  background-image: url("../../../public/assets/images/bg/bgLineGaming.svg");
+  background-image: url("@public/assets/images/bg/bgLineGaming.svg");
   background-repeat: no-repeat;
   background-position: center 0px;
   background-size: cover;
@@ -32,7 +32,7 @@
 .gaming__img-wrp {
   width: 480px;
   height: 600px;
-  /* -webkit-mask-image: url("../../../public/assets/images/gaming/mask/mask-gaming.png"); */
+  -webkit-mask-image: url("@public/assets/images/gaming/mask/mask-gaming.png");
   mask-image: url("@public/assets/images/gaming/mask/mask-gaming.png");
 }
 .img-gaming {
@@ -49,120 +49,15 @@
   justify-content: space-between;
   margin: 56px 6px 55px 0;
 }
-.content-info {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-align: start;
-  -ms-flex-align: start;
-  align-items: start;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
 
-.content-info__links {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: start;
-  -ms-flex-pack: start;
-  justify-content: start;
-  /* margin-top: 20px; */
-  margin-bottom: 15px;
-}
-
-.content-info__list {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: start;
-  -ms-flex-pack: start;
-  justify-content: start;
-  font-size: var(--nunito-fz-15);
-  font-weight: 400;
-  line-height: 140%;
-  gap: 14px;
+.content-info-gaming .date-big-cards {
+  letter-spacing: -0.8px;
+  margin-bottom: 70px;
 }
 .text-info-gaming h3 {
   font-size: 32px;
   line-height: 140%;
   letter-spacing: 2.4px;
-}
-.text-info {
-  max-width: 610px;
-  margin-right: 90px;
-  margin-bottom: 21px;
-}
-.text-info__title {
-  font-family: var(--font-family-title);
-  font-size: 30px;
-  font-weight: 400;
-  line-height: 120%;
-  font-style: normal;
-  color: var(--black);
-  margin-bottom: 13px;
-}
-.text-info__sub-text {
-  max-width: 465px;
-  font-weight: 400;
-  line-height: 162%;
-  color: var(--gray70);
-}
-.content-info__date {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: start;
-  -ms-flex-pack: start;
-  justify-content: start;
-  gap: 22px;
-  font-size: var(--nunito-fz-15);
-  font-weight: 400;
-  color: var(--gray35);
-}
-.content-info-gaming .date-big-cards {
-  letter-spacing: -0.8px;
-  margin-bottom: 70px;
-}
-
-.date-text {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: start;
-  -ms-flex-pack: start;
-  justify-content: start;
-  letter-spacing: 0.1px;
-  gap: 9px;
-}
-.time {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  gap: 8px;
 }
 .link-btn-webinars {
   display: -webkit-box;
@@ -188,7 +83,7 @@
 /* --------------------------------- @media 1279px ------------------------------ */
 @media (max-width: 1279px) {
   .gaming {
-    background-image: url("../../../public/assets/images/bg/bgLineGaming-tablet.svg");
+    background-image: url("@public/assets/images/bg/bgLineGaming-tablet.svg");
     background-position: center 0px;
   }
   .gaming-cnt {
@@ -209,8 +104,8 @@
   .mask-gaming {
     width: 704px;
     height: 320px;
-    -webkit-mask-image: url("../../../public/assets/images/gaming/mask/mask-gaming-tablet.png");
-    mask-image: url("../../../public/assets/images/gaming/mask/mask-gaming-tablet.png");
+    -webkit-mask-image: url("@public/assets/images/gaming/mask/mask-gaming-tablet.png");
+    mask-image: url("@public/assets/images/gaming/mask/mask-gaming-tablet.png");
   }
   .img-wrp__stiker-gaming svg {
     width: 120px;
@@ -345,7 +240,7 @@
 @media (max-width: 768px) {
   /*  ------------------------ gaming ----------------------- */
   .gaming {
-    background-image: url("../../../public/assets/images/bg/bgLineGaming-mobile.svg");
+    background-image: url("@public/assets/images/bg/bgLineGaming-mobile.svg");
   }
   .gaming-cnt {
     -webkit-box-orient: vertical;
@@ -362,8 +257,8 @@
   .gaming__img-wrp {
     width: 304px;
     height: 352px;
-    -webkit-mask-image: url("../../../public/assets/images/gaming/mask/mask-gaming.png");
-    mask-image: url("../../../public/assets/images/gaming/mask/mask-gaming.png");
+    -webkit-mask-image: url("@public/assets/images/gaming/mask/mask-gaming.png");
+    mask-image: url("@public/assets/images/gaming/mask/mask-gaming.png");
   }
   .img-gaming {
     object-position: center -90px;

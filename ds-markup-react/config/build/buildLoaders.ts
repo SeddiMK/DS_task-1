@@ -30,6 +30,7 @@ export const buildLoaders = ({
           // Run `postcss-loader` on each CSS `@import` and CSS modules/ICSS imports, do not forget that `sass-loader` compile non CSS `@import`'s into a single file
           // If you need run `sass-loader` and `postcss-loader` on each CSS `@import` please set it to `2`
           importLoaders: 1,
+          url: true,
         },
       },
       // {
@@ -41,17 +42,17 @@ export const buildLoaders = ({
   };
 
   // png|svg|jpg|jpeg|gif
+  //  use: [
+  //     {
+  //       loader: "url-loader",
+  //       options: {
+  //         limit: 8192,
+  //       },
+  //     },
+  //   ],
   const assetLoader = {
     test: /\.(png|jpg|jpeg|gif)$/i,
-    use: [
-      {
-        loader: "url-loader",
-        options: {
-          limit: 8192,
-        },
-      },
-    ],
-    type: "javascript/auto",
+    type: "asset/resource",
   };
 
   const fontsLoader = {
@@ -73,6 +74,3 @@ export const buildLoaders = ({
 
   return [fontsLoader, cssLoader, assetLoader, svgrLoader, tsLoader];
 };
-function postcssPresetEnv(arg0: { stage: number }) {
-  throw new Error("Function not implemented.");
-}

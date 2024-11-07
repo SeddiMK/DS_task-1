@@ -1,0 +1,31 @@
+/* MaskedImage.module.css */
+
+.image-wrapper {
+  /* overflow: hidden;
+  display: inline-block; */
+}
+
+.masked-image {
+  /* width: 100%;
+  height: auto;
+  display: block; */
+}
+
+/* Mask styles */
+.mask-circle {
+  /* border-radius: 50%; */
+}
+
+.mask-square {
+  /* border-radius: 0; */
+}
+
+.mask-arch {
+  /* border-radius: 0 0 50% 50%; */
+}
+
+.mask-rounded {
+  /* border-radius: 10px; */
+}
+
+/* Add more mask styles as needed */

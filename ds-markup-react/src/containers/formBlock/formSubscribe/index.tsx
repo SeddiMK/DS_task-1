@@ -78,6 +78,20 @@ export const FormSubscribe: React.FC<FormProps> = ({
               className={`form-subscribe__input-wrp ${email && (isEmailValid ? "correct-inp-wrp" : "error-inp-wrp")}`}
             >
               <input
+                required
+                id="chb-subscribe"
+                type="checkbox"
+                className="form-subscribe__inp-chb"
+                onChange={() => setIsTermsAccepted(!isTermsAccepted)}
+              />
+              <label
+                className="form-subscribe__lbl lbl lbl-subscribe"
+                htmlFor="chb-subscribe"
+              >
+                {agreementT}
+              </label>
+              <input
+                required
                 value={email}
                 id="inp-email-subscribe"
                 type="email"
@@ -91,6 +105,7 @@ export const FormSubscribe: React.FC<FormProps> = ({
                 // }}
                 onChange={(e) => setEmail(e.target.value)}
               />
+              <span className="icon-email"></span>
             </div>
 
             <button
@@ -106,21 +121,6 @@ export const FormSubscribe: React.FC<FormProps> = ({
               {errorMessage}
             </div>
           )}
-
-          <div className="form-subscribe__chb">
-            <input
-              id="chb-subscribe"
-              type="checkbox"
-              className="form-subscribe__inp-chb"
-              onChange={() => setIsTermsAccepted(!isTermsAccepted)}
-            />
-            <label
-              className="form-subscribe__lbl lbl lbl-subscribe"
-              htmlFor="chb-subscribe"
-            >
-              {agreementT}
-            </label>
-          </div>
         </form>
       )}
       {isSubscribed && <FormSuccessful />}

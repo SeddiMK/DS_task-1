@@ -1,86 +1,54 @@
 /* Реализовать подсветку инпутов формы на CSS по событию blur */
-
-/* input {
-  width: 100%;
-  padding: 10px;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  outline: none;
-  transition: border-color 0.3s ease;
-  padding-left: 30px; /* Место для иконки 
-} */
-
-/* Подсветка инпута при фокусе  */
 input[type="email"]:focus {
   border-color: var(--black);
 }
-/* input[type="email"]:not(:focus) {
-  border-color: var(--white);
-} */
-
-/* Подсветка инпута, если он не в фокусе и содержит ошибку  */
-/* input[type="email"]:invalid {
-  border-color: var(--tangerine);
-} */
-/* Красная граница для невалидных инпутов после потери фокуса */
-/* input[type="email"]:invalid:not(:focus) {
-  border-color: var(--tangerine);
-} */
-
-/* Стиль инпута после того как он потерял фокус  input[type="email"]*/
-/* Когда чекбокс отмечен и email валиден (и не в фокусе), меняем цвет границы на зеленый */
-#chb-subscribe:checked + #inp-email-subscribe:valid:not(:focus) {
+#chb-subscribe:checked ~ input[type="email"]:not(:focus):valid {
   border-color: var(--grass);
 }
 
-/* Когда чекбокс не отмечен и email не валиден (и не в фокусе), меняем цвет границы на оранжевый */
-#chb-subscribe:not(:checked) + #inp-email-subscribe:invalid:not(:focus) {
-  border-color: var(--tangerine);
-}
-
-/* #inp-email-subscribe:checked
-  + input[type="email"]:valid:not(:focus)
-  + input[type="email"]:focus {
-  border-color: var(--grass);
-}
-
-.form-subscribe__inp-chb:checked {
-  background-color: var(--grass);
-}
-input[type="email"]:valid + .form-subscribe__inp-chb:not(:disabled):checked {
-  border-color: var(--grass);
-} */
-
-/* ------------------------------------------------- */
-/* Иконка ошибки */
-/* !!! */
-.error-inp-wrp:before {
-  /* content: ""; */
-  display: block;
-  position: absolute;
-  z-index: 5;
-  right: 18px;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  width: 25px;
-  height: 25px;
-  background-color: transparent;
-  background-image: url("@public/assets/images/subscribe-block/icon/error-inp.svg");
-  background-size: contain;
-  background-repeat: no-repeat;
-  -khtml-background-size: contain;
-  -moz-background-size: contain;
-  -ms-background-size: contain;
-  -o-background-size: contain;
-  -webkit-background-size: contain;
-}
-/* !!! */
-#inp-email-subscribe:invalid:before {
-  /* content: ""; */
-  display: block;
+#chb-subscribe:checked ~ input[type="email"]:not(:focus):valid ~ span::before {
   content: "";
+  background-image: url("@public/assets/images/subscribe-block/icon/correct-inp.svg");
+}
+
+#chb-subscribe:checked ~ input[type="email"]:not(:focus):user-invalid:invalid {
+  border-color: var(--tangerine);
+}
+#chb-subscribe:checked
+  ~ input[type="email"]:not(:focus):user-invalid:invalid
+  ~ span::before {
+  content: "";
+}
+
+#chb-subscribe:not(:checked) ~ input[type="email"]:not(:focus):invalid {
+  border-color: var(--tangerine);
+}
+#chb-subscribe:not(:checked)
+  ~ input[type="email"]:not(:focus):invalid
+  ~ span::before {
+  content: "";
+}
+
+#chb-subscribe:not(:checked) ~ input[type="email"]:not(:focus):valid {
+  border-color: var(--tangerine);
+}
+#chb-subscribe:not(:checked)
+  ~ input[type="email"]:not(:focus):valid
+  ~ span::before {
+  content: "";
+}
+
+#chb-subscribe:not(:checked) ~ input[type="email"]:placeholder-shown:invalid {
+  border-color: var(--white);
+}
+#chb-subscribe:not(:checked)
+  ~ input[type="email"]:placeholder-shown:invalid
+  ~ span::before {
+  content: none;
+}
+
+input[type="email"] ~ span::before {
+  content: none;
   display: block;
   position: absolute;
   z-index: 5;
@@ -93,30 +61,6 @@ input[type="email"]:valid + .form-subscribe__inp-chb:not(:disabled):checked {
   height: 25px;
   background-color: transparent;
   background-image: url("@public/assets/images/subscribe-block/icon/error-inp.svg");
-  background-size: contain;
-  background-repeat: no-repeat;
-  -khtml-background-size: contain;
-  -moz-background-size: contain;
-  -ms-background-size: contain;
-  -o-background-size: contain;
-  -webkit-background-size: contain;
-}
-/* !!! */
-/* Иконка успеха */
-.correct-inp-wrp:valid:before {
-  /* content: ""; */
-  display: block;
-  position: absolute;
-  z-index: 5;
-  right: 18px;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  width: 25px;
-  height: 25px;
-  background-color: transparent;
-  background-image: url("@public/assets/images/subscribe-block/icon/correct-inp.svg");
   background-size: contain;
   background-repeat: no-repeat;
   -khtml-background-size: contain;

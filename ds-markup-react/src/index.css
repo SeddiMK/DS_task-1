@@ -729,7 +729,10 @@ input[type="email"]:hover {
 }
 .lbl {
   display: inline-block;
-  position: relative;
+  position: absolute;
+  top: 80px;
+  left: 0;
+  width: 615px;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;

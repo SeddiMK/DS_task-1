@@ -113,13 +113,18 @@
   -webkit-box-align: start;
   -ms-flex-align: start;
   align-items: start;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: end;
   -webkit-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
+  position: relative;
+  left: 0;
+  bottom: 0;
+
   max-width: 580px;
+  height: 100px;
 }
 .form-subscribe__send {
   display: -webkit-box;
@@ -132,15 +137,16 @@
   position: relative;
   top: 0;
   left: 0;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
+  padding-bottom: 30px;
 }
 .form-subscribe__success-message {
   display: block;
   text-align: center;
   font-size: var(--nunito-fz-13);
   color: var(--white);
-  position: relative;
-  top: -11px;
+  position: absolute;
+  top: 59px;
   left: 0;
   max-width: 280px;
 }

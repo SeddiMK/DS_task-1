@@ -1,9 +1,9 @@
-import "./App.css";
 import { Header } from "@/containers/header";
 import { Footer } from "@/containers/footer";
 import { Gaming } from "@/containers/gaming";
-import { Articles } from "@/containers/articlesItems/articles";
-import { Webinars } from "@/containers/webinarsItems/webinars";
+import { Articles } from "@/containers/articlesBlock/articles";
+import { Webinars } from "@/containers/webinarsBlock/webinars";
+import { SubscribeBlock } from "@/containers/subscribe";
 
 export const App = () => {
   return (
@@ -11,7 +11,8 @@ export const App = () => {
       {/* <Header /> */}
       {/* <Gaming /> */}
       {/* <Articles /> */}
-      <Webinars />
+      {/* <Webinars /> */}
+      <SubscribeBlock />
       {/* <Footer /> */}
     </div>
   );

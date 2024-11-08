@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { WebinarCard } from "../webinarCard";
 import { useDB } from "@/hooks/getDB";
 import { Loading } from "@/containers/loading";
+import "./style.css";
 
 type Author = {
   img: string;
@@ -21,7 +22,7 @@ type Webinar = {
 
 type ProposalsResponse = {
   title: string;
-  browse_all_text: string;
+  "browse-all-text": string;
   items: Webinar[];
   ticker: {
     text: string;
@@ -54,7 +55,7 @@ export const Webinars: React.FC = () => {
               href="#"
               className="webinars__btn-link btn link-btn-webinars webinars_bgc_active webinars_bgc_hover webinars_bgc_focus webinars_bgc_disabled"
             >
-              {data.browse_all_text}
+              {data["browse-all-text"]}
             </a>
           </div>
 

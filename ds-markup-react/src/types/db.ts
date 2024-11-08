@@ -29,6 +29,11 @@ export interface Sections {
   subscription: Subscription;
 }
 
+export interface FormProps {
+  agreementT: string;
+  submitT: string;
+  emailT: string;
+}
 export interface Subscription {
   title: string;
   text: string;
@@ -69,6 +74,10 @@ export interface Content {
 export interface ArticleCardProps {
   article: Item3;
   index: number;
+}
+export interface WebinarCardProps {
+  index: number;
+  webinar: Item4;
 }
 
 export interface Item3 {

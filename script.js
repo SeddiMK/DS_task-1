@@ -38,6 +38,7 @@ function validateEmail(email) {
 
 	return emailRegex.test(email)
 }
+
 // стилизация по результатам валидации
 function formActions(e) {
 	e.preventDefault()

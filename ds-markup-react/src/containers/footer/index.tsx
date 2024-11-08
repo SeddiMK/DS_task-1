@@ -1,10 +1,10 @@
 import "./style.css";
 import { useDB } from "@/hooks/getDB";
 import { FooterType, Item } from "@/types/db";
-import { Contacts } from "@/containers/footerItems/contacts";
+import { Contacts } from "@/containers/footerBlock/contacts";
 import { IconComponent } from "../IconComponent";
 import Awards from "@public/assets/images/footer/awards.jpg";
-import { Privicy } from "../footerItems/privicy";
+import { Privicy } from "../footerBlock/privicy";
 
 export const Footer: React.FC = () => {
   const { fetchData } = useDB("menu");

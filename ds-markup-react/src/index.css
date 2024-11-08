@@ -77,6 +77,20 @@ body {
   background-color: var(--white-def);
   overflow-x: hidden;
 }
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  font-family: Nunito, Arial, sans-serif;
+  color: var(--black);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+  font-style: normal;
+  background-color: var(--white);
+  overflow: hidden;
+}
 main {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -256,7 +270,26 @@ main {
 .link-btn-gaming_focus:focus {
   outline-offset: 0;
 }
-
+.link-btn-webinars {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-radius: 40px;
+  color: var(--white);
+  background-color: var(--violet-dark);
+  font-size: var(--nunito-fz-18);
+  letter-spacing: 0.2px;
+  font-weight: 700;
+  border-color: var(--violet-dark);
+  width: 280px;
+  height: 64px;
+}
 /* --------------------------------- list ------------------------------ */
 .list-gaming {
   color: var(--grass-dark);

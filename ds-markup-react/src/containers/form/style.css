@@ -1,0 +1,177 @@
+/* Реализовать подсветку инпутов формы на CSS по событию blur */
+/* Для того чтобы реализовать подсветку инпутов формы при событии blur с использованием только CSS, мы можем воспользоваться псевдоклассом :focus-within. Этот псевдокласс применяется к родительскому элементу, когда один из вложенных элементов получает фокус. Однако в вашем случае, когда нужно подсветить инпут именно после того, как он потеряет фокус, то есть в событии blur, это будет немного сложнее, так как CSS не поддерживает обработку события blur напрямую.
+
+Для решения задачи мы можем использовать псевдокласс :focus для инпута и :not(:focus) для подсветки инпута, когда он теряет фокус. Однако CSS не имеет прямого способа отслеживать только blur, так что этот подход подразумевает использование стилей для инпута в фокусе и изменения его состояния при потере фокуса.
+
+Решение через CSS:
+Для того, чтобы подсветить инпут, когда он теряет фокус, можно использовать псевдоклассы :focus и :not(:focus). */
+/* Основной стиль для инпута */
+/* Объяснение:
+input:focus:
+
+Этот стиль применяется, когда инпут находится в фокусе (пользователь только что кликнул или начал вводить в поле).
+input:valid и input:invalid:
+
+Когда инпут теряет фокус, он может быть либо валидным (если введенные данные соответствуют ожиданиям), либо невалидным (если введенные данные не соответствуют ожиданиям).
+Мы применяем стили для границы инпута, в зависимости от того, валидны ли данные в нем.
+input:not(:focus):
+
+Этот стиль применяется, когда инпут не находится в фокусе, то есть после того как пользователь покинул поле.
+Подсветка после потери фокуса:
+
+Если инпут валиден и потерял фокус, то его граница будет зеленой (#2ecc71).
+Если инпут невалиден и потерял фокус, то граница станет красной (#e74c3c). */
+/* <form>
+  <div class="form-field">
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required placeholder="Введите ваш email">
+  </div>
+  <div class="form-field">
+    <label for="password">Пароль</label>
+    <input type="password" id="password" name="password" required placeholder="Введите ваш пароль">
+  </div>
+  <button type="submit">Отправить</button>
+</form> */
+/* Результат:
+Поле ввода будет подсвечиваться синей границей при фокусе.
+После потери фокуса поле с валидными данными получит зеленую границу, а поле с ошибкой будет подсвечено красной.
+Дополнительные улучшения:
+Можно добавить анимацию для плавного перехода между состояниями с помощью свойства transition.
+Также можно сделать более сложные стили, например, изменяя цвет фона или добавляя иконки ошибок, если это необходимо.
+Этот способ основывается только на CSS и не требует использования JavaScript. */
+
+/* input {
+  border: 2px solid #ccc;
+  padding: 10px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+/* Подсветка инпута при фокусе 
+input:focus {
+  border-color: #4d90fe; /* Цвет границы при фокусе 
+}
+
+/* Подсветка инпута, если он не в фокусе и содержит ошибку 
+input:invalid {
+  border-color: #e74c3c; /* Красная граница для невалидных инпутов 
+}
+input:invalid:before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 5;
+  right: 18px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 25px;
+  height: 25px;
+  background-color: transparent;
+  background-image: url("@public/assets/images/subscribe-block/icon/error-inp.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  -khtml-background-size: contain;
+  -moz-background-size: contain;
+  -ms-background-size: contain;
+  -o-background-size: contain;
+  -webkit-background-size: contain;
+
+
+
+   content: "\f00d"; /* Код иконки для Font Awesome (крестик) 
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900; /* Толщина для иконок Font Awesome 
+  color: red;
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Стиль инпута после того как он потерял фокус 
+input:not(:focus):valid {
+  border-color: #2ecc71; /* Зеленая граница для валидных инпутов после потери фокуса 
+}
+
+input:not(:focus):invalid {
+  border-color: #e74c3c;  Красная граница для невалидных инпутов после потери фокуса 
+} */
+
+/* -------------------------------------- */
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s ease;
+  padding-left: 30px; /* Место для иконки */
+}
+
+/* Стилизация иконки перед инпутом */
+input:focus {
+  border-color: #4caf50;
+}
+
+/* Стилизация инпута в случае ошибки (если он невалидный) */
+input:invalid {
+  border-color: red;
+}
+
+/* Иконка ошибки */
+input:invalid::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 5;
+  right: 18px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 25px;
+  height: 25px;
+  background-color: transparent;
+  background-image: url("@public/assets/images/subscribe-block/icon/error-inp.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  -khtml-background-size: contain;
+  -moz-background-size: contain;
+  -ms-background-size: contain;
+  -o-background-size: contain;
+  -webkit-background-size: contain;
+}
+/* input correct-inp-wrp error-inp-wrp*/
+/* Иконка успеха */
+.correct-inp-wrp:valid::before {
+  content: "\f00c"; /* Код иконки для Font Awesome (галочка) */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  color: green;
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+/* 
+        Дополнительные стили для инпута 
+        input::placeholder {
+            color: #ccc;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        } */

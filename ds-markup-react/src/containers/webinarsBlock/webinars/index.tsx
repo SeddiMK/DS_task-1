@@ -2,46 +2,19 @@ import { useState, useEffect } from "react";
 import { WebinarCard } from "../webinarCard";
 import { useDB } from "@/hooks/getDB";
 import { Loading } from "@/containers/loading";
+import { Marquee } from "@/components/marquee";
+import { Proposals } from "@/types/db";
 import "./style.css";
-
-type Author = {
-  img: string;
-  name: string;
-  position: string;
-};
-
-type Webinar = {
-  background: string;
-  author: Author;
-  text: string;
-  tags: string[];
-  date_from: string;
-  date_to: string;
-  time: string;
-};
-
-type ProposalsResponse = {
-  title: string;
-  "browse-all-text": string;
-  items: Webinar[];
-  ticker: {
-    text: string;
-    color: string;
-  };
-};
 
 export const Webinars: React.FC = () => {
   const { fetchData } = useDB("sections");
-  const [data, setData] = useState<ProposalsResponse | null>(null);
+  const [data, setData] = useState<Proposals | null>(null);
 
-  // Fetch the webinars data from the API using the custom hook
   useEffect(() => {
     setData(fetchData?.proposals);
   }, [fetchData]);
 
   if (!data) return <Loading />;
-
-  console.log(data);
 
   return (
     <section className="webinars">
@@ -66,6 +39,11 @@ export const Webinars: React.FC = () => {
           </div>
         </div>
       </div>
+      <Marquee
+        tickerClass="webinars"
+        tickerText={data.ticker.text}
+        tickerColor={data.ticker.color}
+      />
     </section>
   );
 };

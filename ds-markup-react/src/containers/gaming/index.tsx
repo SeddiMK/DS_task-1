@@ -5,24 +5,22 @@ import IconDate from "@public/assets/images/icons/general/calendar.svg";
 import IconTime from "@public/assets/images/icons/general/cloсk.svg";
 import { MaskedImage } from "../maskedImage";
 import MaskImageSrc from "@public/assets/images/gaming/mask/mask-gaming.png";
-import { Item2 } from "@/types/db";
+import { Item2, Main, Menu } from "@/types/db";
+import { Marquee } from "@/components/marquee";
+import { Loading } from "../loading";
 import "./style.css";
 
 export const Gaming: React.FC = () => {
   const { fetchData } = useDB("sections");
+  const [data, setData] = useState<Main | null>(null);
   const [item, setItem] = useState<Item2 | null>(null);
 
-  // const item = fetchData?.main.items[0];
-
   useEffect(() => {
+    setData(fetchData?.main);
     setItem(fetchData?.main.items[0]);
   }, [fetchData]);
 
-  // console.log(item);
-
-  if (!item) {
-    return <div>Loading components...</div>;
-  }
+  if (!data) return <Loading />;
 
   return (
     <section className="gaming">
@@ -84,6 +82,11 @@ export const Gaming: React.FC = () => {
           </div>
         </div>
       </div>
+      <Marquee
+        tickerClass="articles"
+        tickerText={data.ticker.text}
+        tickerColor={data.ticker.color}
+      />
     </section>
   );
 };

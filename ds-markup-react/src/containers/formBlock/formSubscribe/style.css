@@ -21,108 +21,87 @@ input:not(:focus):
 
 Если инпут валиден и потерял фокус, то его граница будет зеленой (#2ecc71).
 Если инпут невалиден и потерял фокус, то граница станет красной (#e74c3c). */
-/* <form>
-  <div class="form-field">
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" required placeholder="Введите ваш email">
-  </div>
-  <div class="form-field">
-    <label for="password">Пароль</label>
-    <input type="password" id="password" name="password" required placeholder="Введите ваш пароль">
-  </div>
-  <button type="submit">Отправить</button>
-</form> */
-/* Результат:
-Поле ввода будет подсвечиваться синей границей при фокусе.
-После потери фокуса поле с валидными данными получит зеленую границу, а поле с ошибкой будет подсвечено красной.
-Дополнительные улучшения:
-Можно добавить анимацию для плавного перехода между состояниями с помощью свойства transition.
-Также можно сделать более сложные стили, например, изменяя цвет фона или добавляя иконки ошибок, если это необходимо.
-Этот способ основывается только на CSS и не требует использования JavaScript. */
 
 /* input {
-  border: 2px solid #ccc;
-  padding: 10px;
-  font-size: 16px;
-  transition: border-color 0.3s ease;
-}
-
-/* Подсветка инпута при фокусе 
-input:focus {
-  border-color: #4d90fe; /* Цвет границы при фокусе 
-}
-
-/* Подсветка инпута, если он не в фокусе и содержит ошибку 
-input:invalid {
-  border-color: #e74c3c; /* Красная граница для невалидных инпутов 
-}
-input:invalid:before {
-  content: "";
-  display: block;
-  position: absolute;
-  z-index: 5;
-  right: 18px;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  width: 25px;
-  height: 25px;
-  background-color: transparent;
-  background-image: url("@public/assets/images/subscribe-block/icon/error-inp.svg");
-  background-size: contain;
-  background-repeat: no-repeat;
-  -khtml-background-size: contain;
-  -moz-background-size: contain;
-  -ms-background-size: contain;
-  -o-background-size: contain;
-  -webkit-background-size: contain;
-
-
-
-   content: "\f00d"; /* Код иконки для Font Awesome (крестик) 
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900; /* Толщина для иконок Font Awesome 
-  color: red;
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-/* Стиль инпута после того как он потерял фокус 
-input:not(:focus):valid {
-  border-color: #2ecc71; /* Зеленая граница для валидных инпутов после потери фокуса 
-}
-
-input:not(:focus):invalid {
-  border-color: #e74c3c;  Красная граница для невалидных инпутов после потери фокуса 
-} */
-
-/* -------------------------------------- */
-input {
   width: 100%;
   padding: 10px;
-  margin-bottom: 20px;
   border: 2px solid #ccc;
   border-radius: 4px;
   outline: none;
   transition: border-color 0.3s ease;
-  padding-left: 30px; /* Место для иконки */
+  padding-left: 30px; /* Место для иконки 
+} */
+
+/* Подсветка инпута при фокусе  */
+input[type="email"]:focus {
+  border-color: var(--black);
+}
+/* input[type="email"]:not(:focus) {
+  border-color: var(--white);
+} */
+
+/* Подсветка инпута, если он не в фокусе и содержит ошибку  */
+/* input[type="email"]:invalid {
+  border-color: var(--tangerine);
+} */
+/* Красная граница для невалидных инпутов после потери фокуса */
+/* input[type="email"]:invalid:not(:focus) {
+  border-color: var(--tangerine);
+} */
+
+/* Стиль инпута после того как он потерял фокус  input[type="email"]*/
+/* Когда чекбокс отмечен и email валиден (и не в фокусе), меняем цвет границы на зеленый */
+#chb-subscribe:checked + #inp-email-subscribe:valid:not(:focus) {
+  border-color: var(--grass);
 }
 
-/* Стилизация иконки перед инпутом */
-input:focus {
-  border-color: #4caf50;
+/* Когда чекбокс не отмечен и email не валиден (и не в фокусе), меняем цвет границы на оранжевый */
+#chb-subscribe:not(:checked) + #inp-email-subscribe:invalid:not(:focus) {
+  border-color: var(--tangerine);
 }
 
-/* Стилизация инпута в случае ошибки (если он невалидный) */
-input:invalid {
-  border-color: red;
+/* #inp-email-subscribe:checked
+  + input[type="email"]:valid:not(:focus)
+  + input[type="email"]:focus {
+  border-color: var(--grass);
 }
 
+.form-subscribe__inp-chb:checked {
+  background-color: var(--grass);
+}
+input[type="email"]:valid + .form-subscribe__inp-chb:not(:disabled):checked {
+  border-color: var(--grass);
+} */
+
+/* ------------------------------------------------- */
 /* Иконка ошибки */
-input:invalid::before {
+/* !!! */
+.error-inp-wrp:before {
+  /* content: ""; */
+  display: block;
+  position: absolute;
+  z-index: 5;
+  right: 18px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 25px;
+  height: 25px;
+  background-color: transparent;
+  background-image: url("@public/assets/images/subscribe-block/icon/error-inp.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  -khtml-background-size: contain;
+  -moz-background-size: contain;
+  -ms-background-size: contain;
+  -o-background-size: contain;
+  -webkit-background-size: contain;
+}
+/* !!! */
+#inp-email-subscribe:invalid:before {
+  /* content: ""; */
+  display: block;
   content: "";
   display: block;
   position: absolute;
@@ -144,34 +123,27 @@ input:invalid::before {
   -o-background-size: contain;
   -webkit-background-size: contain;
 }
-/* input correct-inp-wrp error-inp-wrp*/
+/* !!! */
 /* Иконка успеха */
-.correct-inp-wrp:valid::before {
-  content: "\f00c"; /* Код иконки для Font Awesome (галочка) */
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  color: green;
+.correct-inp-wrp:valid:before {
+  /* content: ""; */
+  display: block;
   position: absolute;
-  left: 10px;
+  z-index: 5;
+  right: 18px;
   top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
   transform: translateY(-50%);
+  width: 25px;
+  height: 25px;
+  background-color: transparent;
+  background-image: url("@public/assets/images/subscribe-block/icon/correct-inp.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  -khtml-background-size: contain;
+  -moz-background-size: contain;
+  -ms-background-size: contain;
+  -o-background-size: contain;
+  -webkit-background-size: contain;
 }
-/* 
-        Дополнительные стили для инпута 
-        input::placeholder {
-            color: #ccc;
-        }
-
-        button {
-            padding: 10px 15px;
-            background-color: #4caf50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        } */

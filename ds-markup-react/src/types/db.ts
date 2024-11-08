@@ -99,7 +99,7 @@ export interface Main {
 
 export interface Ticker {
   text: string;
-  "color:": string;
+  color: string;
 }
 
 export interface Item2 {

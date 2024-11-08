@@ -1,22 +1,28 @@
-import "./style.css";
 import { useDB } from "@/hooks/getDB";
-import { FooterType, Item } from "@/types/db";
+import { FooterType, Item, Menu } from "@/types/db";
 import { Contacts } from "@/containers/footerBlock/contacts";
 import { IconComponent } from "../IconComponent";
 import Awards from "@public/assets/images/footer/awards.jpg";
 import { Privicy } from "../footerBlock/privicy";
+import "./style.css";
+import { Marquee } from "@/components/marquee";
+import { useState, useEffect } from "react";
+import { Loading } from "../loading";
 
 export const Footer: React.FC = () => {
   const { fetchData } = useDB("menu");
+  const [data, setData] = useState<Menu | null>(null);
   const fetchDataContacts = useDB("contacts");
   const btnEmailPlhr =
     fetchDataContacts?.fetchData?.subscription["email-placeholder"];
   const btnSubmitPlhr =
     fetchDataContacts?.fetchData?.subscription["submit-text"];
 
-  if (!fetchData) {
-    return <div>Loading...</div>;
-  }
+  useEffect(() => {
+    setData(fetchData?.menu);
+  }, [fetchData]);
+
+  if (!data) return <Loading />;
 
   return (
     <footer className="footer">

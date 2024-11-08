@@ -687,50 +687,7 @@ main {
   -ms-flex-pack: center;
   justify-content: center;
 }
-.error-inp-wrp:before {
-  content: "";
-  display: block;
-  position: absolute;
-  z-index: 5;
-  right: 18px;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  width: 25px;
-  height: 25px;
-  background-color: transparent;
-  background-image: url("@public/assets/images/subscribe-block/icon/error-inp.svg");
-  background-size: contain;
-  background-repeat: no-repeat;
-  -khtml-background-size: contain;
-  -moz-background-size: contain;
-  -ms-background-size: contain;
-  -o-background-size: contain;
-  -webkit-background-size: contain;
-}
-.correct-inp-wrp:before {
-  content: "";
-  display: block;
-  position: absolute;
-  z-index: 5;
-  right: 18px;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  width: 25px;
-  height: 25px;
-  background-color: transparent;
-  background-image: url("@public/assets/images/subscribe-block/icon/correct-inp.svg");
-  background-size: contain;
-  background-repeat: no-repeat;
-  -khtml-background-size: contain;
-  -moz-background-size: contain;
-  -ms-background-size: contain;
-  -o-background-size: contain;
-  -webkit-background-size: contain;
-}
+
 .form-subscribe__input {
   position: relative;
   top: 0;

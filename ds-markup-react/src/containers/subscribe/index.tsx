@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useDB } from "@/hooks/getDB";
 import { Loading } from "../loading";
 import { Subscription } from "@/types/db";
-import { Form } from "../form";
+import { FormSubscribe } from "../formBlock/formSubscribe";
+import { Marquee } from "@/components/marquee";
 import "./style.css";
 
 export const SubscribeBlock: React.FC = () => {
   const { fetchData } = useDB("sections");
   const [data, setData] = useState<Subscription | null>(null);
 
-  // Fetch the webinars data from the API using the custom hook
   useEffect(() => {
     setData(fetchData?.subscription);
   }, [fetchData]);
@@ -33,31 +33,21 @@ export const SubscribeBlock: React.FC = () => {
                 </div>
               </div>
               <div className="section-subscribe__form-block form-block">
-                <Form
+                <FormSubscribe
                   agreementT={data["agreement-text"]}
                   submitT={data["submit-text"]}
                   emailT={data["email-placeholder"]}
                 />
-
-                <div className="form-block__subscr-successful subscr-successful">
-                  <div className="subscr-successful__block">
-                    <p className="subscr-successful__text">
-                      Fantástico! Espera la primera carta
-                    </p>
-                  </div>
-                  <div className="subscr-successful__img-wrp img-wrp subscr-successful-img-wrp">
-                    <img
-                      className="subscr-successful__img img img-subscr-successful"
-                      src="./images/subscribe-block/subscr-success/sticker/sticker-success.png"
-                      alt="etiqueta y sobre de suscripción exitosa"
-                    />
-                  </div>
-                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <Marquee
+        tickerClass="subscribe-block"
+        tickerText={data.ticker.text}
+        tickerColor={data.ticker.color}
+      />
     </section>
   );
 };

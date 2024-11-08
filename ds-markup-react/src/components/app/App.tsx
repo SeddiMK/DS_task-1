@@ -1,5 +1,5 @@
-// import { SmartHeader } from "@/containers/smartHeader";
-// import { Footer } from "@/containers/footer";
+import { SmartHeader } from "@/containers/smartHeader";
+import { Footer } from "@/containers/footer";
 import { Gaming } from "@/containers/gaming";
 import { Articles } from "@/containers/articlesBlock/articles";
 import { Webinars } from "@/containers/webinarsBlock/webinars";

@@ -112,3 +112,85 @@ export const Form: React.FC<FormProps> = ({ agreementT, submitT, emailT }) => {
 //     </form>
 //   );
 // };
+
+// -----------------------------------------------------
+
+// -----------------------------------------------------
+
+// export const FormSubscribe = () => {
+//   const [email, setEmail] = useState("");
+//   const [isSubscribed, setIsSubscribed] = useState(false);
+//   const [errorMessage, setErrorMessage] = useState("");
+//   const [isEmailValid, setIsEmailValid] = useState(true);
+//   const [isTermsAccepted, setIsTermsAccepted] = useState(false);
+
+//   // Validate email format
+//   const validateEmail = (email) => {
+//     const emailRegex =
+//       /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+//     return emailRegex.test(email);
+//   };
+
+//   const handleFormSubmit = (e) => {
+//     e.preventDefault();
+//     if (!email || !isTermsAccepted) {
+//       setErrorMessage(
+//         "No ha introducido el correo electrónico o no ha aceptado los términos.",
+//       );
+//       return;
+//     }
+
+//     if (email && !validateEmail(email)) {
+//       setIsEmailValid(false);
+//       setErrorMessage("Formato de email inválido, verifique a ortografía.");
+//       return;
+//     }
+
+//     setIsEmailValid(true);
+//     setErrorMessage("");
+
+//     // Simulate form submission
+//     setTimeout(() => {
+//       setIsSubscribed(true);
+//     }, 1000);
+//   };
+
+//   return (
+//     <div>
+//       <form id="form-subscribe" onSubmit={handleFormSubmit}>
+//         <div
+//           id="inp-email-subscribe-wrp"
+//           className={isEmailValid ? "correct-inp-wrp" : "error-inp-wrp"}
+//         >
+//           <input
+//             type="email"
+//             id="inp-email-subscribe"
+//             value={email}
+//             onChange={(e) => setEmail(e.target.value)}
+//             style={{
+//               borderColor: isEmailValid ? "var(--grass)" : "var(--tangerine)",
+//               borderWidth: "2px",
+//             }}
+//           />
+//         </div>
+//         <div>
+//           <input
+//             type="checkbox"
+//             id="chb-subscribe"
+//             checked={isTermsAccepted}
+//             onChange={() => setIsTermsAccepted(!isTermsAccepted)}
+//           />
+//           Acepto los términos
+//         </div>
+//         <div className="form-subscribe__error-message">{errorMessage}</div>
+//         <button type="submit">Enviar</button>
+//       </form>
+
+//       {isSubscribed && (
+//         <div className="subscr-successful">
+//           <p>¡Suscripción exitosa!</p>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };

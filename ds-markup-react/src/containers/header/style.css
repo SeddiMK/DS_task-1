@@ -1,6 +1,10 @@
 .loading {
   width: 40px;
 }
+.icon-logo {
+  width: 100%;
+  height: 100%;
+}
 /* --------------------------------- header ------------------------------ */
 .header {
   display: -webkit-box;

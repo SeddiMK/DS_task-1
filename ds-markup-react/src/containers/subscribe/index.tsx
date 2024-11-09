@@ -43,11 +43,11 @@ export const SubscribeBlock: React.FC = () => {
           </div>
         </div>
       </div>
-      {/* <Marquee
+      <Marquee
         tickerClass="subscribe-block"
         tickerText={data.ticker.text}
         tickerColor={data.ticker.color}
-      /> */}
+      />
     </section>
   );
 };

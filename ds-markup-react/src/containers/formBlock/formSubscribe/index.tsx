@@ -50,17 +50,11 @@ export const FormSubscribe: React.FC<FormProps> = ({
     }
 
     setTimeout(() => {
-      console.log(email);
       setIsSubscribed(true);
     }, 1000);
   };
 
   useEffect(() => {}, [isSubscribed]);
-
-  console.log(isEmailValid, "isEmailValid");
-  console.log(isSubscribed, "isSubscribed");
-  console.log(isTermsAccepted, "isTermsAccepted");
-  console.log(Boolean(email), "Boolean(email)");
 
   return (
     <>

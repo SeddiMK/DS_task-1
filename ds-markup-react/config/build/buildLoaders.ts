@@ -1,6 +1,7 @@
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { ModuleOptions } from "webpack";
 import { BuildOptions } from "./types/types";
+import path from "path";
 
 export const buildLoaders = ({
   mode,
@@ -26,32 +27,20 @@ export const buildLoaders = ({
       isDev ? "style-loader" : MiniCssExtractPlugin.loader,
       {
         loader: "css-loader",
-        options: {
-          // Run `postcss-loader` on each CSS `@import` and CSS modules/ICSS imports, do not forget that `sass-loader` compile non CSS `@import`'s into a single file
-          // If you need run `sass-loader` and `postcss-loader` on each CSS `@import` please set it to `2`
-          importLoaders: 1,
-          url: true,
-        },
+        // options: {
+        //   // Run `postcss-loader` on each CSS `@import` and CSS modules/ICSS imports, do not forget that `sass-loader` compile non CSS `@import`'s into a single file
+        //   // If you need run `sass-loader` and `postcss-loader` on each CSS `@import` please set it to `2`
+        //   importLoaders: 1,
+        //   url: true,
+        // },
       },
-      // {
-      //   loader: "postcss-loader",
-      //   options: { plugins: () => [postcssPresetEnv({ stage: 0 })] },
-      // },
+
       "sass-loader",
     ],
   };
 
-  // png|svg|jpg|jpeg|gif
-  //  use: [
-  //     {
-  //       loader: "url-loader",
-  //       options: {
-  //         limit: 8192,
-  //       },
-  //     },
-  //   ],
   const assetLoader = {
-    test: /\.(png|jpg|jpeg|gif)$/i,
+    test: /\.(png|svg|jpg|jpeg|gif)$/i,
     type: "asset/resource",
   };
 
@@ -60,11 +49,20 @@ export const buildLoaders = ({
     type: "asset/resource",
   };
 
-  const svgrLoader = {
-    test: /\.svg$/i,
-    issuer: /\.[jt]sx?$/,
-    use: [{ loader: "@svgr/webpack", options: { icon: true } }],
-  };
+  // const svgrLoader = {
+  //   test: /\.svg$/i,
+  //   issuer: /\.[jt]sx?$/,
+  //   use: [{ loader: "@svgr/webpack", options: { icon: true } }],
+  // };
+
+  // const svgSptiteLoader = {
+  //   test: /\.svg$/,
+  //   use: [
+  //     "svg-sprite-loader", // этот загрузчик создаст спрайт
+  //     "file-loader", // этот загрузчик обрабатывает SVG
+  //   ],
+  //   include: path.resolve(__dirname, "public/assets/images/sprites"),
+  // };
 
   const tsLoader = {
     test: /\.tsx?$/,
@@ -72,5 +70,5 @@ export const buildLoaders = ({
     exclude: /node_modules/,
   };
 
-  return [fontsLoader, cssLoader, assetLoader, svgrLoader, tsLoader];
+  return [fontsLoader, cssLoader, assetLoader, tsLoader];
 };

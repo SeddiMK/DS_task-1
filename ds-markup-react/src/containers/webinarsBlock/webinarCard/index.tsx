@@ -23,7 +23,7 @@ export const WebinarCard: React.FC<WebinarCardProps> = ({ webinar, index }) => {
         <MaskedImage
           src={webinar.author.img}
           alt={`Avatar of ${webinar.author.name}`}
-          maskSrc={MaskImageSrc}
+          maskSrcMiniCardAvatar={MaskImageSrc}
           className={`top-card-mini__avatar img-wrp img-card-mini mask-${classCard}`}
         />
 

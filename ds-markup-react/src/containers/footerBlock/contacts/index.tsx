@@ -5,6 +5,7 @@ import IconInstagram from "@public/assets/images/icons/footer/instagram.svg";
 import IconFacebook from "@public/assets/images/icons/footer/facebook.svg";
 import IconYoutube from "@public/assets/images/icons/footer/youtube.svg";
 import IconLinkedin from "@public/assets/images/icons/footer/linkedin.svg";
+import { Loading } from "@/containers/loading";
 
 export const Contacts: React.FC = () => {
   const { fetchData } = useDB("contacts");
@@ -17,7 +18,7 @@ export const Contacts: React.FC = () => {
   }, [fetchData]);
 
   if (!fetchData) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (

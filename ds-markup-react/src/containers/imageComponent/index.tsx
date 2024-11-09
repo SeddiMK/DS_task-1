@@ -1,6 +1,14 @@
 import { useState, useEffect } from "react";
 
-export const IconComponent = ({ iconUrl = "", className = "" }) => {
+export interface ImageComponentProps {
+  iconUrl: string;
+  className?: string;
+}
+
+export const ImageComponent: React.FC<ImageComponentProps> = ({
+  iconUrl,
+  className,
+}) => {
   const [svgContent, setSvgContent] = useState(null);
 
   useEffect(() => {

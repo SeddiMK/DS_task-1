@@ -1,5 +1,5 @@
 import { SmartHeader } from "@/containers/smartHeader";
-import { Footer } from "@/containers/footer";
+import { Footer } from "@/containers/footerBlock/footer";
 import { Gaming } from "@/containers/gaming";
 import { Articles } from "@/containers/articlesBlock/articles";
 import { Webinars } from "@/containers/webinarsBlock/webinars";
@@ -9,10 +9,10 @@ export const App = () => {
   return (
     <div className="wrapper">
       {/* <SmartHeader /> */}
-      {/* <Gaming /> */}
-      {/* <Articles /> */}
+      <Gaming />
+      <Articles />
       {/* <Webinars /> */}
-      <SubscribeBlock />
+      {/* <SubscribeBlock /> */}
       {/* <Footer /> */}
     </div>
   );

@@ -4,11 +4,13 @@ import StickersGaming from "@public/assets/images/gaming/sticker/sticker-gaming.
 import IconDate from "@public/assets/images/icons/general/calendar.svg";
 import IconTime from "@public/assets/images/icons/general/cloсk.svg";
 import { MaskedImage } from "../maskedImage";
-import MaskImageSrc from "@public/assets/images/gaming/mask/mask-gaming.png";
-import { Item2, Main, Menu } from "@/types/db";
+import { Item2, Main } from "@/types/db";
 import { Marquee } from "@/components/marquee";
 import { Loading } from "../loading";
 import "./style.css";
+import { StickersImage } from "../stickersImage";
+import { IconSprite } from "../IconSprite";
+import spriteStickers from "@public/assets/images/stickers/spriteStickers.svg";
 
 export const Gaming: React.FC = () => {
   const { fetchData } = useDB("sections");
@@ -29,14 +31,20 @@ export const Gaming: React.FC = () => {
           <MaskedImage
             src={item.img.url}
             alt="imagen de una niña con una computadora portátil en su regazo"
-            maskSrc={MaskImageSrc}
+            maskShape={item.img.shape}
             className="mask-gaming gaming__img-wrp"
           />
           <span
-            className={`img-wrp__stiker-gaming stiker-img stiker-img_r_t_0`}
+            className={`img-wrp__stiker-gaming stiker-gaming stiker-img stiker-img_r_t_0`}
           >
-            <StickersGaming />
+            <IconSprite name="gaming" nameSpriteSrc={spriteStickers} />
           </span>
+          {/* <StickersImage
+            word={item.stamp.word}
+            type={item.stamp.type}
+            position={item.stamp.position}
+          /> */}
+          {/* <StickersGaming /> */}
         </div>
 
         <div className="gaming__content-info content-info-big-card content-info-gaming">
@@ -61,13 +69,15 @@ export const Gaming: React.FC = () => {
           <div className="content-info__date date-big-cards date-big-cards-gaming">
             <p className="content-info__date-text date-text">
               <span className="date-text__icon icon">
-                <IconDate />
+                {/* <IconDate /> */}
+                svg
               </span>
               <span className="date-text__txt">{item.date}</span>
             </p>
             <p className="content-info__time time">
               <span className="time__icon icon">
-                <IconTime />
+                svg
+                {/* <IconTime /> */}
               </span>
               <span className="time__text">{item.duration} min</span>
             </p>

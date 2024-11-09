@@ -194,8 +194,8 @@
   margin-bottom: 16px;
 }
 .img-card-mini {
-  mask-image: url("@public/assets/images/webinars/card/mask/mask-avatar.png");
-  -webkit-mask-image: url("@public/assets/images/webinars/card/mask/mask-avatar.png");
+  /* mask-image: url("@public/assets/images/webinars/card/mask/mask-avatar.png");
+  -webkit-mask-image: url("@public/assets/images/webinars/card/mask/mask-avatar.png"); */
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-size: 100% 100%;

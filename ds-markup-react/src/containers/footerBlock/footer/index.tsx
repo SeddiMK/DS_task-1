@@ -1,13 +1,12 @@
 import { useDB } from "@/hooks/getDB";
 import { FooterType, Item, Menu } from "@/types/db";
 import { Contacts } from "@/containers/footerBlock/contacts";
-import { IconComponent } from "../IconComponent";
+import { ImageComponent } from "../../imageComponent";
 import Awards from "@public/assets/images/footer/awards.jpg";
-import { Privicy } from "../footerBlock/privicy";
-import "./style.css";
-import { Marquee } from "@/components/marquee";
+import { Privicy } from "../privicy";
 import { useState, useEffect } from "react";
-import { Loading } from "../loading";
+import { Loading } from "../../loading";
+import "./style.css";
 
 export const Footer: React.FC = () => {
   const { fetchData } = useDB("menu");
@@ -19,7 +18,7 @@ export const Footer: React.FC = () => {
     fetchDataContacts?.fetchData?.subscription["submit-text"];
 
   useEffect(() => {
-    setData(fetchData?.menu);
+    setData(fetchData);
   }, [fetchData]);
 
   if (!data) return <Loading />;
@@ -34,7 +33,7 @@ export const Footer: React.FC = () => {
                 href="/"
                 className="logo__link logo_color_white logo_color_active logo_color_hover"
               >
-                <IconComponent
+                <ImageComponent
                   iconUrl={fetchData?.logo}
                   className="icon-logo"
                 />

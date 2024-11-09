@@ -10,8 +10,6 @@ export const Articles: React.FC = () => {
   const { fetchData } = useDB("sections");
   const [data, setData] = useState<Content | null>(null);
 
-  // const item = fetchData?.main.items[1]; !!!
-
   useEffect(() => {
     setData(fetchData?.content);
   }, [fetchData]);
@@ -26,7 +24,7 @@ export const Articles: React.FC = () => {
         ))}
       </div>
       <Marquee
-        tickerClass="articles"
+        tickerClass="webinars"
         tickerText={data.ticker.text}
         tickerColor={data.ticker.color}
       />

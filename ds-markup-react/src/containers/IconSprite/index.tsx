@@ -3,35 +3,28 @@ import { useEffect, useState } from "react";
 
 export const IconSprite: React.FC<IconProps> = ({
   name,
-  nameSpriteSrc,
+  nameIconSrc,
   width,
   height,
   className,
-  bgColorIcon,
+  fellIcon,
 }) => {
-  const [nameStickers, setNameStickers] = useState("");
+  // const [nameIcon, setNameIcon] = useState("");
 
-  useEffect(() => {
-    if (name) {
-      setNameStickers(name);
-    }
-
-    if (!name) {
-      setNameStickers("gaming");
-    }
-  }, [name]);
-
-  console.log(name, "name+++++++++++++++++++++");
-  console.log(nameSpriteSrc, "nameSpriteSrc+++++++++++++++++++++");
+  // useEffect(() => {
+  //   if (name) {
+  //     setNameIcon(name);
+  //   }
+  // }, [name]);
 
   return (
     <svg
-      className={`icon icon-${nameStickers}`}
-      // style={{ backgroundColor: bgColorIcon }}
+      className={`${className ? className : ""} icon icon-${name}`}
+      style={{ fill: fellIcon }}
       width={width}
       height={height}
     >
-      <use xlinkHref={nameSpriteSrc + `#icon-${nameStickers}`} />
+      <use xlinkHref={nameIconSrc + `#icon-${name}`} />
     </svg>
   );
 };

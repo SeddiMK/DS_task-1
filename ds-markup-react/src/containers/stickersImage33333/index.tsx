@@ -19,7 +19,7 @@ export const StickersImage: React.FC<StickerImageProps> = ({
   return (
     <>
       <span
-        className={`img-wrp__stiker-gaming stiker-gaming stiker-img stiker-img_r_t_0`}
+        className={`img-wrp__stiker-gaming stiker-gaming stiker-img`}
         style={
           {
             // width: width,

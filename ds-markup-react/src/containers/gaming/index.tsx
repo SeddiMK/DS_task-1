@@ -1,28 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { useDB } from "@/hooks/getDB";
-import StickersGaming from "@public/assets/images/gaming/sticker/sticker-gaming.svg";
-import IconDate from "@public/assets/images/icons/general/calendar.svg";
-import IconTime from "@public/assets/images/icons/general/cloсk.svg";
 import { MaskedImage } from "../maskedImage";
-import { Item2, Main } from "@/types/db";
+import { Item2, Main, Stamp } from "@/types/db";
 import { Marquee } from "@/components/marquee";
 import { Loading } from "../loading";
 import "./style.css";
-import { StickersImage } from "../stickersImage";
 import { IconSprite } from "../IconSprite";
 import spriteStickers from "@public/assets/images/stickers/spriteStickers.svg";
+import SpriteDateTime from "@public/assets/images/icons/general/spriteDateTime.svg";
 
 export const Gaming: React.FC = () => {
   const { fetchData } = useDB("sections");
   const [data, setData] = useState<Main | null>(null);
   const [item, setItem] = useState<Item2 | null>(null);
+  const [itemStamp, setItemStamp] = useState<Stamp | null>(null);
 
   useEffect(() => {
     setData(fetchData?.main);
     setItem(fetchData?.main.items[0]);
+    setItemStamp(fetchData?.main.items[0].stamp);
   }, [fetchData]);
 
   if (!data) return <Loading />;
+
+  console.log(item, "----------------item");
+  console.log(itemStamp, "----------------itemStamp");
 
   return (
     <section className="gaming">
@@ -30,14 +32,18 @@ export const Gaming: React.FC = () => {
         <div className="gaming__img-wrapper">
           <MaskedImage
             src={item.img.url}
-            alt="imagen de una niña con una computadora portátil en su regazo"
+            alt={`image ${item.img.shape}`}
             maskShape={item.img.shape}
             className="mask-gaming gaming__img-wrp"
           />
           <span
-            className={`img-wrp__stiker-gaming stiker-gaming stiker-img stiker-img_r_t_0`}
+            id={`stiker-${itemStamp.word.toLowerCase()}`}
+            className={`img-wrp__stiker-gaming stiker-${itemStamp.word.toLowerCase()} stiker-img stiker_${item.stamp.position}`}
           >
-            <IconSprite name="gaming" nameSpriteSrc={spriteStickers} />
+            <IconSprite
+              name={itemStamp.word.toLowerCase()}
+              nameIconSrc={spriteStickers}
+            />
           </span>
           {/* <StickersImage
             word={item.stamp.word}
@@ -69,15 +75,21 @@ export const Gaming: React.FC = () => {
           <div className="content-info__date date-big-cards date-big-cards-gaming">
             <p className="content-info__date-text date-text">
               <span className="date-text__icon icon">
-                {/* <IconDate /> */}
-                svg
+                <IconSprite
+                  name="calendar"
+                  nameIconSrc={SpriteDateTime}
+                  fellIcon="#aeaeae"
+                />
               </span>
               <span className="date-text__txt">{item.date}</span>
             </p>
             <p className="content-info__time time">
               <span className="time__icon icon">
-                svg
-                {/* <IconTime /> */}
+                <IconSprite
+                  name="clock"
+                  nameIconSrc={SpriteDateTime}
+                  fellIcon="#aeaeae"
+                />{" "}
               </span>
               <span className="time__text">{item.duration} min</span>
             </p>

@@ -398,9 +398,11 @@ main {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  justify-content: start;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 17px;
+  height: 21px;
 }
 .icon-cmpt {
 }
@@ -483,6 +485,7 @@ main {
   -webkit-mask-size: contain;
   mask-size: contain;
 }
+/* --------------------------- stickers position ------------------------ */
 .stiker-img {
   position: absolute;
   z-index: 2;
@@ -491,25 +494,30 @@ main {
   width: 200px;
   height: 200px;
 }
-.stiker-img_r_t_0 {
-  right: -10px;
+
+#stiker-gaming {
   top: 21px;
+  right: -10px;
 }
-.stiker-img_l_t_47 {
-  left: -35px;
+#stiker-marketing {
+  width: 265px;
+  height: 148px;
   top: -43px;
+  left: -35px;
 }
-.stiker-img_r_t_47 {
-  right: -39px;
-  top: -49px;
+#stiker-marketing svg {
+  width: 265px;
+  height: 148px;
 }
-.stiker-img_l_t_80 {
-  left: -57px;
-  top: -80.5px;
-}
-.stiker-img_r_t {
-  right: -40px;
+
+.stiker_top-right {
   top: -52.5px;
+  right: -40px;
+}
+
+.stiker_top-left {
+  top: -43px;
+  left: -35px;
 }
 
 /* --------------------------------- input ------------------------------ */

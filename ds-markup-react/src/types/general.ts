@@ -22,9 +22,9 @@ export interface StickerImageProps {
 
 export interface IconProps {
   name: string;
-  nameSpriteSrc: string;
+  nameIconSrc: string;
   width?: number;
   height?: number;
   className?: string;
-  bgColorIcon?: string;
+  fellIcon?: string;
 }

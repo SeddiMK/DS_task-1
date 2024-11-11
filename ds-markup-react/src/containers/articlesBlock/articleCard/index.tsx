@@ -1,24 +1,19 @@
 import React, { useEffect, useState } from "react";
-import StickerFashion from "@public/assets/images/articles/stikers/fashion.svg";
-import StickerDesign from "@public/assets/images/articles/stikers/design.svg";
-import StickerMarketing from "@public/assets/images/articles/stikers/marketing.svg";
-import StickerSoftware from "@public/assets/images/articles/stikers/software.svg";
-import IconDate from "@public/assets/images/icons/general/calendar.svg";
-import IconTime from "@public/assets/images/icons/general/cloсk.svg";
 import { MaskedImage } from "../../maskedImage";
-import MaskImageSrc from "@public/assets/images/articles/mask/fashion.png";
 import { ArticleCardProps } from "@/types/db";
-import { StickersImage } from "@/containers/stickersImage";
 import { IconSprite } from "@/containers/IconSprite";
-import spriteStickers from "@public/assets/images/stickers/spriteStickers.svg";
+import SpriteStickers from "@public/assets/images/stickers/spriteStickers.svg";
+import SpriteDateTime from "@public/assets/images/icons/general/spriteDateTime.svg";
 import { Loading } from "@/containers/loading";
 
-// !!!
-const classes = ["fashion", "design", "design-ux-ui", "marketing", "software"];
-
 export const ArticleCard: React.FC<ArticleCardProps> = ({ article, index }) => {
-  // const [classCard, setClassCard] = useState("");
   const [nameStickers, setNameStickers] = useState("");
+  const [classSpanStickers, setSpanStickers] = useState("");
+
+  // const spanStickersClass = (index: number) => {
+  //   if (index === 2) {
+  //   }
+  // };
 
   useEffect(() => {
     if (article) {
@@ -30,13 +25,21 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ article, index }) => {
     }
   }, [article]);
 
+  useEffect(() => {
+    if (nameStickers) {
+      setSpanStickers(
+        `img-wrp__stiker-articles stiker-img stiker-${index === 2 ? `design-ux-ui` : nameStickers} ${index === 1 ? "stiker-design_rotate-animation" : ""} stiker_${article.stamp.position}`,
+      );
+    }
+  }, [nameStickers]);
+
   if (!article) {
     return <Loading />;
   }
 
-  console.log("article=====", article);
-  console.log("article.stamp.word=====", article.stamp.word.toLowerCase());
-  console.log("nameStickers=====", nameStickers);
+  // console.log("article=====", article);
+  // console.log("article.stamp.word=====", article.stamp.word.toLowerCase());
+  // console.log("nameStickers=====", nameStickers);
 
   return (
     <article
@@ -79,16 +82,14 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ article, index }) => {
             }
           />
 
-          <span
-            className={`img-wrp__stiker-articles stiker-img stiker-${index === 2 ? `design-ux-ui` : nameStickers} ${index === 0 && "stiker-img_l_t_47"} ${index === 1 && "stiker-design_rotate-animation"} ${(index === 1 || index === 2) && "stiker-img_r_t_47"} ${index === 2 && "stiker-img_r_t_15"}  ${index === 3 && "stiker-img_l_t_80"} ${index === 4 && "stiker-img_r_t"}`}
-          >
+          <span id={`stiker-${nameStickers}`} className={classSpanStickers}>
             {/* <StickersImage
               word={article.stamp.word}
               type={article.stamp.type}
               position={article.stamp.position}
             /> */}
 
-            <IconSprite name={nameStickers} nameSpriteSrc={spriteStickers} />
+            <IconSprite name={nameStickers} nameIconSrc={SpriteStickers} />
 
             {/* {index === 0 && <StickerFashion />}
             {(index === 1 || index === 2) && <StickerDesign />}
@@ -125,15 +126,21 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ article, index }) => {
           <div className="content-info__date">
             <p className="content-info__date-text date-text">
               <span className="date-text__icon icon">
-                {/* <IconDate /> */}
-                svg
+                <IconSprite
+                  name="calendar"
+                  nameIconSrc={SpriteDateTime}
+                  fellIcon="#aeaeae"
+                />
               </span>
               <span className="date-text__txt">{article.date}</span>
             </p>
             <p className="content-info__time time">
               <span className="time__icon icon">
-                {/* <IconTime /> */}
-                svg
+                <IconSprite
+                  name="clock"
+                  nameIconSrc={SpriteDateTime}
+                  fellIcon="#aeaeae"
+                />
               </span>
               <span className="time__text">{article.duration} min</span>
             </p>

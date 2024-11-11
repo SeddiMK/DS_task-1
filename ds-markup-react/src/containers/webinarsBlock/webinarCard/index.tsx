@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { MaskedImage } from "@/containers/maskedImage";
 import MaskImageSrc from "@public/assets/images/webinars/card/mask/mask-avatar.png";
-import IconDate from "@public/assets/images/icons/general/calendar.svg";
-import IconTime from "@public/assets/images/icons/general/cloсk.svg";
+import SpriteDateTime from "@public/assets/images/icons/general/spriteDateTime.svg";
 import { WebinarCardProps } from "@/types/db";
+import { IconSprite } from "@/containers/IconSprite";
 
 const classes = ["one", "two", "three"];
 
@@ -45,7 +45,11 @@ export const WebinarCard: React.FC<WebinarCardProps> = ({ webinar, index }) => {
         <div className="bottom-card-mini__learn-time learn-time">
           <p className="learn-time__date-text date-text">
             <span className="date-text__icon icon learn-time-icon">
-              <IconDate />
+              <IconSprite
+                name="calendar"
+                nameIconSrc={SpriteDateTime}
+                fellIcon="#aeaeae"
+              />
             </span>
             <span className="date-text__txt">
               {webinar.date_from} {webinar.date_to}
@@ -53,7 +57,11 @@ export const WebinarCard: React.FC<WebinarCardProps> = ({ webinar, index }) => {
           </p>
           <p className="learn-time__time time">
             <span className="time__icon icon">
-              <IconTime />
+              <IconSprite
+                name="clock"
+                nameIconSrc={SpriteDateTime}
+                fellIcon="#aeaeae"
+              />
             </span>
             <span className="time__text">{webinar.time}</span>
           </p>

@@ -67,7 +67,7 @@ export const FormSubscribe: React.FC<FormProps> = ({
           <div className="form-subscribe__send">
             <div
               id="inp-email-subscribe-wrp"
-              className={`form-subscribe__input-wrp ${email && (isEmailValid ? "correct-inp-wrp" : "error-inp-wrp")}`}
+              className={`form-subscribe__input-wrp`}
             >
               <input
                 required
@@ -76,6 +76,7 @@ export const FormSubscribe: React.FC<FormProps> = ({
                 className="form-subscribe__inp-chb"
                 onChange={() => setIsTermsAccepted(!isTermsAccepted)}
               />
+
               <label
                 className="form-subscribe__lbl lbl lbl-subscribe"
                 htmlFor="chb-subscribe"
@@ -93,25 +94,23 @@ export const FormSubscribe: React.FC<FormProps> = ({
                 name="form-subscribe[email]"
                 data-error="Error"
                 placeholder={emailT}
-                className="form-subscribe__input input form-subscribe-input_focus form-subscribe-input_disabled"
+                className={`form-subscribe__input input form-subscribe-input_focus form-subscribe-input_disabled ${email && (isEmailValid ? "correct-inp-wrp" : "error-inp-wrp")}`}
                 onChange={(e) => setEmail(e.target.value)}
               />
               <span className="icon-email"></span>
+              <button
+                type="submit"
+                className="form-subscribe__btn btn subscribe-btn subscribe_bgc_active subscribe_bgc_hover subscribe_bgc_focus subscribe_bgc_disabled"
+              >
+                {submitT}
+              </button>
+              {errorMessage && (
+                <div className="form-subscribe__success-message">
+                  {errorMessage}
+                </div>
+              )}
             </div>
-
-            <button
-              type="submit"
-              className="form-subscribe__btn btn subscribe-btn subscribe_bgc_active subscribe_bgc_hover subscribe_bgc_focus subscribe_bgc_disabled"
-            >
-              {submitT}
-            </button>
           </div>
-
-          {errorMessage && (
-            <div className="form-subscribe__success-message">
-              {errorMessage}
-            </div>
-          )}
         </form>
       )}
       {isSubscribed && <FormSuccessful />}

@@ -49,7 +49,7 @@ export const WebinarCard: React.FC<WebinarCardProps> = ({ webinar, index }) => {
               <IconSprite
                 name="calendar"
                 nameIconSrc={SpriteDateTime}
-                fellIcon="#aeaeae"
+                fellIcon="#fcfaf9"
               />
             </span>
             <span className="date-text__txt">
@@ -61,7 +61,7 @@ export const WebinarCard: React.FC<WebinarCardProps> = ({ webinar, index }) => {
               <IconSprite
                 name="clock"
                 nameIconSrc={SpriteDateTime}
-                fellIcon="#aeaeae"
+                fellIcon="#fcfaf9"
               />
             </span>
             <span className="time__text">{webinar.time}</span>

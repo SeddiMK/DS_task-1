@@ -1,59 +1,11 @@
 /* Реализовать подсветку инпутов формы на CSS по событию blur */
-input[type="email"]:focus {
-  border-color: var(--black);
-}
-#chb-subscribe:checked ~ input[type="email"]:not(:focus):valid {
-  border-color: var(--grass);
-}
-
-#chb-subscribe:checked ~ input[type="email"]:not(:focus):valid ~ span::before {
-  content: "";
-  background-image: url("@public/assets/images/subscribe-block/icon/correct-inp.svg");
-}
-
-#chb-subscribe:checked ~ input[type="email"]:not(:focus):user-invalid:invalid {
-  border-color: var(--tangerine);
-}
-#chb-subscribe:checked
-  ~ input[type="email"]:not(:focus):user-invalid:invalid
-  ~ span::before {
-  content: "";
-}
-
-#chb-subscribe:not(:checked) ~ input[type="email"]:not(:focus):invalid {
-  border-color: var(--tangerine);
-}
-#chb-subscribe:not(:checked)
-  ~ input[type="email"]:not(:focus):invalid
-  ~ span::before {
-  content: "";
-}
-
-#chb-subscribe:not(:checked) ~ input[type="email"]:not(:focus):valid {
-  border-color: var(--tangerine);
-}
-#chb-subscribe:not(:checked)
-  ~ input[type="email"]:not(:focus):valid
-  ~ span::before {
-  content: "";
-}
-
-#chb-subscribe:not(:checked) ~ input[type="email"]:placeholder-shown:invalid {
-  border-color: var(--white);
-}
-#chb-subscribe:not(:checked)
-  ~ input[type="email"]:placeholder-shown:invalid
-  ~ span::before {
-  content: none;
-}
-
-input[type="email"] ~ span::before {
+#inp-email-subscribe ~ span::before {
+  order: 2;
   content: none;
   display: block;
   position: absolute;
   z-index: 5;
-  right: 18px;
-  top: 50%;
+  left: 242px;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
@@ -72,4 +24,58 @@ input[type="email"] ~ span::before {
 
 .lbl-subscribe a {
   text-decoration: underline;
+}
+#inp-email-subscribe:focus {
+  border-color: var(--black);
+}
+#chb-subscribe:checked ~ #inp-email-subscribe:valid:not(:focus) {
+  border-color: var(--grass);
+}
+#chb-subscribe:checked ~ #inp-email-subscribe:not(:focus):valid ~ span::before {
+  content: "";
+  background-image: url("@public/assets/images/subscribe-block/icon/correct-inp.svg");
+}
+
+/* not correct email .error-inp-wrp*/
+
+#chb-subscribe:checked ~ .error-inp-wrp:valid:not(:focus) {
+  border-color: var(--tangerine);
+}
+
+#chb-subscribe:checked ~ #inp-email-subscribe:not(:focus):user-invalid:invalid {
+  border-color: var(--tangerine);
+}
+
+#chb-subscribe:checked
+  ~ #inp-email-subscribe:not(:focus):user-invalid:invalid
+  ~ span::before {
+  content: "";
+}
+
+#chb-subscribe:not(:checked) ~ #inp-email-subscribe:not(:focus):invalid {
+  border-color: var(--tangerine);
+}
+#chb-subscribe:not(:checked)
+  ~ #inp-email-subscribe:not(:focus):invalid
+  ~ span::before {
+  content: "";
+}
+
+#chb-subscribe:not(:checked) ~ #inp-email-subscribe:not(:focus):valid {
+  border-color: var(--tangerine);
+}
+#chb-subscribe:not(:checked)
+  ~ #inp-email-subscribe:not(:focus):valid
+  ~ span::before {
+  content: "";
+}
+
+#chb-subscribe:not(:checked) ~ #inp-email-subscribe:placeholder-shown:invalid {
+  border-color: var(--white);
+}
+
+#chb-subscribe:not(:checked)
+  ~ #inp-email-subscribe:placeholder-shown:invalid
+  ~ span::before {
+  content: none;
 }

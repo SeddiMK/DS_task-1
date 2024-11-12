@@ -72,7 +72,7 @@ export const Footer: React.FC = () => {
               placeholder={btnEmailPlhr || "Su correo electrónico"}
             />
             <button
-              className="subscribe__subscribe-to-newsletter btn btn_footer footer_bgc_active footer_bgc_hover footer_bgc_disabled footer_bgc_focus"
+              className="subscribe__subscribe-to-newsletter btn btn-footer footer_bgc_active footer_bgc_hover footer_bgc_disabled footer_bgc_focus"
               type="submit"
             >
               {btnSubmitPlhr || "Suscribirse al boletín"}

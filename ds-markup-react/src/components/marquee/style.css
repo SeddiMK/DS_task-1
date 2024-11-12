@@ -1,9 +1,9 @@
 /* --------------------------------- marquee ------------------------------ */
 .marquee-wrp {
+  width: 3840px;
   position: absolute;
   z-index: 10;
   left: 33vw;
-  max-width: 4000px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -30,41 +30,45 @@
   padding: 25px 0;
 }
 .marquee-articles {
-  left: 18vw;
-  top: 837px;
+  width: 3840px;
+  bottom: 336px;
+  left: 50%;
   background: var(--turquoise);
-  -webkit-transform: rotate(-4deg);
-  -ms-transform: rotate(-4deg);
-  transform: rotate(-4deg);
+  -webkit-transform: rotate(-4deg) translateX(-50%);
+  -ms-transform: rotate(-4deg) translateX(-50%);
+  transform: rotate(-4deg) translateX(-50%);
 }
 .marquee-webinars {
-  top: 2037px;
-  left: 18vw;
+  width: 3840px;
+  bottom: -106px;
+  left: 0vw;
   -webkit-transform: rotate(-3deg);
   -ms-transform: rotate(-3deg);
   transform: rotate(-3deg);
   background: var(--tangerine);
 }
-.marquee-subscribe-block {
-  bottom: 16px;
-  left: -24vw;
-  background: var(--coral-dark);
+.marquee-subscribe {
+  width: 3840px;
+  bottom: 3px;
+  left: 0vw;
   -webkit-transform: rotate(2deg);
   -ms-transform: rotate(2deg);
   transform: rotate(2deg);
+  background: var(--coral-dark);
 }
-.marquee-footer {
-  top: -115px;
-  left: -19vw;
-  background: var(--pink-dark);
-  color: var(--gray5);
+.marquee-subscribe-block {
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3840px;
+  background: var(--coral-dark);
+  color: var(--white);
 }
-.marquee-footer .marquee-item svg path {
-  fill: var(--gray5);
+
+.marquee-subscribe-block .marquee-item svg path {
+  fill: var(--white);
 }
-.marquee-sale {
-  background: var(--pink-dark);
-}
+
 .marquee-items {
   -ms-flex-negative: 0;
   flex-shrink: 0;

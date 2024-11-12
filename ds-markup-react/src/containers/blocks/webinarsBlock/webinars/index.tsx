@@ -40,7 +40,7 @@ export const Webinars: React.FC = () => {
         </div>
       </div>
       <Marquee
-        tickerClass="webinars"
+        tickerClass="subscribe"
         tickerText={data.ticker.text}
         tickerColor={data.ticker.color}
       />

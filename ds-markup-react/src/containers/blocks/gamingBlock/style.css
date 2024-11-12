@@ -3,16 +3,17 @@
   position: relative;
   top: 0;
   left: 0;
+  z-index: 1;
+  width: 100%;
   background-image: url("@public/assets/images/bg/bgLineGaming.svg");
   background-repeat: no-repeat;
-  background-position: center 0px;
-  background-size: cover;
-  min-width: 100vw;
-  -khtml-background-size: cover;
-  -moz-background-size: cover;
-  -ms-background-size: cover;
-  -o-background-size: cover;
-  -webkit-background-size: cover;
+  background-position: -42px 4px;
+  background-size: 106% 106%;
+  -khtml-background-size: 106% 106%;
+  -moz-background-size: 106% 106%;
+  -ms-background-size: 106% 106%;
+  -o-background-size: 106% 106%;
+  -webkit-background-size: 106% 106%;
 }
 .gaming-cnt {
   -webkit-box-orient: horizontal;
@@ -20,8 +21,9 @@
   -ms-flex-direction: row;
   flex-direction: row;
   gap: 52px;
-  margin-top: 130px;
-  margin-bottom: 420px;
+  margin-top: 155px;
+  margin-bottom: 445px;
+  height: 560px;
   padding: 0;
 }
 .gaming__img-wrapper {
@@ -36,7 +38,7 @@
   mask-image: url("@public/assets/images/gaming/mask/mask-gaming.png"); */
 }
 .gaming__img-wrp img {
-  object-position: center -139px;
+  object-position: center -143px;
 }
 .img-gaming {
   object-position: center 100%;
@@ -50,24 +52,26 @@
   flex-direction: column;
   align-items: start;
   justify-content: space-between;
-  padding: 67px 6px 55px 0;
+  height: 468px;
+  margin: 43px 6px 64px 0;
 }
 
 .content-info-gaming .date-big-cards {
   letter-spacing: 0px;
   margin-bottom: 70px;
 }
-.content-info-gaming div {
-  margin-bottom: 17px;
-}
+
 .text-info-gaming h3 {
   font-size: 35px;
   line-height: 125%;
   letter-spacing: 0.5px;
 }
-.list-gaming li:not(:last-child) {
-  /* margin-right: 12px; */
+.text-info-gaming {
+  max-width: 610px;
+  margin-right: 90px;
+  margin-bottom: 16px;
 }
+
 /* --------------------------------- @media 1279px ------------------------------ */
 @media (max-width: 1279px) {
   .gaming {

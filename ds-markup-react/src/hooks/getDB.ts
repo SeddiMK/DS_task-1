@@ -1,6 +1,5 @@
+import { SERVER_URL } from "@/config/paths";
 import { useEffect, useState } from "react";
-
-const SERVER_URL = "http://localhost:4000/";
 
 export const useDB = (query: string, endpoint = SERVER_URL) => {
   const [fetchData, setFetchData] = useState(null);
@@ -12,7 +11,7 @@ export const useDB = (query: string, endpoint = SERVER_URL) => {
     setLoading(true);
     const queryParam = query ? `${query}` : "";
 
-    console.log(`${endpoint}${queryParam}`); //!!!
+    // console.log(`${endpoint}${queryParam}`); //!!!
 
     try {
       const response = await fetch(`${endpoint}${queryParam}`);

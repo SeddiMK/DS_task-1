@@ -78,6 +78,9 @@ h6 {
   font-size: inherit;
 }
 
+span {
+  letter-spacing: 0px;
+}
 /* Fix slaider */
 * {
   min-width: 0;

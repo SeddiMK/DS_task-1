@@ -1,19 +1,19 @@
 import { SmartHeader } from "@/containers/smartHeader";
-import { Footer } from "@/containers/footerBlock/footer";
-import { Gaming } from "@/containers/gaming";
-import { Articles } from "@/containers/articlesBlock/articles";
-import { Webinars } from "@/containers/webinarsBlock/webinars";
-import { SubscribeBlock } from "@/containers/subscribe";
+import { Gaming } from "@/containers/blocks/gamingBlock";
+import { Articles } from "@/containers/blocks/articlesBlock/articles";
+import { Webinars } from "@/containers/blocks/webinarsBlock/webinars";
+import { SubscribeBlock } from "@/containers/blocks/subscribeBlock";
+import { Footer } from "@/containers/blocks/footerBlock/footer";
 
 export const App = () => {
   return (
     <div className="wrapper">
-      {/* <SmartHeader /> */}
+      <SmartHeader />
       <Gaming />
       <Articles />
-      {/* <Webinars /> */}
-      {/* <SubscribeBlock /> */}
-      {/* <Footer /> */}
+      <Webinars />
+      <SubscribeBlock />
+      <Footer />
     </div>
   );
 };

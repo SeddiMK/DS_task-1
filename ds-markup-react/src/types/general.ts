@@ -21,10 +21,15 @@ export interface StickerImageProps {
 }
 
 export interface IconProps {
-  name: string;
+  name?: string;
   nameIconSrc: string;
   width?: number;
   height?: number;
   className?: string;
   fellIcon?: string;
+}
+
+export interface ImageComponentProps {
+  iconUrl: string;
+  className?: string;
 }

@@ -6,8 +6,6 @@ export const Marquee: React.FC<MarqueeProps> = ({
   tickerText,
   tickerColor,
 }) => {
-  console.log(tickerClass, tickerText, Boolean(tickerColor), tickerColor);
-
   return (
     <div
       className={`marquee-wrp marquee-${tickerClass}`}

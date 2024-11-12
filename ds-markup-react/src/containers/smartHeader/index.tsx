@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Header } from "../header";
+import { Header } from "@/containers/blocks/headerBlock";
 
 export const SmartHeader = () => {
   const [lastScrollTop, setLastScrollTop] = useState(0);

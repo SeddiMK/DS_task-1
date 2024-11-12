@@ -291,8 +291,20 @@ main {
   height: 64px;
 }
 /* --------------------------------- list ------------------------------ */
-.list-gaming {
+.list li:first-child {
+  margin-right: 4px;
+}
+
+ul.list-gaming {
+  line-height: 150%;
+  gap: 12px;
   color: var(--grass-dark);
+}
+.link-gaming {
+  /* margin-right: 4px; */
+}
+.link-fashion {
+  /* margin-right: 4px; */
 }
 .list-fashion {
   color: var(--marine);
@@ -369,9 +381,10 @@ main {
   padding: 6px 19px;
 }
 .link-design {
-  padding: 7px 20px;
   color: var(--black);
   background-color: var(--pink);
+  padding: 7px 18px;
+  margin-right: 5px;
 }
 .link-design-ux-ui {
   padding: 7px 20px;
@@ -413,14 +426,21 @@ main {
 }
 
 /* --------------------------------- logo ------------------------------ */
+.loading {
+  width: 40px;
+}
+.icon-logo {
+  width: 100%;
+  height: 100%;
+}
 .logo {
   text-align: center;
   width: 100%;
-  max-width: 108px;
+  max-width: 150px;
   height: 100%;
   max-height: 40px;
-  margin-right: 42px;
-  padding-left: 20px;
+  margin-right: -3px;
+  padding-left: 41px;
 }
 .logo-left-footer {
   max-width: 224px;
@@ -496,12 +516,10 @@ main {
 }
 
 #stiker-gaming {
-  top: 21px;
-  right: -10px;
+  top: 2px;
+  right: -12px;
 }
 #stiker-marketing {
-  width: 265px;
-  height: 148px;
   top: -43px;
   left: -35px;
 }
@@ -509,15 +527,19 @@ main {
   width: 265px;
   height: 148px;
 }
+#stiker-marketing svg use {
+  width: 100%;
+  height: 100%;
+}
 
 .stiker_top-right {
-  top: -52.5px;
+  top: -47.5px;
   right: -40px;
 }
 
 .stiker_top-left {
-  top: -43px;
-  left: -35px;
+  top: -47px;
+  left: -40px;
 }
 
 /* --------------------------------- input ------------------------------ */
@@ -727,7 +749,7 @@ input[type="email"]:hover {
   position: relative;
   top: 0;
   left: 0;
-  margin-bottom: 68px;
+  margin-bottom: 50px;
 }
 .content-info {
   display: -webkit-box;
@@ -772,7 +794,7 @@ input[type="email"]:hover {
   font-size: var(--nunito-fz-15);
   font-weight: 400;
   line-height: 140%;
-  gap: 14px;
+  gap: 9px;
 }
 
 .text-info {
@@ -787,7 +809,7 @@ input[type="email"]:hover {
   line-height: 120%;
   font-style: normal;
   color: var(--black);
-  margin-bottom: 13px;
+  margin-bottom: 16px;
 }
 .text-info__sub-text {
   max-width: 465px;
@@ -821,7 +843,7 @@ input[type="email"]:hover {
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   justify-content: start;
-  letter-spacing: 0.1px;
+  letter-spacing: 0px;
   gap: 9px;
 }
 .time {

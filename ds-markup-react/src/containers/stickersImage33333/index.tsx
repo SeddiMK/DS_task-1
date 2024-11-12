@@ -1,6 +1,6 @@
 import { StickerImageProps } from "@/types/general";
 import { useEffect, useState } from "react";
-import { ImageComponent } from "../imageComponent";
+import { ImageComponent } from "../utils/imageComponent";
 
 //  style={{ maskImage: `url(${maskUrl})` }}
 export const StickersImage: React.FC<StickerImageProps> = ({

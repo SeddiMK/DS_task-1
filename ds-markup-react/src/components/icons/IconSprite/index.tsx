@@ -12,8 +12,8 @@ export const IconSprite: React.FC<IconProps> = ({
     <svg
       className={`${className ? className : ""} icon icon-${name}`}
       style={{ fill: fellIcon }}
-      width={width}
-      height={height}
+      // width={width}
+      // height={height}
     >
       <use xlinkHref={nameIconSrc + `#icon-${name}`} />
     </svg>

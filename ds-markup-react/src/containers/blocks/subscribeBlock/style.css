@@ -311,6 +311,10 @@ input[type="email"]:hover {
 .form-subscribe__inp-chb:disabled + .lbl-subscribe::before {
   opacity: 0.4;
 }
+.form-subscribe__success-message {
+  line-height: 120%;
+  margin-top: 5px;
+}
 /* --------------------------------- @media 1279px ------------------------------ */
 @media (max-width: 1279px) {
   /* ------------------------ subscribe-successful ---------------------- */
@@ -318,7 +322,7 @@ input[type="email"]:hover {
     width: 100%;
   }
   .subscribe-block-cnt {
-    margin-bottom: 190px;
+    margin-bottom: 188px;
   }
   .section-subscribe {
     -webkit-mask: none;
@@ -365,6 +369,9 @@ input[type="email"]:hover {
     width: 104px;
     height: 104px;
   }
+  .form-subscribe__input {
+    margin-bottom: 16px;
+  }
   .form-subscribe__send {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -377,8 +384,17 @@ input[type="email"]:hover {
     -ms-flex-pack: center;
     justify-content: center;
   }
+
   .lbl-subscribe {
     font-size: var(--nunito-fz-13);
+    width: 360px;
+    margin-top: 15px;
+    margin-bottom: -2px;
+  }
+  .lbl-subscribe::before {
+    width: 1.78em;
+    height: 1.78em;
+    margin-top: 1px;
   }
 }
 
@@ -471,13 +487,34 @@ input[type="email"]:hover {
   .subscr-successful__img-wrp {
     left: 167px;
   }
-  .content-subscribe-block {
-    margin-bottom: 76px;
+  .content-subscribe-block__text {
+    height: 388px;
+    margin-bottom: 0px;
   }
   .title-section-subscribe {
-    padding-right: 15px;
+    padding-right: 20px;
+    margin-bottom: 6px;
   }
-  .title-section-subscribe {
-    margin-bottom: 11px;
+  .form-subscribe__input-wrp {
+    flex-direction: column;
+  }
+  #inp-email-subscribe {
+    margin-right: 0px;
+    margin-bottom: 7px;
+  }
+  .lbl-subscribe {
+    width: 256px;
+    margin-top: 6px;
+  }
+  .marquee-subscribe-block {
+    bottom: 0px;
+  }
+  .marquee-subscribe-block .marquee-item span {
+    font-size: 30px;
+  }
+  .container {
+    max-width: var(--max-w-cnt-mobile);
+    padding-right: 8px;
+    padding-left: 8px;
   }
 }

@@ -115,10 +115,11 @@
     -ms-flex-wrap: wrap;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 24px;
-    padding: 16px 8px;
+    gap: 26px;
+    padding: 18px 8px;
   }
   .logo {
+    max-width: 109px;
     padding-left: 0px;
   }
   .header__right-search-block {
@@ -145,15 +146,15 @@
 @media (max-width: 768px) {
   .header-cnt {
     justify-content: space-between;
-    gap: 5px;
-    padding: 12px 8px;
+    gap: 16px;
+    padding: 14px 8px;
   }
   .logo {
     max-width: 130px;
     max-height: 48px;
     padding-left: 0px;
     margin-right: 0px;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
   }
   .logo__link svg {
     width: 100%;
@@ -177,11 +178,10 @@
     margin-bottom: 12px;
   }
   .header__right-search-block {
-    padding-top: 12px;
-    padding-bottom: 23px;
+    padding-top: 4px;
     margin-right: -4px;
   }
   .header__search-icon {
-    margin-right: 22px;
+    margin-right: 27px;
   }
 }

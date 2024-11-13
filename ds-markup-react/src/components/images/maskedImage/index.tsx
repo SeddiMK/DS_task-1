@@ -18,9 +18,6 @@ export const MaskedImage: React.FC<MaskedImageProps> = ({
         height: height,
         maskImage: `url(${maskShape || maskSrcMiniCardAvatar})`,
         WebkitMaskImage: `url(${maskShape || maskSrcMiniCardAvatar})`,
-        maskSize: "cover",
-        maskPosition: "center",
-        maskRepeat: "no-repeat",
       }}
     >
       <img className="img-wrp__imamge img masked-image" src={src} alt={alt} />

@@ -68,6 +68,9 @@
 .marquee-subscribe-block .marquee-item svg path {
   fill: var(--white);
 }
+.marquee-subscribe-block .marquee-item span {
+  font-size: 58px;
+}
 
 .marquee-items {
   -ms-flex-negative: 0;
@@ -119,5 +122,19 @@
   100% {
     -webkit-transform: translate3d(-50%, 0, 0);
     transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* --------------------------------- @media 1279px ------------------------------ */
+@media (max-width: 1279px) {
+  .marquee-webinars {
+    left: 100vw;
+    background-position: center;
+  }
+  .marquee-subscribe-block {
+    bottom: 0px;
+  }
+  .marquee-subscribe-block .marquee-item span {
+    font-size: 44px;
   }
 }

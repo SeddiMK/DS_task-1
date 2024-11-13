@@ -832,3 +832,46 @@ input:checked ~ .tab__content {
   max-height: 100vh;
   padding: 8px 0;
 }
+
+/* --------------------------------- @media 1279px ------------------------------ */
+@media (max-width: 1279px) {
+  .stiker_top-left {
+    top: -31px;
+    left: 190px;
+  }
+  .stiker_top-right {
+    top: -31.5px;
+    right: -30px;
+  }
+
+  .stiker-img svg {
+    width: 104px;
+    height: 104px;
+    transform: scale(0.58);
+  }
+}
+
+/* --------------------------------- @media 768px ------------------------------ */
+@media (max-width: 768px) {
+  .mask {
+    mask-size: cover;
+  }
+  .stiker_top-left {
+    top: -22px;
+    left: -22px;
+  }
+  .stiker_top-right {
+    top: -20.5px;
+    right: -22px;
+  }
+  .stiker-img svg {
+    width: 120px;
+    height: 120px;
+    transform: scale(0.67);
+  }
+  .container {
+    max-width: var(--max-w-cnt-mobile);
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+}

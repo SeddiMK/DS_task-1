@@ -86,18 +86,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ article, index }) => {
           />
 
           <span id={`stiker-${nameStickers}`} className={classSpanStickers}>
-            {/* <StickersImage
-              word={article.stamp.word}
-              type={article.stamp.type}
-              position={article.stamp.position}
-            /> */}
-
             <IconSprite name={nameStickers} nameIconSrc={SpriteStickers} />
-
-            {/* {index === 0 && <StickerFashion />}
-            {(index === 1 || index === 2) && <StickerDesign />}
-            {index === 3 && <StickerMarketing />}
-            {index === 4 && <StickerSoftware />} */}
           </span>
         </div>
 

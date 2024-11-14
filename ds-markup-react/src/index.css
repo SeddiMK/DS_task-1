@@ -78,9 +78,18 @@ body {
   overflow-x: hidden;
 }
 .wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
   justify-content: start;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   width: 100%;
   font-family: Nunito, Arial, sans-serif;
@@ -121,9 +130,8 @@ main {
   -ms-flex-align: start;
   align-items: start;
   padding: 0 10px 0 10px;
-  margin: 0px auto;
+  margin: 0 auto;
 }
-/* --------------------------------- btn ------------------------------ */
 .btn {
   display: inline-block;
   white-space: nowrap;
@@ -231,8 +239,6 @@ main {
   background-color: var(--coral-dark);
   border-color: var(--black);
 }
-
-/* --------------------------------- link ------------------------------ */
 .link-btn-gaming {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -290,21 +296,13 @@ main {
   width: 280px;
   height: 64px;
 }
-/* --------------------------------- list ------------------------------ */
 .list li:first-child {
   margin-right: 4px;
 }
-
 ul.list-gaming {
   line-height: 150%;
   gap: 12px;
   color: var(--grass-dark);
-}
-.link-gaming {
-  /* margin-right: 4px; */
-}
-.link-fashion {
-  /* margin-right: 4px; */
 }
 .list-fashion {
   color: var(--marine);
@@ -363,6 +361,9 @@ ul.list-gaming {
   transition:
     transform 0.3s,
     -webkit-transform 0.3s;
+  transition:
+    transform 0.3s,
+    -webkit-transform 0.3s;
 }
 .link_metis:hover::before {
   -webkit-transform-origin: 0% 50%;
@@ -403,7 +404,6 @@ ul.list-gaming {
 .content-info-software .text-info-card {
   margin-right: 0;
 }
-
 .icon {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -417,15 +417,11 @@ ul.list-gaming {
   width: 17px;
   height: 21px;
 }
-.icon-cmpt {
-}
 .icon-separator-run-line {
   display: inline-block;
   width: 40px;
   height: 58px;
 }
-
-/* --------------------------------- logo ------------------------------ */
 .loading {
   width: 40px;
 }
@@ -442,13 +438,11 @@ ul.list-gaming {
   margin-right: -3px;
   padding-left: 41px;
 }
-
 .logo__link {
   display: inline-block;
   width: 100%;
   height: 100%;
 }
-
 .logo_color_active svg path,
 .logo_color_hover svg path {
   -webkit-transition: fill 0.2s ease-in-out;
@@ -500,7 +494,6 @@ ul.list-gaming {
   -webkit-mask-size: contain;
   mask-size: contain;
 }
-/* --------------------------- stickers position ------------------------ */
 .stiker-img {
   position: absolute;
   z-index: 2;
@@ -509,7 +502,6 @@ ul.list-gaming {
   width: 200px;
   height: 200px;
 }
-
 #stiker-gaming {
   top: -1px;
   right: -12px;
@@ -519,8 +511,14 @@ ul.list-gaming {
   left: -57px;
 }
 #stiker-marketing svg {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   width: 255px;
   height: 180px;
@@ -529,18 +527,14 @@ ul.list-gaming {
   x: 0%;
   y: 0%;
 }
-
 .stiker_top-right {
   top: -47.5px;
   right: -40px;
 }
-
 .stiker_top-left {
   top: -47px;
   left: -40px;
 }
-
-/* --------------------------------- input ------------------------------ */
 .input {
   display: inline-block;
   font-size: var(--nunito-fz-18);
@@ -583,9 +577,6 @@ ul.list-gaming {
 .input_footer::placeholder {
   color: var(--pale);
 }
-
-/* --------------------------------- cards ------------------------------ */
-
 .cards {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -600,7 +591,6 @@ ul.list-gaming {
   max-height: 628px;
   gap: 42px;
 }
-
 .mask-fashion {
   mask-image: url(@public/assets/images/articles/mask/fashion.png);
   -webkit-mask-image: url(@public/assets/images/articles/mask/fashion.png);
@@ -629,9 +619,18 @@ ul.list-gaming {
 }
 .card {
   grid-row-start: 3;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
   justify-content: start;
 }
 .card__img-wrapper {
@@ -661,7 +660,6 @@ ul.list-gaming {
   -ms-flex-pack: center;
   justify-content: center;
 }
-
 .content-info__links {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -672,10 +670,8 @@ ul.list-gaming {
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   justify-content: start;
-  /* margin-top: 20px; */
   margin-bottom: 15px;
 }
-
 .content-info__list {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -691,7 +687,6 @@ ul.list-gaming {
   line-height: 140%;
   gap: 9px;
 }
-
 .text-info {
   max-width: 610px;
   margin-right: 90px;
@@ -735,7 +730,6 @@ ul.list-gaming {
   font-weight: 400;
   color: var(--gray35);
 }
-
 .date-text {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -746,7 +740,7 @@ ul.list-gaming {
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   justify-content: start;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   gap: 7px;
 }
 .time {
@@ -832,8 +826,6 @@ input:checked ~ .tab__content {
   max-height: 100vh;
   padding: 8px 0;
 }
-
-/* --------------------------------- @media 1279px ------------------------------ */
 @media (max-width: 1279px) {
   .stiker_top-left {
     top: -31px;
@@ -843,17 +835,17 @@ input:checked ~ .tab__content {
     top: -31.5px;
     right: -30px;
   }
-
   .stiker-img svg {
     width: 104px;
     height: 104px;
+    -webkit-transform: scale(0.58);
+    -ms-transform: scale(0.58);
     transform: scale(0.58);
   }
 }
-
-/* --------------------------------- @media 768px ------------------------------ */
 @media (max-width: 768px) {
   .mask {
+    -webkit-mask-size: cover;
     mask-size: cover;
   }
   .stiker_top-left {
@@ -867,6 +859,8 @@ input:checked ~ .tab__content {
   .stiker-img svg {
     width: 120px;
     height: 120px;
+    -webkit-transform: scale(0.67);
+    -ms-transform: scale(0.67);
     transform: scale(0.67);
   }
   .container {

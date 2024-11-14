@@ -153,7 +153,11 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
   flex-direction: row;
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -164,6 +168,8 @@
 }
 
 .form-subscribe__input {
+  -webkit-box-ordinal-group: 2;
+  -ms-flex-order: 1;
   order: 1;
   position: relative;
   top: 0;
@@ -175,12 +181,18 @@
   margin-right: 16px;
 }
 .form-subscribe__input ~ span {
+  -webkit-box-ordinal-group: 3;
+  -ms-flex-order: 2;
   order: 2;
 }
 .form-subscribe__btn {
+  -webkit-box-ordinal-group: 4;
+  -ms-flex-order: 3;
   order: 3;
 }
 .form-subscribe__success-message {
+  -webkit-box-ordinal-group: 5;
+  -ms-flex-order: 4;
   order: 4;
   display: block;
   text-align: center;
@@ -190,6 +202,8 @@
   max-width: 280px;
 }
 .form-subscribe__lbl {
+  -webkit-box-ordinal-group: 8;
+  -ms-flex-order: 7;
   order: 7;
   display: inline-block;
   color: var(--white);
@@ -476,7 +490,11 @@ input[type="email"]:hover {
     height: 49px;
   }
   .subscribe-btn {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
     width: fit-content;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
     height: fit-content;
     padding: 13px 102px;
   }
@@ -496,6 +514,9 @@ input[type="email"]:hover {
     margin-bottom: 6px;
   }
   .form-subscribe__input-wrp {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
   }
   #inp-email-subscribe {

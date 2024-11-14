@@ -12,7 +12,7 @@ export const Marquee: React.FC<MarqueeProps> = ({
       style={{ backgroundColor: tickerColor ? tickerColor : "#da3369" }}
     >
       <div className="marquee-items marquee">
-        {Array(30)
+        {Array(40)
           .fill("")
           .map((el: any, ind: number) => (
             <div key={el + ind} className="marquee-item">

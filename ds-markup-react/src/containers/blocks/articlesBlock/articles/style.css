@@ -20,6 +20,8 @@
   grid-template-columns: repeat(2, auto);
   grid-template-rows: repeat(3, auto);
   row-gap: 137px;
+  -webkit-column-gap: 38px;
+  -moz-column-gap: 38px;
   column-gap: 38px;
   margin-bottom: 164px;
   padding: 0;
@@ -45,26 +47,13 @@
   letter-spacing: -0.8px;
   gap: 24px;
 }
-.content-info-design .text-info-card {
-  /* margin-bottom: 18px; */
-}
+
 .content-info-fashion .content-info__date {
   letter-spacing: -0.7px;
 }
 .img-wrapper-design {
   margin-bottom: 31px;
 }
-/* .list-cards {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: start;
-  -ms-flex-pack: start;
-  justify-content: start;
-} */
 
 .design-ux-ui {
   grid-column: span 2 / span 2;
@@ -81,7 +70,10 @@
   grid-template-columns: 376px 1fr;
   grid-column-gap: 19px;
   grid-row-gap: 7px;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
   align-items: start;
+  -ms-flex-pack: distribute;
   justify-content: space-around;
   width: 100%;
   height: 100%;
@@ -96,16 +88,28 @@
   max-width: 675px;
 }
 .info-design-ux-ui .links-cards {
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
   justify-content: end;
 }
 .info-design-ux-ui .content-info__date {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
   justify-content: start;
+  -webkit-box-align: end;
+  -ms-flex-align: end;
   align-items: end;
   gap: 8px;
   margin-top: 2px;
 }
 .info-design-ux-ui .content-info__date p {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+  -ms-flex-direction: row-reverse;
   flex-direction: row-reverse;
 }
 .info-design-ux-ui .date-big-cards {
@@ -142,6 +146,8 @@
   grid-template-columns: repeat(3, auto);
   grid-template-rows: repeat(2, auto);
   gap: 10px;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
   justify-content: end;
 }
 .info-design-ux-ui .list-cards li:first-child {
@@ -167,6 +173,7 @@
 .info-design-ux-ui .content-info__date {
 }
 .info-design-ux-ui .links-big-cards {
+  -ms-flex-item-align: start;
   align-self: start;
   justify-self: end;
 }
@@ -176,9 +183,18 @@
   grid-row-start: 1;
 }
 .text-info-design-ux-ui {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
   justify-content: start;
   max-width: 640px;
   height: 100%;
@@ -331,6 +347,8 @@
     background-position: -15px 226px;
   }
   .articles-cnt {
+    -webkit-column-gap: 24px;
+    -moz-column-gap: 24px;
     column-gap: 24px;
     row-gap: 96px;
     padding-top: 100px;
@@ -385,6 +403,8 @@
     margin-bottom: 18px;
   }
   .articles__content-info ul.list {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     gap: 10px;
   }
@@ -420,6 +440,8 @@
     -webkit-box-align: end;
     -ms-flex-align: end;
     align-items: end;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
     justify-content: start;
     gap: 9px;
     margin-top: 3px;
@@ -444,6 +466,7 @@
   .mask-design-ux-ui {
     width: 704px;
     height: 338px;
+    -webkit-mask-size: 702px 324px;
     mask-size: 702px 324px;
   }
 
@@ -451,6 +474,8 @@
     margin-bottom: 24px;
   }
   .cards-buttom .content-info__date {
+    -webkit-box-ordinal-group: 4;
+    -ms-flex-order: 3;
     order: 3;
   }
   .cards-buttom .text-info__title {
@@ -477,7 +502,11 @@
     grid-template-rows: 36% 61%;
     grid-template-columns: auto 461px;
     grid-column-gap: 25px;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
     align-items: start;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
     justify-content: end;
     width: 100%;
 
@@ -495,7 +524,11 @@
     display: grid;
     grid-template-columns: repeat(3, auto);
     grid-template-rows: repeat(2, auto);
+    -webkit-box-align: start;
+    -ms-flex-align: start;
     align-items: start;
+    -webkit-column-gap: 10px;
+    -moz-column-gap: 10px;
     column-gap: 10px;
     row-gap: 11px;
     margin-top: 0px;
@@ -512,9 +545,13 @@
     padding: 7px 18px;
   }
   .content-info-marketing .content-info__date {
+    -webkit-box-ordinal-group: 4;
+    -ms-flex-order: 3;
     order: 3;
   }
   .content-info-software .content-info__date {
+    -webkit-box-ordinal-group: 4;
+    -ms-flex-order: 3;
     order: 3;
   }
   #stiker-marketing {
@@ -522,6 +559,8 @@
     height: 140px;
     top: -50px;
     left: 136px;
+    -webkit-transform: rotate(15deg);
+    -ms-transform: rotate(15deg);
     transform: rotate(15deg);
   }
 }
@@ -555,9 +594,18 @@
       116% 48%;
   }
   .articles-cnt {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
     justify-content: start;
     gap: 103px;
     padding-top: 130px;
@@ -605,6 +653,8 @@
     margin-right: -1px;
   }
   .articles__content-info .links-cards {
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
     justify-content: start;
     margin-bottom: 3px;
   }
@@ -618,6 +668,7 @@
     mask-size: 304px 352px;
   }
   .mask-design img {
+    -o-object-position: -50px 0px;
     object-position: -50px 0px;
   }
 
@@ -625,8 +676,14 @@
     margin-right: 2px;
   }
   .design-ux-ui__img-wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
     justify-content: start;
     margin-bottom: 19px;
   }
@@ -635,11 +692,18 @@
     height: 352px;
     /* mask-image: url("@public/assets/images/articles/mask/design-ui-mobile.png");
     -webkit-mask-image: url("@public/assets/images/articles/mask/design-ui-mobile.png"); */
+    -webkit-mask-size: 304px 352px;
     mask-size: 304px 352px;
   }
   .design-ux-ui__info ul.list-design {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
     justify-content: start;
     margin-bottom: 15px;
   }
@@ -679,15 +743,23 @@
     margin-right: 6px;
   }
   .info-design-ux-ui .content-info__date {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
     flex-direction: row;
     -webkit-box-align: end;
     -ms-flex-align: end;
     align-items: end;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
     justify-content: start;
     gap: 25px;
     margin-top: 15px;
   }
   .info-design-ux-ui .content-info__date p {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
     flex-direction: row;
   }
   .img-wrp-cards {
@@ -695,7 +767,11 @@
     height: 352px;
   }
   .card-marketing {
+    -webkit-box-align: start;
+    -ms-flex-align: start;
     align-items: start;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
     justify-content: start;
     max-height: 621px;
     margin-top: 7px;
@@ -737,7 +813,11 @@
     margin-bottom: 13px;
   }
   .content-info {
+    -webkit-box-align: start;
+    -ms-flex-align: start;
     align-items: start;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
     justify-content: start;
     gap: 16px;
   }
@@ -818,6 +898,8 @@
     margin-right: 4px;
   }
   .card-software .links-cards {
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
     justify-content: start;
     margin-bottom: 2px;
   }
@@ -826,6 +908,8 @@
   }
   .marquee-webinars {
     bottom: -152px;
+    -webkit-transform: rotate(-4deg);
+    -ms-transform: rotate(-4deg);
     transform: rotate(-4deg);
   }
   .container {

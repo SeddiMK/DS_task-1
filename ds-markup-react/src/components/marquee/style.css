@@ -59,6 +59,8 @@
 .marquee-subscribe-block {
   bottom: 0px;
   left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
   transform: translateX(-50%);
   width: 3840px;
   background: var(--coral-dark);

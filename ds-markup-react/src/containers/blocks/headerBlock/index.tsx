@@ -3,8 +3,8 @@ import { HeaderType } from "@/types/db";
 import { ImageComponent } from "@/containers/utils/imageComponent";
 import { Loading } from "@/components/loading";
 import { Arrow, IconSearch } from "@/config/paths";
-import "./style.css";
 import { ToggleTheme } from "@/containers/toogleTheme";
+import "./style.css";
 
 export const Header: React.FC = () => {
   const { fetchData } = useDB("menu");

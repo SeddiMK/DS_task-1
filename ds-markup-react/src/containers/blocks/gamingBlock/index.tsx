@@ -26,9 +26,6 @@ export const Gaming: React.FC = () => {
 
   if (!data) return <Loading />;
 
-  // console.log(item, "----------------item");
-  // console.log(itemStamp, "----------------itemStamp");
-
   return (
     <section className="gaming">
       <div className="container gaming-cnt">
@@ -48,12 +45,6 @@ export const Gaming: React.FC = () => {
               nameIconSrc={SpriteStickers}
             />
           </span>
-          {/* <StickersImage
-            word={item.stamp.word}
-            type={item.stamp.type}
-            position={item.stamp.position}
-          /> */}
-          {/* <StickersGaming /> */}
         </div>
 
         <div className="gaming__content-info content-info-big-card content-info-gaming">

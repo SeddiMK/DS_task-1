@@ -1,4 +1,3 @@
-// Функция для замены фраз на ссылки
 export const insertLinks = (str: string, phrases: string[]) => {
   // Создаем регулярное выражение для поиска фраз
   const regex = new RegExp(`(${phrases.join("|")})`, "gi");

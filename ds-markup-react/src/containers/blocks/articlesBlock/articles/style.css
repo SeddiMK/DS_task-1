@@ -45,14 +45,14 @@
 }
 .content-info-design .content-info__date {
   letter-spacing: -0.8px;
-  gap: 24px;
+  gap: 27px;
 }
 
 .content-info-fashion .content-info__date {
   letter-spacing: -0.7px;
 }
 .img-wrapper-design {
-  margin-bottom: 31px;
+  margin-bottom: 32px;
 }
 
 .design-ux-ui {
@@ -256,7 +256,7 @@
 }
 
 .img-wrapper-marketing {
-  margin-bottom: 32px;
+  margin-bottom: 31px;
 }
 .link-marketing {
   padding: 8px 18px;
@@ -273,7 +273,7 @@
   margin-bottom: 12px;
 }
 .img-wrapper-software {
-  margin-bottom: 32px;
+  margin-bottom: 31px;
 }
 .img-wrp-software {
 }
@@ -458,7 +458,7 @@
 
   .link-software {
     padding: 7px 17px;
-    margin-right: 6px;
+    margin-right: 4px;
   }
   .articles-cards_m_b {
     /* margin-bottom: 96px; */
@@ -483,7 +483,7 @@
   }
   .link-marketing {
     padding: 7px 18px;
-    margin-right: 6px;
+    margin-right: 2px;
   }
   .list-marketing {
     letter-spacing: 0px;

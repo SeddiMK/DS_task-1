@@ -105,6 +105,7 @@
 @media (max-width: 1279px) {
   .switch-toggle-theme {
     top: -11px;
+    right: 130px;
   }
   .btn-swh {
     flex-direction: row;
@@ -113,6 +114,10 @@
 @media (max-width: 768px) {
   .switch-toggle-theme {
     top: -7px;
+  }
+}
+@media (max-width: 385px) {
+  .switch-toggle-theme {
     right: 118px;
   }
 }

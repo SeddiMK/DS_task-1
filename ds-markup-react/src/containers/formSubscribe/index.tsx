@@ -39,6 +39,7 @@ export const FormSubscribe: React.FC<FormProps> = ({
     if (email) {
       let formData = new FormData(e.target as HTMLFormElement);
 
+      // Для удобства данные form data в консоль таблицу
       // console.table([...formData.entries()]);
 
       fetch("/upload", {

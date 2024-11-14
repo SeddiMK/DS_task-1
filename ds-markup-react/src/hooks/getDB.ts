@@ -3,15 +3,12 @@ import { useEffect, useState } from "react";
 
 export const useDB = (query: string, endpoint = SERVER_URL) => {
   const [fetchData, setFetchData] = useState(null);
-  // <RootObject>
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   const requestFetchData = async () => {
     setLoading(true);
     const queryParam = query ? `${query}` : "";
-
-    // console.log(`${endpoint}${queryParam}`); //!!!
 
     try {
       const response = await fetch(`${endpoint}${queryParam}`);

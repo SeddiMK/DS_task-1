@@ -5,16 +5,6 @@ import { WebinarCardProps } from "@/types/db";
 import { IconSprite } from "@/components/icons/IconSprite";
 
 export const WebinarCard: React.FC<WebinarCardProps> = ({ webinar, index }) => {
-  // const [maskSrc, setMaskSrc] = useState("");
-
-  // useEffect(() => {
-  //   if (!maskSrcMiniCardAvatar) {
-  //     setMaskSrc(`../../assets/images/masks/${maskShape}.png`);
-  //   } else {
-  //     setMaskSrc(maskSrcMiniCardAvatar);
-  //   }
-  // }, [maskShape]);
-
   return (
     <article
       className={`webinars__card-mini card-mini card-mini-${index}`}

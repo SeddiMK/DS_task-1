@@ -13,11 +13,6 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ article, index }) => {
   const [nameStickers, setNameStickers] = useState("");
   const [classSpanStickers, setSpanStickers] = useState("");
 
-  // const spanStickersClass = (index: number) => {
-  //   if (index === 2) {
-  //   }
-  // };
-
   useEffect(() => {
     if (article) {
       if (article.stamp.word.toLowerCase() === "diseño") {
@@ -40,10 +35,6 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ article, index }) => {
     return <Loading />;
   }
 
-  // console.log("article=====", article);
-  // console.log("article.stamp.word=====", article.stamp.word.toLowerCase());
-  // console.log("nameStickers=====", nameStickers);
-
   return (
     <article
       className={
@@ -64,13 +55,6 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ article, index }) => {
               : `card__img-wrapper img-wrapper-${nameStickers}`
           }
         >
-          {/* <div
-            className={
-              index === 2
-                ? `design-ux-ui__img-wrp img-wrp mask mask-design-ux-ui`
-                : `card__img-wrp img-wrp img-wrp-cards mask mask-${nameStickers} `
-            }
-          > */}
           <MaskedImage
             src={article.img.url}
             alt={

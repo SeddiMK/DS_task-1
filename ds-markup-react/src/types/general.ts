@@ -33,3 +33,13 @@ export interface ImageComponentProps {
   iconUrl: string;
   className?: string;
 }
+
+export type Theme = "light" | "dark";
+
+export interface ThemeContextType {
+  theme: Theme;
+  setTheme: React.Dispatch<React.SetStateAction<Theme>>;
+}
+export interface ThemeProviderProps {
+  children: React.ReactNode;
+}

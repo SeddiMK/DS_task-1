@@ -4,6 +4,7 @@ import { ImageComponent } from "@/containers/utils/imageComponent";
 import { Loading } from "@/components/loading";
 import { Arrow, IconSearch } from "@/config/paths";
 import "./style.css";
+import { ToggleTheme } from "@/containers/toogleTheme";
 
 export const Header: React.FC = () => {
   const { fetchData } = useDB("menu");
@@ -32,6 +33,7 @@ export const Header: React.FC = () => {
         ))}
       </nav>
       <div className="header__right-search-block">
+        <ToggleTheme />
         <div className="header__search-icon">
           <form className="header__search-form">
             <button className="header__search-btn">

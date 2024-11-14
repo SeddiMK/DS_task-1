@@ -6,6 +6,7 @@ import "@public/assets/fonts/Nunito/Nunito-Bold.ttf";
 import "@/index.css";
 import { createRoot } from "react-dom/client";
 import { App } from "@/components/app/App";
+import { ThemeProvider } from "@/containers/utils/themeProvider";
 
 const root = document.getElementById("root") as HTMLElement;
 
@@ -15,4 +16,8 @@ if (!root) {
 
 const container = createRoot(root);
 
-container.render(<App />);
+container.render(
+  <ThemeProvider>
+    <App />
+  </ThemeProvider>,
+);

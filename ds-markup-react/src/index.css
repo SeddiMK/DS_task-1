@@ -20,6 +20,7 @@
   font-weight: 700;
   src: url(../public/assets/fonts/Nunito/Nunito-Bold.ttf) format("truetype");
 }
+/* Светлая тема */
 :root {
   --max-w-body: 1440px;
   --max-w-cnt: 1208px;
@@ -69,13 +70,27 @@
   --nunito-fz-15: 15px;
   --nunito-fz-13: 13px;
 }
+/* Темная тема */
+[data-theme="dark"] {
+  --black: #ffffff;
+  --white: #444444;
+  --white-def: #333333f;
+
+  --background-color: #333333;
+  --text-color: #ffffff;
+  --link-color: #8ab4f8;
+  --button-background: #444444;
+  --button-text: #fff;
+}
 body {
   font-family: Nunito, Arial, sans-serif;
   width: 100%;
   margin: 0 auto;
   height: 100%;
   background-color: var(--white-def);
+  color: var(--black);
   overflow-x: hidden;
+  transition: all 0.2s ease-in-out;
 }
 .wrapper {
   display: -webkit-box;
@@ -93,7 +108,6 @@ body {
   align-items: center;
   width: 100%;
   font-family: Nunito, Arial, sans-serif;
-  color: var(--black);
   font-size: var(--font-size);
   font-weight: var(--font-weight);
   font-style: normal;
@@ -358,6 +372,9 @@ ul.list-gaming {
   transition: -webkit-transform 0.3s;
   -o-transition: transform 0.3s;
   transition: transform 0.3s;
+  transition:
+    transform 0.3s,
+    -webkit-transform 0.3s;
   transition:
     transform 0.3s,
     -webkit-transform 0.3s;

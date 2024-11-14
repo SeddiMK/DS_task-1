@@ -16,7 +16,10 @@ export const Header: React.FC = () => {
   return (
     <>
       <div className="header__logo logo">
-        <a href="#" className="logo__link logo_color_active logo_color_hover">
+        <a
+          href="#"
+          className="logo__link logo_color_black logo_color_active logo_color_hover"
+        >
           <ImageComponent iconUrl={fetchData?.logo} className="icon-logo" />
         </a>
       </div>

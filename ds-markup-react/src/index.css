@@ -74,7 +74,8 @@
 [data-theme="dark"] {
   --black: #ffffff;
   --white: #444444;
-  --white-def: #333333f;
+  --white-def: #333333;
+  --gray70: #e1e1e1;
 
   --background-color: #333333;
   --text-color: #ffffff;
@@ -82,6 +83,60 @@
   --button-background: #444444;
   --button-text: #fff;
 }
+[data-theme="dark"] .link-btn-gaming_hover:hover {
+  color: var(--black);
+  background-color: var(--white-def);
+  outline: 0;
+}
+[data-theme="dark"] .menu-footer__title {
+  color: var(--white-def);
+}
+[data-theme="dark"] .contacts-item__title {
+  color: var(--white-def);
+}
+[data-theme="dark"] .privicy__text {
+  color: var(--white-def);
+}
+[data-theme="dark"] .link-fashion {
+  color: var(--white-def);
+}
+[data-theme="dark"] .link-design {
+  color: var(--white-def);
+}
+[data-theme="dark"] .link-marketing {
+  color: var(--white-def);
+}
+[data-theme="dark"] .link-software {
+  color: var(--white-def);
+}
+[data-theme="dark"] .subscribe__email::placeholder {
+  color: var(--white-def);
+}
+[data-theme="dark"] .marquee-item svg path {
+  fill: var(--black);
+}
+[data-theme="dark"] .gaming {
+  background: none;
+}
+[data-theme="dark"] .articles {
+  background-image: none;
+}
+[data-theme="dark"] .webinars-wrp {
+  background-image: linear-gradient(
+    rgba(255, 255, 255, 0.2),
+    rgba(109, 109, 109, 0.4)
+  );
+}
+[data-theme="dark"] .footer {
+  background-image: linear-gradient(
+    rgba(255, 255, 255, 0.2),
+    rgba(109, 109, 109, 0.4)
+  );
+}
+[data-theme="dark"] .logo_color_white svg {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
 body {
   font-family: Nunito, Arial, sans-serif;
   width: 100%;
@@ -475,6 +530,12 @@ ul.list-gaming {
 }
 .logo_color_white svg {
   background-color: var(--black);
+}
+.logo_color_black svg path {
+  fill: var(--black);
+}
+.logo_color_black svg {
+  background-color: var(--white);
 }
 .img-wrp {
   display: -webkit-box;

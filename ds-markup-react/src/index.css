@@ -136,7 +136,7 @@
 [data-theme="dark"] .logo_color_white svg {
   background-color: rgba(255, 255, 255, 0.2);
 }
-
+/* ---------------- */
 body {
   font-family: Nunito, Arial, sans-serif;
   width: 100%;

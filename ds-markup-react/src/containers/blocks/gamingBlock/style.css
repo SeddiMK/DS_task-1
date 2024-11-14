@@ -34,8 +34,8 @@
 .gaming__img-wrp {
   width: 480px;
   height: 565px;
-  /* -webkit-mask-image: url("@public/assets/images/gaming/mask/mask-gaming.png");
-  mask-image: url("@public/assets/images/gaming/mask/mask-gaming.png"); */
+  -webkit-mask-image: url("@public/assets/images/gaming/mask/mask-gaming.png");
+  mask-image: url("@public/assets/images/gaming/mask/mask-gaming.png");
 }
 .gaming__img-wrp img {
   -o-object-position: center -143px;
@@ -109,8 +109,8 @@
     width: 270px;
     height: 320px;
     /* mask-position: center 20px; */
-    /* -webkit-mask-image: url("@public/assets/images/gaming/mask/mask-gaming-tablet.png");
-    mask-image: url("@public/assets/images/gaming/mask/mask-gaming-tablet.png"); */
+    -webkit-mask-image: url("@public/assets/images/gaming/mask/mask-gaming-tablet.png");
+    mask-image: url("@public/assets/images/gaming/mask/mask-gaming-tablet.png");
   }
   #stiker-gaming {
     width: 104px;
@@ -287,8 +287,8 @@
   .gaming__img-wrp {
     width: 304px;
     height: 352px;
-    /* -webkit-mask-image: url("@public/assets/images/gaming/mask/mask-gaming.png");
-    mask-image: url("@public/assets/images/gaming/mask/mask-gaming.png"); */
+    -webkit-mask-image: url("@public/assets/images/gaming/mask/mask-gaming.png");
+    mask-image: url("@public/assets/images/gaming/mask/mask-gaming.png");
   }
   .gaming__img-wrp img {
     -o-object-position: center -90px;

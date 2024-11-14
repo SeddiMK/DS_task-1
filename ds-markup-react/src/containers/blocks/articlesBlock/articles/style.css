@@ -311,28 +311,28 @@
 }
 
 .mask-fashion {
-  /* mask-image: url("@public/assets/images/articles/mask/fashion.png");
-  -webkit-mask-image: url("@public/assets/images/articles/mask/fashion.png"); */
+  mask-image: url("@public/assets/images/articles/mask/fashion.png");
+  -webkit-mask-image: url("@public/assets/images/articles/mask/fashion.png");
 }
 .mask-design {
-  /* mask-image: url("@public/assets/images/articles/mask/design.png");
-  -webkit-mask-image: url("@public/assets/images/articles/mask/design.png"); */
+  mask-image: url("@public/assets/images/articles/mask/design.png");
+  -webkit-mask-image: url("@public/assets/images/articles/mask/design.png");
 }
 .mask-design-ux-ui {
   width: 1208px;
   height: 520px;
-  /* mask-image: url("@public/assets/images/articles/mask/design-ui.png");
-  -webkit-mask-image: url("@public/assets/images/articles/mask/design-ui.png"); */
+  mask-image: url("@public/assets/images/articles/mask/design-ui.png");
+  -webkit-mask-image: url("@public/assets/images/articles/mask/design-ui.png");
 }
 .mask-marketing {
-  /* mask-image: url("@public/assets/images/articles/mask/marketing.png");
-  -webkit-mask-image: url("@public/assets/images/articles/mask/marketing.png"); */
+  mask-image: url("@public/assets/images/articles/mask/marketing.png");
+  -webkit-mask-image: url("@public/assets/images/articles/mask/marketing.png");
   -webkit-mask-size: 584px 325px;
   mask-size: 584px 325px;
 }
 .mask-software {
-  /* mask-image: url("@public/assets/images/articles/mask/software.png");
-  -webkit-mask-image: url("@public/assets/images/articles/mask/software.png"); */
+  mask-image: url("@public/assets/images/articles/mask/software.png");
+  -webkit-mask-image: url("@public/assets/images/articles/mask/software.png");
   -webkit-mask-size: 584px 328px;
   mask-size: 584px 328px;
   height: 329px;
@@ -639,8 +639,8 @@
     margin-bottom: 19px;
   }
   .mask-fashion {
-    /* mask-image: url("@public/assets/images/articles/mask/fashion-mobile.png");
-    -webkit-mask-image: url("@public/assets/images/articles/mask/fashion-mobile.png"); */
+    mask-image: url("@public/assets/images/articles/mask/fashion-mobile.png");
+    -webkit-mask-image: url("@public/assets/images/articles/mask/fashion-mobile.png");
     -webkit-mask-size: 304px 352px;
     mask-size: 304px 352px;
   }
@@ -662,8 +662,8 @@
     line-height: 120%;
   }
   .mask-design {
-    /* mask-image: url("@public/assets/images/articles/mask/design-mobile.png");
-    -webkit-mask-image: url("@public/assets/images/articles/mask/design-mobile.png"); */
+    mask-image: url("@public/assets/images/articles/mask/design-mobile.png");
+    -webkit-mask-image: url("@public/assets/images/articles/mask/design-mobile.png");
     -webkit-mask-size: 304px 352px;
     mask-size: 304px 352px;
   }
@@ -690,8 +690,8 @@
   .mask-design-ux-ui {
     width: 304px;
     height: 352px;
-    /* mask-image: url("@public/assets/images/articles/mask/design-ui-mobile.png");
-    -webkit-mask-image: url("@public/assets/images/articles/mask/design-ui-mobile.png"); */
+    mask-image: url("@public/assets/images/articles/mask/design-ui-mobile.png");
+    -webkit-mask-image: url("@public/assets/images/articles/mask/design-ui-mobile.png");
     -webkit-mask-size: 304px 352px;
     mask-size: 304px 352px;
   }
@@ -780,8 +780,8 @@
     margin-bottom: 18px;
   }
   .mask-marketing {
-    /* mask-image: url("@public/assets/images/articles/mask/marketing-mobile.png");
-    -webkit-mask-image: url("@public/assets/images/articles/mask/marketing-mobile.png"); */
+    mask-image: url("@public/assets/images/articles/mask/marketing-mobile.png");
+    -webkit-mask-image: url("@public/assets/images/articles/mask/marketing-mobile.png");
     -webkit-mask-size: 304px 352px;
     mask-size: 304px 352px;
   }
@@ -799,8 +799,8 @@
     margin-bottom: 15px;
   }
   .mask-software {
-    /* mask-image: url("@public/assets/images/articles/mask/software-mobile.png");
-    -webkit-mask-image: url("@public/assets/images/articles/mask/software-mobile.png"); */
+    mask-image: url("@public/assets/images/articles/mask/software-mobile.png");
+    -webkit-mask-image: url("@public/assets/images/articles/mask/software-mobile.png");
     -webkit-mask-size: 304px 352px;
     mask-size: 304px 352px;
   }

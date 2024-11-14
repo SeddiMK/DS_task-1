@@ -23,6 +23,7 @@
 	--max-w-body: 1440px;
 	--max-w-cnt: 1208px;
 	--max-w-cnt-tablet: 768px;
+	--max-w-cnt-mobile: 304px;
 	--font-family: 'Nunito', sans-serif;
 	--font-size: 18px;
 	--font-weight: 500;

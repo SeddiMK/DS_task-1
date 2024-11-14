@@ -1,0 +1,81 @@
+/* Реализовать подсветку инпутов формы на CSS по событию blur */
+#inp-email-subscribe ~ span::before {
+  order: 2;
+  content: none;
+  display: block;
+  position: absolute;
+  z-index: 5;
+  left: 242px;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 25px;
+  height: 25px;
+  background-color: transparent;
+  background-image: url("@public/assets/images/subscribe-block/icon/error-inp.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  -khtml-background-size: contain;
+  -moz-background-size: contain;
+  -ms-background-size: contain;
+  -o-background-size: contain;
+  -webkit-background-size: contain;
+}
+
+.lbl-subscribe a {
+  text-decoration: underline;
+}
+#inp-email-subscribe:focus {
+  border-color: var(--black);
+}
+#chb-subscribe:checked ~ #inp-email-subscribe:valid:not(:focus) {
+  border-color: var(--grass);
+}
+#chb-subscribe:checked ~ #inp-email-subscribe:not(:focus):valid ~ span::before {
+  content: "";
+  background-image: url("@public/assets/images/subscribe-block/icon/correct-inp.svg");
+}
+
+/* not correct email .error-inp-wrp*/
+
+#chb-subscribe:checked ~ .error-inp-wrp:valid:not(:focus) {
+  border-color: var(--tangerine);
+}
+
+#chb-subscribe:checked ~ #inp-email-subscribe:not(:focus):user-invalid:invalid {
+  border-color: var(--tangerine);
+}
+
+#chb-subscribe:checked
+  ~ #inp-email-subscribe:not(:focus):user-invalid:invalid
+  ~ span::before {
+  content: "";
+}
+
+#chb-subscribe:not(:checked) ~ #inp-email-subscribe:not(:focus):invalid {
+  border-color: var(--tangerine);
+}
+#chb-subscribe:not(:checked)
+  ~ #inp-email-subscribe:not(:focus):invalid
+  ~ span::before {
+  content: "";
+}
+
+#chb-subscribe:not(:checked) ~ #inp-email-subscribe:not(:focus):valid {
+  border-color: var(--tangerine);
+}
+#chb-subscribe:not(:checked)
+  ~ #inp-email-subscribe:not(:focus):valid
+  ~ span::before {
+  content: "";
+}
+
+#chb-subscribe:not(:checked) ~ #inp-email-subscribe:placeholder-shown:invalid {
+  border-color: var(--white);
+}
+
+#chb-subscribe:not(:checked)
+  ~ #inp-email-subscribe:placeholder-shown:invalid
+  ~ span::before {
+  content: none;
+}

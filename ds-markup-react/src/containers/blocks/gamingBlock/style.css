@@ -1,0 +1,437 @@
+/* --------------------------------- gaming ------------------------------ */
+.gaming {
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  background-image: url("@public/assets/images/bg/bgLineGaming.svg");
+  background-repeat: no-repeat;
+  background-position: -42px 4px;
+  background-size: 106% 106%;
+  -khtml-background-size: 106% 106%;
+  -moz-background-size: 106% 106%;
+  -ms-background-size: 106% 106%;
+  -o-background-size: 106% 106%;
+  -webkit-background-size: 106% 106%;
+}
+.gaming-cnt {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  gap: 52px;
+  margin-top: 155px;
+  margin-bottom: 445px;
+  height: 560px;
+  padding: 0;
+}
+.gaming__img-wrapper {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.gaming__img-wrp {
+  width: 480px;
+  height: 565px;
+  -webkit-mask-image: url("@public/assets/images/gaming/mask/mask-gaming.png");
+  mask-image: url("@public/assets/images/gaming/mask/mask-gaming.png");
+}
+.gaming__img-wrp img {
+  -o-object-position: center -143px;
+  object-position: center -143px;
+}
+.img-gaming {
+  -o-object-position: center 100%;
+  object-position: center 100%;
+}
+.img-wrp__stiker-gaming svg {
+  width: 180px;
+  height: 180px;
+}
+.content-info-gaming {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  height: 468px;
+  margin: 43px 6px 64px 0;
+}
+
+.content-info-gaming .date-big-cards {
+  letter-spacing: 0px;
+  margin-bottom: 70px;
+}
+
+.text-info-gaming h3 {
+  font-size: 35px;
+  line-height: 125%;
+  letter-spacing: 0.5px;
+}
+.text-info-gaming {
+  max-width: 610px;
+  margin-right: 90px;
+  margin-bottom: 16px;
+}
+
+/* --------------------------------- @media 1279px ------------------------------ */
+@media (max-width: 1279px) {
+  .gaming {
+    background-image: url("@public/assets/images/bg/bgLineGaming-tablet.svg");
+    background-position: -18px -12px;
+  }
+  .gaming-cnt {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 24px;
+    margin-top: 249px;
+    margin-bottom: 261px;
+  }
+  .gaming__img-wrp img {
+    -o-object-position: center -82px;
+    object-position: center -82px;
+  }
+  .mask-gaming {
+    width: 270px;
+    height: 320px;
+    /* mask-position: center 20px; */
+    -webkit-mask-image: url("@public/assets/images/gaming/mask/mask-gaming-tablet.png");
+    mask-image: url("@public/assets/images/gaming/mask/mask-gaming-tablet.png");
+  }
+  #stiker-gaming {
+    width: 104px;
+    height: 104px;
+    top: -39px;
+    right: 28px;
+  }
+
+  .info-design-ux-ui {
+    gap: 0;
+  }
+  .link-gaming {
+    padding: 7px 15px;
+  }
+  .content-info-big-card {
+    display: grid;
+    grid-template-rows: 26% 53% 17%;
+    grid-template-columns: repeat(2, auto);
+    -webkit-column-gap: 24px;
+    -moz-column-gap: 24px;
+    column-gap: 24px;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: end;
+    width: 100%;
+    height: 100%;
+    margin: 0px 0px 0px 0;
+  }
+  .content-info__links {
+    grid-column-start: 1;
+    grid-row-start: 1;
+    -webkit-box-ordinal-group: 2;
+    -ms-flex-order: 1;
+    order: 1;
+    margin-bottom: 0;
+  }
+  .content-info__list {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: repeat(2, auto);
+    gap: 13px;
+  }
+  .content-info__list li:first-child {
+    grid-column: span 3 / span 3;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: start;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: end;
+  }
+  .list__item {
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: end;
+  }
+  .content-info-gaming .date-big-cards {
+    letter-spacing: 0px;
+    margin-bottom: 0px;
+
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: end;
+    -ms-flex-align: end;
+    align-items: end;
+    gap: 9px;
+    margin-top: 3px;
+  }
+
+  .date-big-cards .date-big-cards-gaming {
+    grid-column-start: 1;
+    grid-row-start: 2;
+
+    gap: 8px;
+    -webkit-box-ordinal-group: 3;
+    -ms-flex-order: 2;
+    order: 2;
+
+    margin-top: 0px;
+  }
+  .date-big-cards .date-text {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+    gap: 9px;
+  }
+  .date-big-cards .time {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+  }
+  .info-design-ux-ui .date-big-cards {
+    -ms-flex-item-align: start;
+    align-self: start;
+    margin-top: 16px;
+  }
+  .content-info__text {
+    grid-row: span 2 / span 2;
+    grid-column-start: 2;
+    grid-row-start: 1;
+    -webkit-box-ordinal-group: 4;
+    -ms-flex-order: 3;
+    order: 3;
+    margin-bottom: 94px;
+  }
+  .content-info__link-btn {
+    grid-column-start: 2;
+    grid-row-start: 3;
+    -webkit-box-ordinal-group: 5;
+    -ms-flex-order: 4;
+    order: 4;
+  }
+  .link-btn-gaming {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+  }
+  .text-info-gaming {
+    max-width: 460px;
+  }
+  .text-info-gaming h3 {
+    font-size: 26px;
+    line-height: 120%;
+    letter-spacing: 0px;
+    margin-bottom: 7px;
+  }
+  .text-info {
+    margin-right: 0;
+  }
+  .marquee-articles {
+    bottom: 186px;
+    -webkit-transform: rotate(-3deg) translateX(-50%);
+    -ms-transform: rotate(-3deg) translateX(-50%);
+    transform: rotate(-3deg) translateX(-50%);
+  }
+
+  .container {
+    max-width: var(--max-w-cnt-tablet);
+    padding-right: 32px;
+    padding-left: 32px;
+  }
+}
+
+/* --------------------------------- @media 768px ------------------------------ */
+@media (max-width: 768px) {
+  /*  ------------------------ gaming ----------------------- */
+  .gaming {
+    background-image: url("@public/assets/images/bg/bgLineGaming-mobile.svg");
+    background-position: -47px -12px;
+    background-size: 130% 120%;
+    -khtml-background-size: 130% 120%;
+    -moz-background-size: 130% 120%;
+    -ms-background-size: 130% 120%;
+    -o-background-size: 130% 120%;
+    -webkit-background-size: 130% 120%;
+  }
+
+  .gaming-cnt {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 18px;
+    margin-top: 313px;
+    margin-bottom: 317px;
+  }
+  .gaming__img-wrp {
+    width: 304px;
+    height: 352px;
+    -webkit-mask-image: url("@public/assets/images/gaming/mask/mask-gaming.png");
+    mask-image: url("@public/assets/images/gaming/mask/mask-gaming.png");
+  }
+  .gaming__img-wrp img {
+    -o-object-position: center -90px;
+    object-position: center -90px;
+  }
+  #stiker-gaming {
+    top: -29px;
+    right: 46px;
+  }
+  #stiker-gaming svg {
+    -webkit-transform: scale(0.58);
+    -ms-transform: scale(0.58);
+    transform: scale(0.58);
+  }
+
+  .gaming__content-info {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: start;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    gap: 16px;
+  }
+  .content-info__links {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: start;
+
+    margin-bottom: 16px;
+    font-size: var(--nunito-fz-15);
+  }
+
+  ul.content-info__list {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: start;
+    gap: 10px;
+  }
+  .link-gaming {
+    padding: 7px 18px;
+    margin-right: 2px;
+  }
+  .text-info__title {
+    font-size: 26px;
+  }
+  .text-info-gaming h3 {
+    margin-bottom: 15px;
+  }
+
+  .date-big-cards-gaming .date-text .icon {
+    -webkit-box-ordinal-group: 2;
+    -ms-flex-order: 1;
+    order: 1;
+  }
+  .date-big-cards-gaming .time .icon {
+    -webkit-box-ordinal-group: 2;
+    -ms-flex-order: 1;
+    order: 1;
+  }
+  .content-info-gaming .date-big-cards {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    gap: 24px;
+    margin-top: 0px;
+    margin-bottom: 55px;
+  }
+  .content-info__date {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: start;
+    max-width: 100%;
+    width: 100%;
+    -webkit-box-ordinal-group: 5;
+    -ms-flex-order: 4;
+    order: 4;
+    gap: 24px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    -webkit-box-ordinal-group: 4;
+    -ms-flex-order: 3;
+    order: 3;
+  }
+  .content-info__link-btn {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 100%;
+  }
+  .link-btn-gaming {
+    padding: 16px 90px;
+  }
+  .marquee-articles {
+    bottom: 171px;
+    -webkit-transform: rotate(-4deg) translateX(-50%);
+    -ms-transform: rotate(-4deg) translateX(-50%);
+    transform: rotate(-4deg) translateX(-50%);
+  }
+  .container {
+    max-width: var(--max-w-cnt-mobile);
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+}

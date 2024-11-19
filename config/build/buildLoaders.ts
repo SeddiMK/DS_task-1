@@ -1,7 +1,6 @@
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { ModuleOptions } from "webpack";
 import { BuildOptions } from "./types/types";
-import path from "path";
 
 export const buildLoaders = ({
   mode,

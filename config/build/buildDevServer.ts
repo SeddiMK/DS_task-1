@@ -5,6 +5,7 @@ export const buildDevServer = (
   options: BuildOptions,
 ): DevServerConfiguration => {
   return {
+    historyApiFallback: true, // перенаправление всех маршрутов на index.html для роутинга
     port: options.port ?? 5000,
     open: true,
   };

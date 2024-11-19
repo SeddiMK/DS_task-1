@@ -10,6 +10,7 @@ import IconBack from "@public/assets/images/back.svg";
 import { Card } from "@/types/general";
 import { handleCardFlip } from "@/utils/handleCardFlip3333";
 import { Timer } from "@/containers/Timer";
+import { Link } from "react-router-dom";
 // import { handleCardFlip } from "@/utils/handleCardFlip";
 
 // const GameField: React.FC = () => {

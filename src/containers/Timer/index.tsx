@@ -1,12 +1,19 @@
 import { useTimer } from "@/hooks/useTimer";
+import { useEffect } from "react";
 
 interface TimerProps {
-  btnStartTime: (time: number) => void;
-  btnResetTime: (time: number) => void;
+  startTime?: boolean;
+  resetTime?: boolean;
 }
 
-export const Timer: React.FC<TimerProps> = ({ btnStartTime, btnResetTime }) => {
+export const Timer: React.FC<TimerProps> = ({ startTime, resetTime }) => {
   const { time, start, stop, reset } = useTimer();
+
+  useEffect(() => {
+    if (startTime) {
+      start(60);
+    }
+  }, [startTime]);
 
   return (
     <div>

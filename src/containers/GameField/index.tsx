@@ -61,16 +61,18 @@ export const GameField: React.FC = () => {
   const [choiceOne, setChoiceOne] = useState(null);
   const [choiceTwo, setChoiceTwo] = useState(null);
   const [disabled, setDisabled] = useState(false);
+  const [startTime, setStartTime] = useState(false);
+  const [resetTime, setResetTime] = useState(false);
 
   // ---------------------------------------------
-  const startTime = (time: number) => {
-    console.log(`Таймер стартует с времени: ${time}`);
-    // start(60);
-  };
+  // const startTime = (time: number) => {
+  //   console.log(`Таймер стартует с времени: ${time}`);
+  //   // start(60);
+  // };
 
-  const resetTime = (time: number) => {
-    console.log(`Таймер сбрасывается на: ${time}`);
-  };
+  // const resetTime = (time: number) => {
+  //   console.log(`Таймер сбрасывается на: ${time}`);
+  // };
   // Перемешиваем карточки
   const shuffleCards = () => {
     const shuffledCards = [...cardImages, ...cardImages]
@@ -84,7 +86,7 @@ export const GameField: React.FC = () => {
   };
 
   const handleChoice = (card: any) => {
-    startTime(60);
+    setStartTime(true);
     // start(60);
     // !!!
     console.log(card, "card ------ handleChoice ");
@@ -223,7 +225,7 @@ export const GameField: React.FC = () => {
   return (
     <div>
       <h1>Запомни пары</h1>
-      <Timer btnStartTime={startTime} btnResetTime={resetTime} />
+      <Timer startTime={startTime} resetTime={resetTime} />
       <p>Score: {sessionScore}</p>
       <p>Mistakes: {mistakes}</p>
       <button

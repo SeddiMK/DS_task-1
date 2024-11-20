@@ -1,4 +1,14 @@
 import { Card } from "@/types/general";
+import { useEffect, useState } from "react";
+
+interface Settings {
+  rows: number;
+  cols: number;
+  timeLimit: number;
+  maxErrors: number;
+  username: string;
+  avatarImg: string;
+}
 
 // Перемешиваем карты
 export const shuffleCards = (array: Card[]): Card[] => {
@@ -13,11 +23,29 @@ export const shuffleCards = (array: Card[]): Card[] => {
   //   .sort(() => Math.random() - 0.5)
   //   .map((card) => ({ ...card, id: Math.random() }));
 
-  // return shuffled;
   return shuffled;
 };
 
 export const generateCards = (rows: number, cols: number, images: string[]) => {
+  const [settings, setSettings] = useState<Settings | null>(null);
+
+  // Получаем настройки из localStorage
+  // useEffect(() => {
+  //   const savedSettings = localStorage.getItem("settingsGame");
+  //   if (savedSettings) {
+  //     const parsedSettings: Settings = JSON.parse(savedSettings);
+  //     setSettings(parsedSettings);
+  //   }
+  //   console.log(settings, "settings in generate");
+  // }, []);
+
+  // useEffect(() => {
+  //   if (settings) {
+  //     // Создаем массив карт
+  //     const totalCards = settings.rows * settings.cols;
+  //   }
+  // }, [settings]);
+
   let totalCards = rows * cols;
   const pairs = images.slice(0, totalCards / 2);
 
@@ -25,7 +53,7 @@ export const generateCards = (rows: number, cols: number, images: string[]) => {
 
   const cards: Card[] = [];
 
-  // Шаг 1: Создаем пары карт из изображений
+  //  Создаем пары карт из изображений
   // const pairs = images.slice(0, images.length / 2); // Получаем только половину для пар
 
   pairs.forEach((image, index) => {

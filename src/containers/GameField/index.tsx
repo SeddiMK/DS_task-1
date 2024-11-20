@@ -2,15 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useGameContext } from "@/context/GameContext";
 import { useTimer } from "@/hooks/useTimer";
 import { generateCards, shuffleCards } from "@/utils/generateCards";
-import IconAlarm from "@public/assets/images/alarm.svg";
-import IconAlert from "@public/assets/images/alert.svg";
-import IconCalendar from "@public/assets/images/calendar.svg";
-import IconCrown from "@public/assets/images/crown.svg";
-import IconBack from "@public/assets/images/back.svg";
+import IconAlarm from "@public/assets/images/cards/alarm.svg";
+import IconAlert from "@public/assets/images/cards/alert.svg";
+import IconCalendar from "@public/assets/images/cards/calendar.svg";
+import IconCrown from "@public/assets/images/cards/crown.svg";
+import IconBack from "@public/assets/images/cards/back.svg";
 import { Card } from "@/types/general";
 import { handleCardFlip } from "@/utils/handleCardFlip3333";
 import { Timer } from "@/containers/Timer";
 import { Link } from "react-router-dom";
+import { CardsGenerate } from "../CardsGenerate";
+import { fetchCards } from "@/utils/fetchCards";
 // import { handleCardFlip } from "@/utils/handleCardFlip";
 
 // const GameField: React.FC = () => {
@@ -88,6 +90,7 @@ export const GameField: React.FC = () => {
   const [isGameOver, setIsGameOver] = useState(0);
   const [isGameWinner, setIsGameWinner] = useState(0);
   const [allCardsOpen, setAllCardsOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   // ---------------------------------------------
 
   // Перемешиваем карточки
@@ -96,11 +99,8 @@ export const GameField: React.FC = () => {
       .sort(() => Math.random() - 0.5)
       .map((card) => ({ ...card, id: Math.random() }));
 
-    setChoiceOne(null);
-    setChoiceTwo(null);
     setCards(shuffledCards);
-    setTurns(0);
-    setDisabled(false);
+
     // setIsGameWinner(null);
   };
 
@@ -144,7 +144,7 @@ export const GameField: React.FC = () => {
             }
           });
         });
-        resetTurn();
+        // resetTurn();
       } else {
         if (sessionScore > scoreСomplexity)
           setSessionScore(sessionScore - scoreСomplexity);
@@ -167,13 +167,35 @@ export const GameField: React.FC = () => {
     setStartTime(false);
     setStopTime(false);
     setResetTime(true);
+    setChoiceOne(null);
+    setChoiceTwo(null);
+    setTurns(0);
+    setDisabled(false);
+
+    // !!!
     shuffleCards();
   };
 
-  // useEffect(() => {}, [resetTime]);
-
   useEffect(() => {
+    console.log(fetchCards(), "fetchCards()");
+
+    fetchCards();
     shuffleCards();
+
+    // загружаем изображения
+    const loadCards = async () => {
+      try {
+        const fetchedCards = await fetchCards();
+        // setCards(fetchedCards); // -------------------------------- загрузка cards !!!
+        setLoading(false);
+      } catch (err) {
+        // setError("Не удалось загрузить карты");
+        console.error("Не удалось загрузить карты");
+        setLoading(false);
+      }
+    };
+
+    loadCards();
   }, []);
 
   // Узнаем что время вышло = 0s
@@ -334,11 +356,16 @@ export const GameField: React.FC = () => {
   // console.log(isGame, "isGame");
   // console.log(isGameWinner, "isGameWinner");
   // console.log(isGameOver, "isGameOver");
+  console.log(choiceOne, choiceTwo, "choiceOne,  choiceTwo");
+
+  // Если настройки ещё не загружены
+  // if (!settings) {
+  //   return <div>Loading...</div>;
+  // }
 
   return (
     <div>
       <h1>Запомни пары</h1>
-
       <p>Количество сыгранных игр в текущей сессии: {gamesPlayed}</p>
       <p>Счет в текущей сессии: {maxScore}</p>
       <p>Общий и счет: {gamesPlayed + maxScore} </p>
@@ -348,7 +375,6 @@ export const GameField: React.FC = () => {
         {(allMatchedCards() / 2 / (cards.length / 2)) * 100}
         %)
       </p>
-
       <Timer
         startTime={startTime}
         stopTime={stopTime}
@@ -364,8 +390,7 @@ export const GameField: React.FC = () => {
       >
         Новая игра
       </button>
-
-      <div className="card-grid">
+      {/* <div className="card-grid">
         {cards.map((card, index) => (
           <div
             key={card.id}
@@ -374,7 +399,7 @@ export const GameField: React.FC = () => {
             // onClick={() => handleCardFlip(index)} (card.matched ? false :
             onClick={() => handleChoice(card)}
           >
-            {/* <img src={card.isFlipped ? card.image : IconBack} alt="card" /> */}
+            {/* <img src={card.isFlipped ? card.image : IconBack} alt="card" /> 
             <img
               src={
                 card === choiceOne || card === choiceTwo || card.matched
@@ -385,7 +410,15 @@ export const GameField: React.FC = () => {
             />
           </div>
         ))}
-      </div>
+      </div> 
+      */}
+      <a href="/settings">Настройки</a>
+      <CardsGenerate
+        choiceOne={choiceOne}
+        choiceTwo={choiceTwo}
+        cards={cards}
+        handleChoice={handleChoice}
+      />
     </div>
   );
 };

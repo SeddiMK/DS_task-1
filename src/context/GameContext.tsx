@@ -12,15 +12,24 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({
   const [maxScore, setMaxScore] = useState<number>(
     parseInt(localStorage.getItem("maxScore") || "0"),
   );
+  const [settings, setSettings] = useState<{}>(
+    parseInt(localStorage.getItem("settings") || "0"),
+  );
+
   const [sessionScore, setSessionScore] = useState<number>(0);
   const [mistakes, setMistakes] = useState<number>(0);
 
-  const updateSessionStorage = (gamesPlayed: number) => {
+  const updateSessionStorageGamesPlayed = (gamesPlayed: number) => {
     sessionStorage.setItem("gamesPlayed", gamesPlayed.toString());
   };
 
-  const updateLocalStorage = (maxScore: number) => {
+  const updateLocalStorageMaxScore = (maxScore: number) => {
     localStorage.setItem("maxScore", maxScore.toString());
+  };
+
+  const updateLocalStorageSettings = (settings: {}) => {
+    // localStorage.clear();
+    localStorage.setItem("settingsGame", JSON.stringify(settings));
   };
 
   return (
@@ -35,13 +44,19 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({
         gamesPlayed,
         setGamesPlayed: (games) => {
           setGamesPlayed(games);
-          updateSessionStorage(games);
+          updateSessionStorageGamesPlayed(games);
         },
 
         maxScore,
         setMaxScore: (score) => {
           setMaxScore(score);
-          updateLocalStorage(score);
+          updateLocalStorageMaxScore(score);
+        },
+
+        settings,
+        setSettings: (obj: {}) => {
+          setSettings(obj);
+          updateLocalStorageSettings(obj);
         },
       }}
     >

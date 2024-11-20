@@ -47,8 +47,8 @@ export interface Images {
 //   { src: "../../public/assets/images/crown.svg" },
 // ]; //!!!
 const cardImages: Images[] = [
-  { src: IconAlarm, matched: false, flipped: 0 },
-  { src: IconAlert, matched: false, flipped: 0 },
+  // { src: IconAlarm, matched: false, flipped: 0 },
+  // { src: IconAlert, matched: false, flipped: 0 },
   { src: IconCalendar, matched: false, flipped: 0 },
   { src: IconCrown, matched: false, flipped: 0 },
 ]; //!!!
@@ -56,23 +56,40 @@ const cardImages: Images[] = [
 
 export const GameField: React.FC = () => {
   const { time, start, stop, reset } = useTimer();
+
   const [cards, setCards] = useState([]);
   const [turns, setTurns] = useState(0);
   const [choiceOne, setChoiceOne] = useState(null);
   const [choiceTwo, setChoiceTwo] = useState(null);
   const [disabled, setDisabled] = useState(false);
   const [startTime, setStartTime] = useState(false);
+  const [stopTime, setStopTime] = useState(false);
   const [resetTime, setResetTime] = useState(false);
+  const [scoreСomplexity, setScoreСomplexity] = useState(5);
+  const [zeroTime, setZeroTime] = useState(false);
 
   // ---------------------------------------------
-  // const startTime = (time: number) => {
-  //   console.log(`Таймер стартует с времени: ${time}`);
-  //   // start(60);
-  // };
+  const {
+    mistakes,
+    setMistakes,
+    sessionScore,
+    setSessionScore,
 
-  // const resetTime = (time: number) => {
-  //   console.log(`Таймер сбрасывается на: ${time}`);
-  // };
+    maxScore,
+    setMaxScore,
+    gamesPlayed,
+    setGamesPlayed,
+  } = useGameContext();
+
+  const [rows, setRows] = useState(4);
+  const [cols, setCols] = useState(4);
+  const [flippedCards, setFlippedCards] = useState([]);
+  const [isGame, setIsGame] = useState(0);
+  const [isGameOver, setIsGameOver] = useState(0);
+  const [isGameWinner, setIsGameWinner] = useState(0);
+  const [allCardsOpen, setAllCardsOpen] = useState(false);
+  // ---------------------------------------------
+
   // Перемешиваем карточки
   const shuffleCards = () => {
     const shuffledCards = [...cardImages, ...cardImages]
@@ -83,17 +100,22 @@ export const GameField: React.FC = () => {
     setChoiceTwo(null);
     setCards(shuffledCards);
     setTurns(0);
+    setDisabled(false);
+    // setIsGameWinner(null);
   };
 
+  // Открыли карточку -----------------------------------------------------------
   const handleChoice = (card: any) => {
-    setStartTime(true);
-    // start(60);
     // !!!
-    console.log(card, "card ------ handleChoice ");
-    // Эта карточка перевернулась столько раз
-    card.flipped += 1;
+    // console.log(card, "card ------ handleChoice ");
 
-    if (card.matched === false) {
+    card.flipped += 1;
+    setStartTime(true);
+    setResetTime(false);
+
+    // winningGame();
+
+    if (card.matched === false && !disabled) {
       if (choiceOne !== null && choiceOne !== card) {
         setChoiceTwo(card);
       } else {
@@ -104,24 +126,15 @@ export const GameField: React.FC = () => {
     // choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
   };
 
-  // Сброс
-  const resetTurn = () => {
-    setChoiceOne(null);
-    setChoiceTwo(null);
-    setTurns((prefTurns) => prefTurns + 1);
-    setDisabled(false);
-  };
-
-  // Открыли 2 карточки
+  // Открыли 2 карточки проверка совпадений ----------------------------------------------
   useEffect(() => {
-    console.log(choiceOne, "------choiceOne", choiceTwo, "-------choiceTwo");
+    // console.log(choiceOne, "------choiceOne", choiceTwo, "-------choiceTwo");
 
     if (choiceOne && choiceTwo) {
       setDisabled(true);
 
       if (choiceOne.src === choiceTwo.src) {
-        console.log("choiceOne === choiceTwo");
-
+        setSessionScore(sessionScore + 10);
         setCards((prevCards) => {
           return prevCards.map((card) => {
             if (card.src === choiceOne.src) {
@@ -133,30 +146,126 @@ export const GameField: React.FC = () => {
         });
         resetTurn();
       } else {
+        if (sessionScore > scoreСomplexity)
+          setSessionScore(sessionScore - scoreСomplexity);
+        setMistakes(mistakes + 1);
         setTimeout(() => resetTurn(), 500);
       }
     }
   }, [choiceOne, choiceTwo]);
 
-  // Новая игра
+  // Сброс -----------------------------------------------------------------------
+  const resetTurn = () => {
+    setChoiceOne(null);
+    setChoiceTwo(null);
+    setTurns((prefTurns) => prefTurns + 1);
+    setDisabled(false);
+  };
+  // Новая игра ------------------------------------------------------------------
+  const handleNewGame = () => {
+    setAllCardsOpen(false);
+    setStartTime(false);
+    setStopTime(false);
+    setResetTime(true);
+    shuffleCards();
+  };
+
+  // useEffect(() => {}, [resetTime]);
+
   useEffect(() => {
     shuffleCards();
   }, []);
-  // ---------------------------------------------
-  // ---------------------------------------------
-  const { mistakes, setMistakes, sessionScore, setSessionScore } =
-    useGameContext();
 
-  const [rows, setRows] = React.useState(4);
-  const [cols, setCols] = React.useState(4);
-  const [flippedCards, setFlippedCards] = React.useState([]);
-  const [isGameOver, setIsGameOver] = React.useState(false);
+  // Узнаем что время вышло = 0s
+  const zeroTimeFunc = (flag: boolean) => {
+    setZeroTime(flag);
+  };
+
+  // Все выбранные карточки с matched = true
+  const allMatchedCards = () => {
+    return cards.filter((card) => card.matched).length;
+  };
+
+  // Все карточки открыты
+
+  // const allCardsOpenFunc = () => {
+  //   if (
+  //     startTime &&
+  //     cards.filter((card) => card.matched).length === cards.length
+  //   ) {
+  //     setAllCardsOpen(true);
+  //   }
+  // };
 
   useEffect(() => {
+    console.log(
+      allMatchedCards(),
+      cards.length,
+      "allMatchedCards() === cards.length",
+    );
+
+    if (startTime && allMatchedCards() === cards.length) {
+      setAllCardsOpen(true);
+      // setStopTime(true);
+    }
+  }, [startTime, allCardsOpen, zeroTime, cards]);
+
+  // Подсчет выигрышных партий и отправка в Local Session store --------------------
+  const winningGame = () => {
+    console.log(startTime, "startTime");
+
+    if (startTime) {
+      console.log(zeroTime, "zeroTime");
+
+      if (allCardsOpen && !zeroTime) {
+        if (allMatchedCards() === cards.length) {
+          setIsGame(isGame + 1);
+          setIsGameWinner(isGameWinner + 1);
+        }
+
+        setStopTime(true);
+
+        console.log("--------- !!!winner!!! --------");
+        return true;
+      }
+
+      if (zeroTime) {
+        setIsGame(isGame + 1);
+        setIsGameOver(isGameOver + 1);
+        setDisabled(true);
+
+        console.log("--------- )))game over((( --------");
+        return false;
+      }
+    }
+  };
+
+  // winner game
+  useEffect(() => {
+    winningGame();
+  }, [startTime, zeroTime, allCardsOpen]);
+
+  useEffect(() => {
+    //!!!
+    // делим на 2, т.к. пара карточек
+    console.log(isGame, "isGame");
+    console.log(isGameWinner, "isGameWinner");
+    console.log(isGameOver, "isGameOver");
+    console.log(allCardsOpen, "allCardsOpen");
+    console.log(allMatchedCards(), "allMatchedCards()");
+
+    if (isGame > 0) {
+      console.log(
+        "--------- setGamesPlayed in sessionStorage and setMaxScore in localStore ------------",
+      );
+      setGamesPlayed(isGame);
+      setMaxScore(isGame);
+    }
+    // console.log(resetTime, "resetTime");
     // const initialCards = generateCards(rows, cols, images);
     // setCards(initialCards);
-    // start(1111160); //!!!
-  }, []);
+    // start(1111160);
+  }, [isGame, isGameWinner, isGameOver, allCardsOpen, allMatchedCards()]);
 
   // useEffect(() => {
   //   // if (time === 0) {
@@ -220,17 +329,38 @@ export const GameField: React.FC = () => {
 
   // console.log(newCards, "newCards");
   console.log(cards, "cards");
-  console.log(flippedCards, "flippedCards");
+  // console.log(turns, "turns");
+  // console.log(flippedCards, "flippedCards");
+  // console.log(isGame, "isGame");
+  // console.log(isGameWinner, "isGameWinner");
+  // console.log(isGameOver, "isGameOver");
 
   return (
     <div>
       <h1>Запомни пары</h1>
-      <Timer startTime={startTime} resetTime={resetTime} />
-      <p>Score: {sessionScore}</p>
-      <p>Mistakes: {mistakes}</p>
+
+      <p>Количество сыгранных игр в текущей сессии: {gamesPlayed}</p>
+      <p>Счет в текущей сессии: {maxScore}</p>
+      <p>Общий и счет: {gamesPlayed + maxScore} </p>
+      <p>
+        Количество верно открытых пар/ всего пар (процент прохождения текущей
+        игры): {allMatchedCards() / 2}/{cards.length / 2} (
+        {(allMatchedCards() / 2 / (cards.length / 2)) * 100}
+        %)
+      </p>
+
+      <Timer
+        startTime={startTime}
+        stopTime={stopTime}
+        resetTime={resetTime}
+        zeroTime={zeroTimeFunc}
+      />
+      <p>Счет: {sessionScore}</p>
+      <p>Количество ходов: {turns}</p>
+      <p>Ошибки: {mistakes}</p>
       <button
         // onClick={() => generateCards(rows, cols, images)}
-        onClick={shuffleCards}
+        onClick={handleNewGame}
       >
         Новая игра
       </button>
@@ -251,7 +381,7 @@ export const GameField: React.FC = () => {
                   ? card.src
                   : IconBack
               }
-              alt="card"
+              alt="card game"
             />
           </div>
         ))}

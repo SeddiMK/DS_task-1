@@ -26,20 +26,23 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({
   return (
     <GameContext.Provider
       value={{
-        gamesPlayed,
-        maxScore,
         sessionScore,
+        setSessionScore,
+
         mistakes,
+        setMistakes,
+
+        gamesPlayed,
         setGamesPlayed: (games) => {
           setGamesPlayed(games);
           updateSessionStorage(games);
         },
+
+        maxScore,
         setMaxScore: (score) => {
           setMaxScore(score);
           updateLocalStorage(score);
         },
-        setSessionScore,
-        setMistakes,
       }}
     >
       {children}

@@ -7,36 +7,18 @@ import IconAlert from "@public/assets/images/cards/alert.svg";
 import IconCalendar from "@public/assets/images/cards/calendar.svg";
 import IconCrown from "@public/assets/images/cards/crown.svg";
 import IconBack from "@public/assets/images/cards/back.svg";
-import { Card } from "@/types/general";
+import { Card, GameResult, Settings } from "@/types/general";
 import { handleCardFlip } from "@/utils/handleCardFlip3333";
 import { Timer } from "@/containers/Timer";
 import { Link } from "react-router-dom";
-import { CardsGenerate, Settings } from "../CardsGenerate";
+import { CardsGenerate } from "../CardsGenerate";
 import { fetchCards } from "@/utils/fetchCards3333";
 import { cardArrayConvert } from "@/utils/cardArrayConvert";
 import { imagesUrl } from "@/store/db";
 import { Loading } from "@/components/Loading";
-// import { handleCardFlip } from "@/utils/handleCardFlip";
-
-// const GameField: React.FC = () => {
-//   const [maxScore, setMaxScore] = useLocalStorage<number>("maxScore", 0);
-//   const [score, setScore] = React.useState<number>(0);
-
-//   useEffect(() => {
-//     if (score > maxScore) {
-//       setMaxScore(score); // Update maxScore if the current score exceeds it
-//     }
-//   }, [score, maxScore, setMaxScore]);
-
-//   return (
-//     <div>
-//       <h1>Memory Game</h1>
-//       <p>Current Score: {score}</p>
-//       <p>Max Score: {maxScore}</p>
-//       <button onClick={() => setScore(score + 10)}>Increase Score</button>
-//     </div>
-//   );
-// };
+import { GameResultModal } from "../GameResultModal";
+import { calculateDifficulty } from "@/utils/calculateDifficulty";
+import { calculateScore } from "@/utils/calculateScore";
 
 export interface Images {
   src?: string;
@@ -77,13 +59,17 @@ export const GameField: React.FC = () => {
   const {
     mistakes,
     setMistakes,
+
     sessionScore,
     setSessionScore,
 
     maxScore,
     setMaxScore,
+
     gamesPlayed,
     setGamesPlayed,
+
+    addResult,
   } = useGameContext();
 
   const [rows, setRows] = useState(4);
@@ -96,20 +82,16 @@ export const GameField: React.FC = () => {
   const [fetchedCards, setFetchedCards] = useState([]);
   const [settings, setSettings] = useState<Settings | null>(null);
   const [error, setError] = useState("");
-
   const [loading, setLoading] = useState(false);
   // ---------------------------------------------
-
-  // Перемешиваем карточки
-  // const shuffleCards = () => {
-  //   const shuffledCards = [...cardImages, ...cardImages]
-  //     .sort(() => Math.random() - 0.5)
-  //     .map((card) => ({ ...card, id: Math.random() }));
-
-  //   // setCards(shuffledCards);
-
-  //   // setIsGameWinner(null);
-  // };
+  const [duration, setDuration] = useState(0);
+  const [errorsGame, setErrorsGame] = useState(0);
+  const [score, setScore] = useState(0);
+  const [difficulty, setDifficulty] = useState("");
+  const [isGameFall, setIsGameFall] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [timeInTimer, setTimeInTimer] = useState(0);
+  // ---------------------------------------------
 
   // Получаем настройки из localStorage при первом рендере
   useEffect(() => {
@@ -216,8 +198,6 @@ export const GameField: React.FC = () => {
       setDisabled(true);
 
       if (choiceOne.src === choiceTwo.src) {
-        setSessionScore(sessionScore + 10);
-
         setFetchedCards(matchedCards);
 
         resetTurn();
@@ -280,6 +260,23 @@ export const GameField: React.FC = () => {
   //   }
   // };
 
+  // Сохраняем продолжительность игры и ошибки
+  useEffect(() => {
+    setDuration(timeInTimer);
+    setErrorsGame(mistakes);
+    if (settings && allCardsOpen) {
+      setSessionScore(
+        calculateScore(
+          timeInTimer,
+          errorsGame,
+          settings.rows,
+          settings.cols,
+          settings.timeLimit,
+        ),
+      );
+    }
+  }, [timeInTimer, mistakes, allMatchedCards(), allCardsOpen]);
+
   // Проверка. Все карточки открыты
   useEffect(() => {
     // console.log(
@@ -288,7 +285,8 @@ export const GameField: React.FC = () => {
     //   "allMatchedCards() === fetchedCards.length",
     // );
 
-    if (startTime && allMatchedCards() === fetchedCards.length) {
+    if (startTime && !zeroTime && allMatchedCards() === fetchedCards.length) {
+      setIsSuccess(true);
       setAllCardsOpen(true);
     }
   }, [startTime, allCardsOpen, allMatchedCards(), zeroTime, cards]);
@@ -322,7 +320,6 @@ export const GameField: React.FC = () => {
   // winner game
   useEffect(() => {
     winningGame();
-    console.log(winningGame(), "winningGame()");
   }, [startTime, zeroTime, allCardsOpen]);
 
   // Отправка setGamesPlayed in sessionStorage and setMaxScore in localStore
@@ -335,6 +332,57 @@ export const GameField: React.FC = () => {
       setMaxScore(isGame);
     }
   }, [isGame, isGameWinner, isGameOver, allCardsOpen, allMatchedCards()]);
+
+  // Завершить игру --------------------
+
+  const handleGameEnd = () => {
+    // Вычисляем сложность
+    const gameDifficulty = calculateDifficulty(
+      settings.rows,
+      settings.cols,
+      settings.timeLimit,
+    );
+    setDifficulty(gameDifficulty);
+
+    // Вычисляем итоговый счет
+    const finalScore = calculateScore(
+      duration,
+      errorsGame,
+      settings.rows,
+      settings.cols,
+      settings.timeLimit,
+    );
+
+    if (duration !== 0) setScore(finalScore);
+
+    // Добавляем результат в контекст и localStorage
+    const result: GameResult = {
+      date: new Date().toISOString(),
+      duration,
+      errorsGame,
+      difficulty: gameDifficulty,
+      score: finalScore,
+    };
+    addResult(result);
+
+    if (isSuccess) setIsGameFall(true);
+  };
+
+  console.log(score, "score");
+
+  // Сохранение результата -------------------------------------------
+  // Пример добавления результата
+  // const result: GameResult = {
+  //   date: new Date().toISOString(),
+  //   duration: 45, // например, игра длилась 45 секунд
+  //   errors: 1,
+  //   difficulty: "medium",
+  //   score: 100,
+  // };
+  // useEffect(() => {
+  //   // Добавление результата
+  //   addResult(result);
+  // },[])
 
   // const handleCardFlip = (index: number) => {
   //   if (isGameOver || cards[index].isFlipped || cards[index].isMatched) return;
@@ -423,6 +471,7 @@ export const GameField: React.FC = () => {
         startTime={startTime}
         stopTime={stopTime}
         resetTime={resetTime}
+        setTimeInTimer={setTimeInTimer}
         zeroTime={zeroTimeFunc}
       />
       <p>Счет: {sessionScore}</p>
@@ -465,6 +514,35 @@ export const GameField: React.FC = () => {
         cards={fetchedCards}
         handleChoice={handleChoice}
       />
+      {/* ------------------------------ */}
+      <button onClick={handleGameEnd}>Завершить игру</button>
+      <div>
+        <p>Сложность рассчитывается так:</p>
+        <p>
+          <span>"hard"</span> = количество карточек <span>больше</span> 36 и
+          время открытия всех карточек <span>меньше</span> 30
+        </p>
+        <p>
+          <span>"medium"</span> = количество карточек <span>больше</span> 12 и
+          время открытия всех карточек <span>меньше</span> 60
+        </p>
+        <p>
+          <span>"easy"</span> = количество карточек <span>меньше</span> 12 и
+          время открытия всех карточек <span>больше</span> 60
+        </p>
+      </div>
+      <div>
+        {/* Модальное окно с результатом */}
+        {isGameFall && (
+          <GameResultModal
+            isSuccess={isSuccess}
+            score={score}
+            difficulty={difficulty}
+            errors={errorsGame}
+            onClose={() => setIsGameFall(false)}
+          />
+        )}
+      </div>
     </div>
   );
 };

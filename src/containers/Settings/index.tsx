@@ -1,4 +1,5 @@
 import { useGameContext } from "@/context/GameContext";
+import { GameSettings } from "@/types/general";
 import React, { useState } from "react";
 
 export interface SettingsState {

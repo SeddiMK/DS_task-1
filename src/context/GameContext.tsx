@@ -1,5 +1,11 @@
-import { GameContextType } from "@/types/general";
-import React, { createContext, useState, useContext, ReactNode } from "react";
+import { GameContextType, GameResult, GameSettings } from "@/types/general";
+import React, {
+  createContext,
+  useState,
+  useContext,
+  ReactNode,
+  useEffect,
+} from "react";
 
 const GameContext = createContext<GameContextType | undefined>(undefined);
 
@@ -12,11 +18,13 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({
   const [maxScore, setMaxScore] = useState<number>(
     parseInt(localStorage.getItem("maxScore") || "0"),
   );
+
   const [settings, setSettings] = useState<{}>(
     parseInt(localStorage.getItem("settings") || "0"),
   );
 
   const [sessionScore, setSessionScore] = useState<number>(0);
+
   const [mistakes, setMistakes] = useState<number>(0);
 
   const updateSessionStorageGamesPlayed = (gamesPlayed: number) => {
@@ -31,6 +39,34 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({
     // localStorage.clear();
     localStorage.setItem("settingsGame", JSON.stringify(settings));
   };
+
+  // -----------------------------------------------------------------------
+  const [results, setResults] = useState<GameResult[]>(() => {
+    // Загружаем результаты из localStorage, если они есть
+    const savedResults = localStorage.getItem("gameResults");
+    return savedResults ? JSON.parse(savedResults) : [];
+  });
+
+  // Функция обновления настроек игры ???
+  // const updateSettings = (newSettings: GameSettings) => {
+  //   setSettings(newSettings);
+  //   sessionStorage.setItem("gameSettings", JSON.stringify(newSettings));
+  // };
+
+  // Функция добавления нового результата
+  const addResult = (result: GameResult) => {
+    const updatedResults = [result, ...results];
+    setResults(updatedResults);
+    localStorage.setItem("gameResults", JSON.stringify(updatedResults));
+  };
+
+  // Загрузка настроек из sessionStorage при загрузке приложения
+  useEffect(() => {
+    const savedSettings = sessionStorage.getItem("gameSettings");
+    if (savedSettings) {
+      setSettings(JSON.parse(savedSettings));
+    }
+  }, []);
 
   return (
     <GameContext.Provider
@@ -58,6 +94,10 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({
           setSettings(obj);
           updateLocalStorageSettings(obj);
         },
+
+        results,
+        addResult,
+        // updateSettings,
       }}
     >
       {children}

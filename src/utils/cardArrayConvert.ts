@@ -6,7 +6,6 @@
 // 	{ id: 5, imageUrl: 'image5.jpg' },
 // 	{ id: 6, imageUrl: 'image6.jpg' }
 // ]
-
 // { id: number; imageUrl: string  взять из API images }
 
 // Преобразуем карты в нужный формат

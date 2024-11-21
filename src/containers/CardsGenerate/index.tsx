@@ -1,27 +1,6 @@
-import { Card } from "@/types/general";
-import { useState, useEffect } from "react";
-import { Images } from "../GameField";
+import { Card, CardsGenerateProps, Settings } from "@/types/general";
+import { useState } from "react";
 import IconBack from "@public/assets/images/cards/back.svg";
-import IconCrown from "@public/assets/images/cards/crown.svg";
-import { fetchCards } from "@/utils/fetchCards3333";
-import { shuffleCards } from "@/utils/generateCards";
-import { cardArrayConvert } from "@/utils/cardArrayConvert";
-
-export interface Settings {
-  rows: number;
-  cols: number;
-  timeLimit: number;
-  maxErrors: number;
-  username: string;
-  avatarImg: string;
-}
-
-export interface CardsGenerateProps {
-  choiceOne: Card;
-  choiceTwo: Card;
-  cards: Card[];
-  handleChoice: (card: Card) => void;
-}
 
 export const CardsGenerate: React.FC<CardsGenerateProps> = ({
   choiceOne,
@@ -29,14 +8,14 @@ export const CardsGenerate: React.FC<CardsGenerateProps> = ({
   cards,
   handleChoice,
 }) => {
-  const [settings, setSettings] = useState<Settings | null>(null);
-  const [cardsGener, setCardsGener] = useState<Card[]>([]);
-  const [fetchedCardsImgUrl, setFetchedCardsImgUrl] = useState([]);
-  const [loading, setLoading] = useState(false);
+  // const [settings, setSettings] = useState<Settings | null>(null);
+  // const [cardsGener, setCardsGener] = useState<Card[]>([]);
+  // const [fetchedCardsImgUrl, setFetchedCardsImgUrl] = useState([]);
+  // const [loading, setLoading] = useState(false);
 
   // console.log(settings, "settings in generate");
   // console.log(cards, "cards in generate");
-  console.log(cards, "cards in generate");
+  // console.log(cards, "cards in generate");
 
   return (
     <div className="card-grid">

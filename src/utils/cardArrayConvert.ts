@@ -1,6 +1,3 @@
-import { Images } from "@/containers/GameField";
-import { Card } from "@/types/general";
-
 // [
 // 	{ id: 1, imageUrl: 'image1.jpg' },
 // 	{ id: 2, imageUrl: 'image2.jpg' },
@@ -22,6 +19,4 @@ export const cardArrayConvert = (data: any) => {
       matched: false,
       flipped: 0,
     }));
-
-  // setCards(shuffle(cardArrayConvert)); // Перемешиваем карты !!!?
 };

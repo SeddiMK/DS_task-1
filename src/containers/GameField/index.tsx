@@ -11,8 +11,11 @@ import { Card } from "@/types/general";
 import { handleCardFlip } from "@/utils/handleCardFlip3333";
 import { Timer } from "@/containers/Timer";
 import { Link } from "react-router-dom";
-import { CardsGenerate } from "../CardsGenerate";
-import { fetchCards } from "@/utils/fetchCards";
+import { CardsGenerate, Settings } from "../CardsGenerate";
+import { fetchCards } from "@/utils/fetchCards3333";
+import { cardArrayConvert } from "@/utils/cardArrayConvert";
+import { imagesUrl } from "@/store/db";
+import { Loading } from "@/components/Loading";
 // import { handleCardFlip } from "@/utils/handleCardFlip";
 
 // const GameField: React.FC = () => {
@@ -90,30 +93,84 @@ export const GameField: React.FC = () => {
   const [isGameOver, setIsGameOver] = useState(0);
   const [isGameWinner, setIsGameWinner] = useState(0);
   const [allCardsOpen, setAllCardsOpen] = useState(false);
+  const [fetchedCards, setFetchedCards] = useState([]);
+  const [settings, setSettings] = useState<Settings | null>(null);
+  const [error, setError] = useState("");
+
   const [loading, setLoading] = useState(false);
   // ---------------------------------------------
 
   // Перемешиваем карточки
-  const shuffleCards = () => {
-    const shuffledCards = [...cardImages, ...cardImages]
-      .sort(() => Math.random() - 0.5)
-      .map((card) => ({ ...card, id: Math.random() }));
+  // const shuffleCards = () => {
+  //   const shuffledCards = [...cardImages, ...cardImages]
+  //     .sort(() => Math.random() - 0.5)
+  //     .map((card) => ({ ...card, id: Math.random() }));
 
-    setCards(shuffledCards);
+  //   // setCards(shuffledCards);
 
-    // setIsGameWinner(null);
-  };
+  //   // setIsGameWinner(null);
+  // };
+
+  // Получаем настройки из localStorage при первом рендере
+  useEffect(() => {
+    const savedSettings = localStorage.getItem("settingsGame");
+
+    if (savedSettings) {
+      const parsedSettings: Settings = JSON.parse(savedSettings);
+      setSettings(parsedSettings);
+    }
+  }, []);
+
+  // Кладем карточки из db в state
+  useEffect(() => {
+    setCards(imagesUrl);
+
+    // const loadCards = async () => {
+    //   try {
+    //     const fetchedCards = await fetchCards();
+    //     if (fetchedCards) {
+    //       setCards(fetchedCards); // -------------------------------- загрузка cards !!!
+    //     }
+    //     setLoading(false);
+    //   } catch (err) {
+    //     // setError("Не удалось загрузить карты");
+    //     console.error("Не удалось загрузить карты");
+    //     setLoading(false);
+    //   }
+    // };
+
+    // loadCards();
+  }, []);
+
+  // Применяем настройки к картам
+  useEffect(() => {
+    // console.log(cards, "cards in //");
+    // console.log(settings, "settings in //");
+
+    // Чтобы при первом рендере не было ошибки
+    if (settings && cards) {
+      if (settings && cards) {
+        const totalCardsDuble: number = (settings.rows * settings.cols) / 2;
+
+        const convertedCards = cardArrayConvert(
+          cards.slice(0, totalCardsDuble),
+        );
+
+        setFetchedCards(shuffleCards(convertedCards));
+      } else {
+        setError("Не удалось загрузить карты");
+        console.error("Не удалось загрузить карты");
+      }
+    }
+  }, [settings, cards]);
 
   // Открыли карточку -----------------------------------------------------------
   const handleChoice = (card: any) => {
-    // !!!
     // console.log(card, "card ------ handleChoice ");
 
     card.flipped += 1;
     setStartTime(true);
     setResetTime(false);
-
-    // winningGame();
 
     if (card.matched === false && !disabled) {
       if (choiceOne !== null && choiceOne !== card) {
@@ -126,7 +183,32 @@ export const GameField: React.FC = () => {
     // choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
   };
 
-  // Открыли 2 карточки проверка совпадений ----------------------------------------------
+  // Карточкам ставим matched при совпадении
+  const matchedCards = (prevCards: Card[]) => {
+    return prevCards.map((card: Card) => {
+      if (card.src === choiceOne.src) {
+        return { ...card, matched: true };
+      } else {
+        return card;
+      }
+    });
+  };
+
+  // Карточкам убираем matched при совпадении
+  const notMatchedCards = (cards: Card[]) => {
+    return cards.map((card: Card) => {
+      if (card.matched) {
+        card.matched = false;
+        card.flipped = 0;
+
+        return;
+      } else {
+        return card;
+      }
+    });
+  };
+
+  // Открыли 2 карточки, проверка совпадений ------------------------------------
   useEffect(() => {
     // console.log(choiceOne, "------choiceOne", choiceTwo, "-------choiceTwo");
 
@@ -135,19 +217,14 @@ export const GameField: React.FC = () => {
 
       if (choiceOne.src === choiceTwo.src) {
         setSessionScore(sessionScore + 10);
-        setCards((prevCards) => {
-          return prevCards.map((card) => {
-            if (card.src === choiceOne.src) {
-              return { ...card, matched: true };
-            } else {
-              return card;
-            }
-          });
-        });
-        // resetTurn();
+
+        setFetchedCards(matchedCards);
+
+        resetTurn();
       } else {
-        if (sessionScore > scoreСomplexity)
-          setSessionScore(sessionScore - scoreСomplexity);
+        if (sessionScore > scoreСomplexity) {
+        }
+        setSessionScore(sessionScore - scoreСomplexity);
         setMistakes(mistakes + 1);
         setTimeout(() => resetTurn(), 500);
       }
@@ -161,55 +238,39 @@ export const GameField: React.FC = () => {
     setTurns((prefTurns) => prefTurns + 1);
     setDisabled(false);
   };
-  // Новая игра ------------------------------------------------------------------
+
+  // Новая игра Сброс ------------------------------------------------------------
   const handleNewGame = () => {
-    setAllCardsOpen(false);
-    setStartTime(false);
-    setStopTime(false);
-    setResetTime(true);
+    // !!!
     setChoiceOne(null);
     setChoiceTwo(null);
     setTurns(0);
     setDisabled(false);
 
-    // !!!
-    shuffleCards();
+    notMatchedCards(fetchedCards);
+
+    setSessionScore(0);
+    setMistakes(0);
+
+    setAllCardsOpen(false);
+    setStartTime(false);
+    setStopTime(false);
+    setResetTime(true);
+
+    setFetchedCards(shuffleCards(fetchedCards)); // Перемешиваем карты
   };
 
-  useEffect(() => {
-    console.log(fetchCards(), "fetchCards()");
-
-    fetchCards();
-    shuffleCards();
-
-    // загружаем изображения
-    const loadCards = async () => {
-      try {
-        const fetchedCards = await fetchCards();
-        // setCards(fetchedCards); // -------------------------------- загрузка cards !!!
-        setLoading(false);
-      } catch (err) {
-        // setError("Не удалось загрузить карты");
-        console.error("Не удалось загрузить карты");
-        setLoading(false);
-      }
-    };
-
-    loadCards();
-  }, []);
-
-  // Узнаем что время вышло = 0s
+  // Проверка. Узнаем что время вышло = 0s
   const zeroTimeFunc = (flag: boolean) => {
     setZeroTime(flag);
   };
 
-  // Все выбранные карточки с matched = true
+  // Проверка. Все выбранные карточки с matched = true
   const allMatchedCards = () => {
-    return cards.filter((card) => card.matched).length;
+    return fetchedCards.filter((card) => card.matched).length;
   };
 
-  // Все карточки открыты
-
+  // Все карточки открыты ???
   // const allCardsOpenFunc = () => {
   //   if (
   //     startTime &&
@@ -219,28 +280,24 @@ export const GameField: React.FC = () => {
   //   }
   // };
 
+  // Проверка. Все карточки открыты
   useEffect(() => {
-    console.log(
-      allMatchedCards(),
-      cards.length,
-      "allMatchedCards() === cards.length",
-    );
+    // console.log(
+    //   allMatchedCards(),
+    //   fetchedCards.length,
+    //   "allMatchedCards() === fetchedCards.length",
+    // );
 
-    if (startTime && allMatchedCards() === cards.length) {
+    if (startTime && allMatchedCards() === fetchedCards.length) {
       setAllCardsOpen(true);
-      // setStopTime(true);
     }
-  }, [startTime, allCardsOpen, zeroTime, cards]);
+  }, [startTime, allCardsOpen, allMatchedCards(), zeroTime, cards]);
 
   // Подсчет выигрышных партий и отправка в Local Session store --------------------
   const winningGame = () => {
-    console.log(startTime, "startTime");
-
     if (startTime) {
-      console.log(zeroTime, "zeroTime");
-
       if (allCardsOpen && !zeroTime) {
-        if (allMatchedCards() === cards.length) {
+        if (allMatchedCards() === fetchedCards.length) {
           setIsGame(isGame + 1);
           setIsGameWinner(isGameWinner + 1);
         }
@@ -265,17 +322,11 @@ export const GameField: React.FC = () => {
   // winner game
   useEffect(() => {
     winningGame();
+    console.log(winningGame(), "winningGame()");
   }, [startTime, zeroTime, allCardsOpen]);
 
+  // Отправка setGamesPlayed in sessionStorage and setMaxScore in localStore
   useEffect(() => {
-    //!!!
-    // делим на 2, т.к. пара карточек
-    console.log(isGame, "isGame");
-    console.log(isGameWinner, "isGameWinner");
-    console.log(isGameOver, "isGameOver");
-    console.log(allCardsOpen, "allCardsOpen");
-    console.log(allMatchedCards(), "allMatchedCards()");
-
     if (isGame > 0) {
       console.log(
         "--------- setGamesPlayed in sessionStorage and setMaxScore in localStore ------------",
@@ -283,29 +334,14 @@ export const GameField: React.FC = () => {
       setGamesPlayed(isGame);
       setMaxScore(isGame);
     }
-    // console.log(resetTime, "resetTime");
-    // const initialCards = generateCards(rows, cols, images);
-    // setCards(initialCards);
-    // start(1111160);
   }, [isGame, isGameWinner, isGameOver, allCardsOpen, allMatchedCards()]);
-
-  // useEffect(() => {
-  //   // if (time === 0) {
-  //   //   console.log(time, "----- time === 0 -----");
-  //   //   setIsGameOver(true);
-  //   //   stop();
-  //   // }
-  //   // console.log("223256565");
-  // }, [time, stop]);
-
-  // ----------------------------------------------------------
 
   // const handleCardFlip = (index: number) => {
   //   if (isGameOver || cards[index].isFlipped || cards[index].isMatched) return;
 
   //   const newCards = [...cards];
   //   newCards[index].isFlipped = true;
-  //   setCards(newCards);
+  //   setFetchedCards(newCards);
 
   //   // Обновление flippedCards только в ответ на событие
   //   setFlippedCards((prevFlippedCards) => {
@@ -336,7 +372,7 @@ export const GameField: React.FC = () => {
   //         }
 
   //         // Устанавливаем обновленные карты
-  //         setCards(updatedCards);
+  //         setFetchedCards(updatedCards);
   //         setFlippedCards([]); // После проверки очищаем flippedCards
   //       }, 200);
   //     }
@@ -349,19 +385,27 @@ export const GameField: React.FC = () => {
   //   handleCardFlip(1, cards, isGameOver);
   // }, []);
 
+  console.log(fetchedCards, "************* fetchedCards *************");
+
   // console.log(newCards, "newCards");
-  console.log(cards, "cards");
+  // console.log(cards, "cards");
   // console.log(turns, "turns");
   // console.log(flippedCards, "flippedCards");
+
   // console.log(isGame, "isGame");
   // console.log(isGameWinner, "isGameWinner");
   // console.log(isGameOver, "isGameOver");
-  console.log(choiceOne, choiceTwo, "choiceOne,  choiceTwo");
+
+  // console.log(allCardsOpen, "allCardsOpen");
+  // console.log(allMatchedCards(), "allMatchedCards()");
+  // console.log(winningGame(), "winningGame()");
+
+  console.log(settings, "`````settings`````");
 
   // Если настройки ещё не загружены
-  // if (!settings) {
-  //   return <div>Loading...</div>;
-  // }
+  if (!settings) {
+    return <Loading />;
+  }
 
   return (
     <div>
@@ -371,8 +415,8 @@ export const GameField: React.FC = () => {
       <p>Общий и счет: {gamesPlayed + maxScore} </p>
       <p>
         Количество верно открытых пар/ всего пар (процент прохождения текущей
-        игры): {allMatchedCards() / 2}/{cards.length / 2} (
-        {(allMatchedCards() / 2 / (cards.length / 2)) * 100}
+        игры): {allMatchedCards() / 2}/{fetchedCards.length / 2} (
+        {(allMatchedCards() / 2 / (fetchedCards.length / 2)) * 100}
         %)
       </p>
       <Timer
@@ -412,11 +456,13 @@ export const GameField: React.FC = () => {
         ))}
       </div> 
       */}
-      <a href="/settings">Настройки</a>
+      <div className="settings-link">
+        <a href="/settings">Настройки</a>
+      </div>
       <CardsGenerate
         choiceOne={choiceOne}
         choiceTwo={choiceTwo}
-        cards={cards}
+        cards={fetchedCards}
         handleChoice={handleChoice}
       />
     </div>

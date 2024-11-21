@@ -83,8 +83,8 @@ export const Settings: React.FC = () => {
   //   console.log(parsedSettings); // объект с сохраненными настройками
   // }
 
-  console.log(settingsBase.avatarImg, "settingsBase.avatarImg");
-  console.log(avatar, "avatar");
+  // console.log(settingsBase.avatarImg, "settingsBase.avatarImg");
+  // console.log(avatar, "avatar");
 
   return (
     <div className="settings-container">

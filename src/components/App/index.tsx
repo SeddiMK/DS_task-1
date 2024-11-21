@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { GameProvider } from "@/context/GameContext";
 import { GameField } from "@/containers/GameField";
-import { Settings } from "@/components/Settings";
+import { Settings } from "@/containers/Settings";
 import { Results } from "@/components/Results";
 import "./style.css";
 

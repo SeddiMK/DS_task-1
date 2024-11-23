@@ -1,7 +1,14 @@
+export interface Images {
+  src?: string;
+  id?: number;
+  matched: boolean;
+  flipped: number;
+}
 export interface CardsGenerateProps {
   choiceOne: Card;
   choiceTwo: Card;
   cards: Card[];
+  setErrorsHas?: (flag: boolean) => void;
   handleChoice: (card: Card) => void;
 }
 export interface Settings {

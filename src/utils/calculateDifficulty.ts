@@ -2,13 +2,15 @@
 export const calculateDifficulty = (
   rows: number,
   cols: number,
-  timeLimit: number,
+  timeInGame: number,
 ): string => {
   const totalCells = rows * cols;
 
-  if (totalCells > 36 || timeLimit < 30) {
+  console.log(rows, cols, timeInGame, "calculateDifficulty");
+
+  if (totalCells > 36 && timeInGame < 30) {
     return "hard";
-  } else if (totalCells > 12 || timeLimit < 60) {
+  } else if (totalCells > 16 && timeInGame < 60) {
     return "medium";
   } else {
     return "easy";

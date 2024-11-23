@@ -7,20 +7,26 @@ interface TimerProps {
   resetTime?: boolean;
   stopTime?: boolean;
   setTimeInTimer: (time: number) => void;
-  zeroTime?: (flag: boolean) => void;
+  zeroTimeFunc?: (flag: boolean) => void;
 }
 
 export const Timer: React.FC<TimerProps> = ({
   startTime,
   resetTime,
   stopTime,
-  zeroTime,
+  zeroTimeFunc,
   setTimeInTimer,
 }) => {
   const { time, start, stop, reset } = useTimer();
   const [settingsTime, setSettingsTime] = useState(60);
   const [zeroTimeSt, setZeroTimeSt] = useState(false);
   const [settings, setSettings] = useState<Settings | null>(null);
+
+  // !!!
+  // const timeZeroFunc = () => {
+  //   // setZeroTimeSt(newValue);
+  //   zeroTimeFunc(true); // Вызываем функцию переданную через props
+  // };
 
   // Получаем настройки из localStorage при первом рендере
   useEffect(() => {
@@ -57,12 +63,8 @@ export const Timer: React.FC<TimerProps> = ({
 
   // time
   useEffect(() => {
-    if (time === 0) setZeroTimeSt(true);
+    if (time === 0) zeroTimeFunc(true);
   }, [time]);
-
-  useEffect(() => {
-    zeroTime(zeroTimeSt);
-  }, [zeroTimeSt]);
 
   // Применить настройки
   useEffect(() => {
@@ -70,13 +72,15 @@ export const Timer: React.FC<TimerProps> = ({
   }, [settings]);
 
   return (
-    <div>
-      <p>Времени осталось: {time ? time : settingsTime}s</p>
+    <div className="game__timer timer">
+      <p className="timer__title">
+        Времени осталось: {time ? time : settingsTime}s
+      </p>
 
-      <p>!!!Убрать в продакшене кнопки!!!</p>
+      {/* <p>!!!Убрать в продакшене кнопки!!!</p>
       <button onClick={stop}>Стоп</button>
       <button onClick={() => start(settingsTime)}>Старт</button>
-      <button onClick={() => reset(settingsTime)}>Сбросить таймер</button>
+      <button onClick={() => reset(settingsTime)}>Сбросить таймер</button> */}
     </div>
   );
 };

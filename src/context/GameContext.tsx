@@ -36,7 +36,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const updateLocalStorageSettings = (settings: {}) => {
-    // localStorage.clear();
+    // localStorage.clear(); // Очистка стор для разработки !!!
     localStorage.setItem("settingsGame", JSON.stringify(settings));
   };
 

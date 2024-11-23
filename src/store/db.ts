@@ -26,3 +26,9 @@ export const imagesUrl: Images[] = [
   Speace,
   Train,
 ];
+
+// !!!
+export const imagesUrls: string[] = [
+  `https://loremflickr.com/200/200?random=${Math.random()}`,
+  `https://api.dicebear.com/9.x/pixel-art/svg?seed=${Math.random()}`,
+];

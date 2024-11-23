@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useGameContext } from "@/context/GameContext";
 import { useTimer } from "@/hooks/useTimer";
-import { generateCards, shuffleCards } from "@/utils/generateCards";
-import IconAlarm from "@public/assets/images/cards/alarm.svg";
-import IconAlert from "@public/assets/images/cards/alert.svg";
-import IconCalendar from "@public/assets/images/cards/calendar.svg";
-import IconCrown from "@public/assets/images/cards/crown.svg";
-import IconBack from "@public/assets/images/cards/back.svg";
+import { shuffleCards } from "@/utils/generateCards";
 import { Card, GameResult, Settings } from "@/types/general";
-import { handleCardFlip } from "@/utils/handleCardFlip3333";
 import { Timer } from "@/containers/Timer";
-import { Link } from "react-router-dom";
 import { CardsGenerate } from "../CardsGenerate";
-import { fetchCards } from "@/utils/fetchCards3333";
+import { fetchCards } from "@/utils/fetchCards";
 import { cardArrayConvert } from "@/utils/cardArrayConvert";
-import { imagesUrl } from "@/store/db";
 import { Loading } from "@/components/Loading";
 import { GameResultModal } from "../GameResultModal";
 import { calculateDifficulty } from "@/utils/calculateDifficulty";
 import { calculateScore } from "@/utils/calculateScore";
+import "./style.css";
+import { loadImagesFromLocalStorage } from "@/utils/loadImgFromLocalStore";
+import { CardStyle, styleGameForCards } from "@/utils/styleGameForCards3333";
+import { GameImageUpload } from "../GameImageUpload";
 
 export interface Images {
   src?: string;
@@ -26,19 +22,18 @@ export interface Images {
   matched: boolean;
   flipped: number;
 }
-
 // const cardImages: Images[] = [
 //   { src: "../../public/assets/images/alarm.svg" },
 //   { src: "../../public/assets/images/alert.svg" },
 //   { src: "../../public/assets/images/calendar.svg" },
 //   { src: "../../public/assets/images/crown.svg" },
 // ]; //!!!
-const cardImages: Images[] = [
-  // { src: IconAlarm, matched: false, flipped: 0 },
-  // { src: IconAlert, matched: false, flipped: 0 },
-  { src: IconCalendar, matched: false, flipped: 0 },
-  { src: IconCrown, matched: false, flipped: 0 },
-]; //!!!
+// const cardImages: Images[] = [
+//   // { src: IconAlarm, matched: false, flipped: 0 },
+//   // { src: IconAlert, matched: false, flipped: 0 },
+//   { src: IconCalendar, matched: false, flipped: 0 },
+//   { src: IconCrown, matched: false, flipped: 0 },
+// ]; //!!!
 // const images = [IconAlarm, IconAlert, IconCalendar, IconCrown]; //!!!
 
 export const GameField: React.FC = () => {
@@ -91,6 +86,9 @@ export const GameField: React.FC = () => {
   const [isGameFall, setIsGameFall] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [timeInTimer, setTimeInTimer] = useState(0);
+  const [errorsHas, setErrorsHas] = useState(false);
+  const [imageBase64, setImageBase64] = useState<string[]>([]);
+  const [errorLocalStoreImages, setErrorLocalStoreImages] = useState(false);
   // ---------------------------------------------
 
   // Получаем настройки из localStorage при первом рендере
@@ -103,24 +101,55 @@ export const GameField: React.FC = () => {
     }
   }, []);
 
+  // Загрузка изображений с учетом выбранного стиля =========================================
+  const [styleImage, setStyleImage] = useState<string>("dylan"); // Стиль по умолчанию
+
+  // Функция для обновления карт с выбранным стилем
+  const updateCards = async (styleImg: string) => {
+    const newCards = await fetchCards(styleImg);
+    console.log(
+      styleImg,
+      !errorLocalStoreImages,
+      "styleImg,styleImg!errorLocalStoreImages",
+    );
+
+    if (!errorLocalStoreImages) setCards(newCards);
+
+    // if (styleImg) styleGameForCards(styleImg); !!!???
+  };
+
+  // Загружаем карты при монтировании компонента и при изменении стиля
+  useEffect(() => {
+    updateCards(styleImage);
+  }, [styleImage]);
+
+  // Функция для переключения стиля при клике на кнопку
+  const handleStyleChange = (newStyle: string) => {
+    setErrorLocalStoreImages(false);
+    setStyleImage(newStyle); // Обновляем стиль
+  };
+
+  // Функция для переключения стиля при клике на кнопку
+  const handleStyleChangeMyImage = (newStyle?: string) => {
+    // Проверка local store. Если пустой, то ранее карточки не загружали. Выводить сообщение.
+    loadImagesFromLocalStorage(setCards, setErrorLocalStoreImages);
+  };
+
   // Кладем карточки из db в state
   useEffect(() => {
-    setCards(imagesUrl);
-
     // const loadCards = async () => {
     //   try {
     //     const fetchedCards = await fetchCards();
     //     if (fetchedCards) {
-    //       setCards(fetchedCards); // -------------------------------- загрузка cards !!!
+    //       setCards(fetchedCards); // ----------------------- загрузка cards !!! отправить в base64 local store
     //     }
     //     setLoading(false);
     //   } catch (err) {
-    //     // setError("Не удалось загрузить карты");
+    //     setError("Не удалось загрузить карты");
     //     console.error("Не удалось загрузить карты");
     //     setLoading(false);
     //   }
     // };
-
     // loadCards();
   }, []);
 
@@ -149,10 +178,16 @@ export const GameField: React.FC = () => {
   // Открыли карточку -----------------------------------------------------------
   const handleChoice = (card: any) => {
     // console.log(card, "card ------ handleChoice ");
+    // console.log(isGameFall, "IsGameFall(); ------ handleChoice ");
 
-    card.flipped += 1;
-    setStartTime(true);
-    setResetTime(false);
+    // if(card.src === )
+
+    if (!errorsHas && card) {
+      card.flipped += 1;
+      setStartTime(true);
+      setStopTime(false);
+      setResetTime(false);
+    }
 
     if (card.matched === false && !disabled) {
       if (choiceOne !== null && choiceOne !== card) {
@@ -233,9 +268,14 @@ export const GameField: React.FC = () => {
     setMistakes(0);
 
     setAllCardsOpen(false);
+
     setStartTime(false);
-    setStopTime(false);
+    setStopTime(true);
     setResetTime(true);
+
+    setZeroTime(false);
+
+    setIsGameFall(false); // модальное окно
 
     setFetchedCards(shuffleCards(fetchedCards)); // Перемешиваем карты
   };
@@ -244,6 +284,13 @@ export const GameField: React.FC = () => {
   const zeroTimeFunc = (flag: boolean) => {
     setZeroTime(flag);
   };
+
+  useEffect(() => {
+    // console.log(cards, "cards in //");
+    // console.log(settings, "settings in //");
+
+    if (startTime && zeroTime) zeroTimeFunc(false);
+  }, [startTime, zeroTime]);
 
   // Проверка. Все выбранные карточки с matched = true
   const allMatchedCards = () => {
@@ -261,13 +308,15 @@ export const GameField: React.FC = () => {
   // };
 
   // Сохраняем продолжительность игры и ошибки
+
   useEffect(() => {
-    setDuration(timeInTimer);
     setErrorsGame(mistakes);
-    if (settings && allCardsOpen) {
+    if (settings && allCardsOpen && settings.timeLimit > timeInTimer) {
+      setDuration(settings.timeLimit - timeInTimer);
+
       setSessionScore(
         calculateScore(
-          timeInTimer,
+          settings.timeLimit - timeInTimer,
           errorsGame,
           settings.rows,
           settings.cols,
@@ -291,16 +340,31 @@ export const GameField: React.FC = () => {
     }
   }, [startTime, allCardsOpen, allMatchedCards(), zeroTime, cards]);
 
+  // Вычисляем сложность
+  const gameDifficulty = () => {
+    if (settings)
+      return calculateDifficulty(
+        settings.rows,
+        settings.cols,
+        settings.timeLimit - timeInTimer,
+      );
+  };
+
   // Подсчет выигрышных партий и отправка в Local Session store --------------------
   const winningGame = () => {
+    // console.log(startTime, "startTime winnigs");
+    // console.log(zeroTime, "zeroTime winnigs");
+
     if (startTime) {
       if (allCardsOpen && !zeroTime) {
         if (allMatchedCards() === fetchedCards.length) {
           setIsGame(isGame + 1);
           setIsGameWinner(isGameWinner + 1);
-        }
 
-        setStopTime(true);
+          setStopTime(true);
+          setIsGameFall(true);
+          setDifficulty(gameDifficulty());
+        }
 
         console.log("--------- !!!winner!!! --------");
         return true;
@@ -310,7 +374,9 @@ export const GameField: React.FC = () => {
         setIsGame(isGame + 1);
         setIsGameOver(isGameOver + 1);
         setDisabled(true);
-
+        setIsSuccess(false);
+        setIsGameFall(true);
+        setDifficulty(gameDifficulty());
         console.log("--------- )))game over((( --------");
         return false;
       }
@@ -329,21 +395,20 @@ export const GameField: React.FC = () => {
         "--------- setGamesPlayed in sessionStorage and setMaxScore in localStore ------------",
       );
       setGamesPlayed(isGame);
+
       setMaxScore(isGame);
     }
-  }, [isGame, isGameWinner, isGameOver, allCardsOpen, allMatchedCards()]);
+  }, [
+    isGame,
+    isGameWinner,
+    isGameOver,
+    allCardsOpen,
+    allMatchedCards(),
+    isGameFall,
+  ]);
 
-  // Завершить игру --------------------
-
+  // Завершить игру --------------------------------------------------
   const handleGameEnd = () => {
-    // Вычисляем сложность
-    const gameDifficulty = calculateDifficulty(
-      settings.rows,
-      settings.cols,
-      settings.timeLimit,
-    );
-    setDifficulty(gameDifficulty);
-
     // Вычисляем итоговый счет
     const finalScore = calculateScore(
       duration,
@@ -353,22 +418,22 @@ export const GameField: React.FC = () => {
       settings.timeLimit,
     );
 
-    if (duration !== 0) setScore(finalScore);
+    if (duration !== 0) {
+      setScore(finalScore);
 
-    // Добавляем результат в контекст и localStorage
-    const result: GameResult = {
-      date: new Date().toISOString(),
-      duration,
-      errorsGame,
-      difficulty: gameDifficulty,
-      score: finalScore,
-    };
-    addResult(result);
+      // Добавляем результат в контекст и localStorage
+      const result: GameResult = {
+        date: new Date().toISOString(),
+        duration,
+        errorsGame,
+        difficulty: gameDifficulty(),
+        score: finalScore,
+      };
+      addResult(result);
+    }
 
     if (isSuccess) setIsGameFall(true);
   };
-
-  console.log(score, "score");
 
   // Сохранение результата -------------------------------------------
   // Пример добавления результата
@@ -433,7 +498,7 @@ export const GameField: React.FC = () => {
   //   handleCardFlip(1, cards, isGameOver);
   // }, []);
 
-  console.log(fetchedCards, "************* fetchedCards *************");
+  // console.log(fetchedCards, "************* fetchedCards *************");
 
   // console.log(newCards, "newCards");
   // console.log(cards, "cards");
@@ -447,8 +512,14 @@ export const GameField: React.FC = () => {
   // console.log(allCardsOpen, "allCardsOpen");
   // console.log(allMatchedCards(), "allMatchedCards()");
   // console.log(winningGame(), "winningGame()");
+  console.log(
+    isGameFall,
+    isGame,
 
-  console.log(settings, "`````settings`````");
+    "isGameFall isGame",
+  );
+
+  // console.log(settings, "`````settings`````");
 
   // Если настройки ещё не загружены
   if (!settings) {
@@ -456,93 +527,141 @@ export const GameField: React.FC = () => {
   }
 
   return (
-    <div>
-      <h1>Запомни пары</h1>
-      <p>Количество сыгранных игр в текущей сессии: {gamesPlayed}</p>
-      <p>Счет в текущей сессии: {maxScore}</p>
-      <p>Общий и счет: {gamesPlayed + maxScore} </p>
-      <p>
-        Количество верно открытых пар/ всего пар (процент прохождения текущей
-        игры): {allMatchedCards() / 2}/{fetchedCards.length / 2} (
-        {(allMatchedCards() / 2 / (fetchedCards.length / 2)) * 100}
-        %)
-      </p>
+    <main className={`game ${styleImage}`}>
+      <h1 className="game__title">Запомни пары</h1>
+      <div className="game__score score">
+        <p className="score__text games-played">
+          Количество сыгранных игр в текущей сессии: {gamesPlayed}
+        </p>
+        <p className="score__text max-score">
+          Счет в текущей сессии: {maxScore}
+        </p>
+        <p className="score__text games-played-max-score">
+          Общий счет: {gamesPlayed + maxScore}{" "}
+        </p>
+        <p className="score__text percent">
+          Количество верно открытых пар/ всего пар (процент прохождения текущей
+          игры): {allMatchedCards() / 2}/{fetchedCards.length / 2} (
+          {(allMatchedCards() / 2 / (fetchedCards.length / 2)) * 100}
+          %)
+        </p>
+
+        <p className="score__text session-score">Счет: {sessionScore}</p>
+        <p className="score__text turns">Количество ходов: {turns}</p>
+        <p className="score__text mistakes">Ошибки: {mistakes}</p>
+      </div>
+
+      <button
+        className="game__new-game btn btn-new-game"
+        onClick={handleNewGame}
+      >
+        Новая игра
+      </button>
+      <div className="game__setting-link settings-link">
+        <a className="settings-link" href="/settings">
+          Настройки
+        </a>
+      </div>
+      <div className="game__style-cards style-cards">
+        <h3 className="style-cards__title">
+          Вы можете выбрать изображения карточек здесь:
+        </h3>
+
+        {/* Кнопки для переключения стилей */}
+        <button
+          className="style-cards__btn btn btn-style-cards"
+          onClick={() => handleStyleChange("brazil")}
+        >
+          brazil
+        </button>
+        <button
+          className="style-cards__btn btn btn-style-cards"
+          onClick={() => handleStyleChange("dylan")}
+        >
+          dylan
+        </button>
+        <button
+          className="style-cards__btn btn btn-style-cards"
+          onClick={() => handleStyleChange("personas")}
+        >
+          Personas
+        </button>
+        <button
+          className="style-cards__btn btn btn-style-cards"
+          onClick={() => handleStyleChange("icons")}
+        >
+          icons
+        </button>
+        <button
+          className="style-cards__btn btn btn-style-cards"
+          onClick={() => handleStyleChange("pixel-art")}
+        >
+          Pixel Art
+        </button>
+        <div className="game__my-cards my-cards">
+          <button
+            className="style-cards__btn btn btn-style-cards btn-my-cards"
+            onClick={() => handleStyleChangeMyImage()}
+          >
+            {errorLocalStoreImages
+              ? "Пользовательские изображения не были загружены."
+              : "Мои изображения загруженные ранее. Повторно загружать не требуется."}
+          </button>
+
+          <GameImageUpload setImageBase64={setImageBase64} />
+        </div>
+      </div>
       <Timer
         startTime={startTime}
         stopTime={stopTime}
         resetTime={resetTime}
         setTimeInTimer={setTimeInTimer}
-        zeroTime={zeroTimeFunc}
+        zeroTimeFunc={zeroTimeFunc}
       />
-      <p>Счет: {sessionScore}</p>
-      <p>Количество ходов: {turns}</p>
-      <p>Ошибки: {mistakes}</p>
-      <button
-        // onClick={() => generateCards(rows, cols, images)}
-        onClick={handleNewGame}
-      >
-        Новая игра
-      </button>
-      {/* <div className="card-grid">
-        {cards.map((card, index) => (
-          <div
-            key={card.id}
-            className={`card ${card === choiceOne || card === choiceTwo || card.matched ? "flipped" : ""}`}
-            // className={`card ${card.isFlipped ? "flipped" : ""}`}
-            // onClick={() => handleCardFlip(index)} (card.matched ? false :
-            onClick={() => handleChoice(card)}
-          >
-            {/* <img src={card.isFlipped ? card.image : IconBack} alt="card" /> 
-            <img
-              src={
-                card === choiceOne || card === choiceTwo || card.matched
-                  ? card.src
-                  : IconBack
-              }
-              alt="card game"
-            />
-          </div>
-        ))}
-      </div> 
-      */}
-      <div className="settings-link">
-        <a href="/settings">Настройки</a>
-      </div>
       <CardsGenerate
         choiceOne={choiceOne}
         choiceTwo={choiceTwo}
         cards={fetchedCards}
+        setErrorsHas={setErrorsHas}
         handleChoice={handleChoice}
       />
-      {/* ------------------------------ */}
-      <button onClick={handleGameEnd}>Завершить игру</button>
-      <div>
-        <p>Сложность рассчитывается так:</p>
-        <p>
-          <span>"hard"</span> = количество карточек <span>больше</span> 36 и
-          время открытия всех карточек <span>меньше</span> 30
+      <button className="game__end-game" onClick={handleGameEnd}>
+        Завершить игру
+      </button>
+      {/* Расчет сложности игры */}
+      <div className="game__difficulty difficulty-section">
+        <p className="difficulty-section__text">
+          Сложность рассчитывается так:
         </p>
-        <p>
-          <span>"medium"</span> = количество карточек <span>больше</span> 12 и
-          время открытия всех карточек <span>меньше</span> 60
+        <p className="difficulty-section__text">
+          <span className="difficulty-text">"hard"</span> = количество карточек{" "}
+          <span>больше</span> 36 и время открытия всех карточек{" "}
+          <span>меньше</span> 30c
         </p>
-        <p>
-          <span>"easy"</span> = количество карточек <span>меньше</span> 12 и
-          время открытия всех карточек <span>больше</span> 60
+        <p className="difficulty-section__text">
+          <span className="difficulty-text">"medium"</span> = количество
+          карточек <span>больше</span> 16 и время открытия всех карточек{" "}
+          <span>меньше</span> 60c
+        </p>
+        <p className="difficulty-section__text">
+          <span className="difficulty-text">"easy"</span> = количество карточек{" "}
+          <span>меньше</span> 16 и время открытия всех карточек{" "}
+          <span>больше</span> 60c
         </p>
       </div>
-      <div>
-        {/* Модальное окно с результатом */}
+      {/* Модальное окно с результатом */}
+      <div className="game__modal modal">
         {isGameFall && (
           <GameResultModal
             isSuccess={isSuccess}
-            score={score}
+            score={score ? score : sessionScore}
+            duration={duration}
             difficulty={difficulty}
             errors={errorsGame}
-            onClose={() => setIsGameFall(false)}
+            onClose={handleNewGame}
           />
         )}
       </div>
-    </div>
+    </main>
   );
 };

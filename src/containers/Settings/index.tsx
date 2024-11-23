@@ -1,6 +1,6 @@
 import { useGameContext } from "@/context/GameContext";
-import { GameSettings } from "@/types/general";
 import React, { useState } from "react";
+import { GameImageUpload } from "../GameImageUpload";
 
 export interface SettingsState {
   rows: number;

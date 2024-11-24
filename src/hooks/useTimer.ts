@@ -1,12 +1,5 @@
+import { TimerState } from "@/types/general";
 import { useState, useEffect } from "react";
-
-type TimerState = {
-  time: number;
-  isRunning: boolean;
-  start: (initialTime: number) => void;
-  stop: () => void;
-  reset: (initialTime: number) => void;
-};
 
 export const useTimer = (): TimerState => {
   const [time, setTime] = useState<number>(null);

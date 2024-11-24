@@ -74,7 +74,29 @@ export interface GameContextType {
   setMistakes: (mistakes: number) => void;
   setSettings: (settings: object) => void;
 }
+export interface Settings {
+  rows: number;
+  cols: number;
+  timeLimit: number;
+  maxErrors: number;
+  username: string;
+  avatarImg: string;
+}
 
+export type TimerState = {
+  time: number;
+  isRunning: boolean;
+  start: (initialTime: number) => void;
+  stop: () => void;
+  reset: (initialTime: number) => void;
+};
+export interface TimerProps {
+  startTime: boolean;
+  resetTime?: boolean;
+  stopTime?: boolean;
+  setTimeInTimer: (time: number) => void;
+  zeroTimeFunc?: (flag: boolean) => void;
+}
 export interface IconProps {
   name?: string;
   nameIconSrc: string;

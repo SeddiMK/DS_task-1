@@ -1,14 +1,5 @@
-import { Card } from "@/types/general";
-import { useEffect, useState } from "react";
-
-interface Settings {
-  rows: number;
-  cols: number;
-  timeLimit: number;
-  maxErrors: number;
-  username: string;
-  avatarImg: string;
-}
+import { Card, Settings } from "@/types/general";
+import { useState } from "react";
 
 // Перемешиваем карты
 export const shuffleCards = (array: Card[]): Card[] => {
@@ -19,32 +10,11 @@ export const shuffleCards = (array: Card[]): Card[] => {
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
   }
 
-  // const shuffled = [...array]
-  //   .sort(() => Math.random() - 0.5)
-  //   .map((card) => ({ ...card, id: Math.random() }));
-
   return shuffled;
 };
 
 export const generateCards = (rows: number, cols: number, images: string[]) => {
   const [settings, setSettings] = useState<Settings | null>(null);
-
-  // Получаем настройки из localStorage
-  // useEffect(() => {
-  //   const savedSettings = localStorage.getItem("settingsGame");
-  //   if (savedSettings) {
-  //     const parsedSettings: Settings = JSON.parse(savedSettings);
-  //     setSettings(parsedSettings);
-  //   }
-  //   console.log(settings, "settings in generate");
-  // }, []);
-
-  // useEffect(() => {
-  //   if (settings) {
-  //     // Создаем массив карт
-  //     const totalCards = settings.rows * settings.cols;
-  //   }
-  // }, [settings]);
 
   let totalCards = rows * cols;
   const pairs = images.slice(0, totalCards / 2);
@@ -54,8 +24,6 @@ export const generateCards = (rows: number, cols: number, images: string[]) => {
   const cards: Card[] = [];
 
   //  Создаем пары карт из изображений
-  // const pairs = images.slice(0, images.length / 2); // Получаем только половину для пар
-
   pairs.forEach((image, index) => {
     cards.push({
       id: index * 2,
@@ -70,7 +38,6 @@ export const generateCards = (rows: number, cols: number, images: string[]) => {
       isMatched: false,
     });
   });
-  // console.log(cards, "cards+++++++generateCards");
 
   return shuffleCards(cards);
 };

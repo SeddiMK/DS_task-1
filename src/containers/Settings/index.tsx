@@ -1,7 +1,7 @@
 import { useGameContext } from "@/context/GameContext";
+import { SettingsState } from "@/types/general";
 import React, { useEffect, useState } from "react";
 import "./style.css";
-import { SettingsState } from "@/types/general";
 
 export const Settings: React.FC = () => {
   const [avatar, setAvatar] = useState<string>("");

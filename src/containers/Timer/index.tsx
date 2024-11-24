@@ -1,14 +1,6 @@
 import { useTimer } from "@/hooks/useTimer";
-import { Settings } from "@/types/general";
+import { Settings, TimerProps } from "@/types/general";
 import { useEffect, useState } from "react";
-
-interface TimerProps {
-  startTime: boolean;
-  resetTime?: boolean;
-  stopTime?: boolean;
-  setTimeInTimer: (time: number) => void;
-  zeroTimeFunc?: (flag: boolean) => void;
-}
 
 export const Timer: React.FC<TimerProps> = ({
   startTime,
@@ -21,12 +13,6 @@ export const Timer: React.FC<TimerProps> = ({
   const [settingsTime, setSettingsTime] = useState(60);
   const [zeroTimeSt, setZeroTimeSt] = useState(false);
   const [settings, setSettings] = useState<Settings | null>(null);
-
-  // !!!
-  // const timeZeroFunc = () => {
-  //   // setZeroTimeSt(newValue);
-  //   zeroTimeFunc(true); // Вызываем функцию переданную через props
-  // };
 
   // Получаем настройки из localStorage при первом рендере
   useEffect(() => {

@@ -3,7 +3,6 @@ import { GameProvider } from "@/context/GameContext";
 import { GameField } from "@/containers/GameField";
 import { Settings } from "@/containers/Settings";
 import { GameResults } from "@/containers/GameResults";
-import "./style.css";
 
 export const App: React.FC = () => {
   return (

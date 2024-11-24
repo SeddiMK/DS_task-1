@@ -27,7 +27,6 @@ export const CardsGenerate: React.FC<CardsGenerateProps> = ({
   if (cards.length === 0) {
     return <Loading />;
   }
-  // console.log(hasError, "hasError");
 
   return (
     <div className="game__cards cards">

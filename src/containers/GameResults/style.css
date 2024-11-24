@@ -9,9 +9,6 @@
   font-weight: 600;
 }
 
-.results__table {
-}
-
 td,
 th {
   text-align: center;
@@ -39,17 +36,47 @@ th:hover {
   content: "\2193"; /* Стрелка вниз (символ Unicode) */
   font-size: 15px;
   margin-left: 7px;
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
   transform: rotate(180deg);
+  -webkit-transition:
+    content 0.3s ease,
+    -webkit-transform 0.3s ease;
+  transition:
+    content 0.3s ease,
+    -webkit-transform 0.3s ease;
+  -o-transition:
+    transform 0.3s ease,
+    content 0.3s ease;
   transition:
     transform 0.3s ease,
     content 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    content 0.3s ease,
+    -webkit-transform 0.3s ease;
 }
 .sort-head.asc::after {
   content: "\2191"; /* Стрелка вверх (символ Unicode) */
   font-size: 15px;
   margin-left: 7px;
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
   transform: rotate(180deg);
+  -webkit-transition:
+    content 0.3s ease,
+    -webkit-transform 0.3s ease;
+  transition:
+    content 0.3s ease,
+    -webkit-transform 0.3s ease;
+  -o-transition:
+    transform 0.3s ease,
+    content 0.3s ease;
   transition:
     transform 0.3s ease,
     content 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    content 0.3s ease,
+    -webkit-transform 0.3s ease;
 }

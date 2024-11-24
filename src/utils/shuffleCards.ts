@@ -8,13 +8,3 @@ export const shuffleCards = (array: string[]): string[] => {
   }
   return shuffledArray;
 };
-
-// const shuffleCards = () => {
-//   const shuffledCards = [...cardImages, ...cardImages]
-//     .sort(() => Math.random() - 0.5)
-//     .map((card) => ({ ...card, id: Math.random() }));
-
-//   // setCards(shuffledCards);
-
-//   // setIsGameWinner(null);
-// };

@@ -5,7 +5,9 @@
 .game__title {
   font-size: 24px;
 }
-
+.score__text {
+  text-wrap: wrap;
+}
 .score {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -72,10 +74,7 @@
   align-items: center;
   width: 100%;
 }
-.my-cards__wrp {
-}
-.my-cards__inp {
-}
+
 .my-cards__form {
   margin-bottom: 1rem;
 }

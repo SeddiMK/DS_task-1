@@ -14,7 +14,7 @@ export const Settings: React.FC = () => {
     rows: 4,
     cols: 4,
     timeLimit: 60, // 60 секунд
-    maxErrors: 3, // 3 ошибки
+    maxErrors: 10, // 10 ошиб
     username: "",
     avatarImg: "",
   });

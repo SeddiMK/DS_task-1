@@ -28,7 +28,7 @@ export const GameField: React.FC = () => {
   const [startTime, setStartTime] = useState(false);
   const [stopTime, setStopTime] = useState(false);
   const [resetTime, setResetTime] = useState(false);
-  const [scoreСomplexity, setScoreСomplexity] = useState(5);
+  // const [scoreСomplexity, setScoreСomplexity] = useState(5);
   const [zeroTime, setZeroTime] = useState(false);
 
   // --------- context data ------------------------------------
@@ -72,6 +72,8 @@ export const GameField: React.FC = () => {
   const [imageBase64, setImageBase64] = useState<string[]>([]);
   const [errorLocalStoreImages, setErrorLocalStoreImages] = useState(false);
   const [styleImage, setStyleImage] = useState<string>("dylan"); // Стиль по умолчанию
+  const [errorTime, setErrorTime] = useState(true); // Стиль по умолчанию
+  const [errorNum, setErrorNum] = useState(true); // Стиль по умолчанию
 
   const [settingsBase, setSettingsBase] = useState<SettingsState>({
     rows: 4,
@@ -81,7 +83,7 @@ export const GameField: React.FC = () => {
     username: "",
     avatarImg: "",
   });
-  // ---------------------------------------------
+  // При первом рендере задаем базовые настройки если их нет в local store ----
 
   // Получаем настройки из localStorage при первом рендере
   useEffect(() => {
@@ -91,11 +93,11 @@ export const GameField: React.FC = () => {
       const parsedSettings: Settings = JSON.parse(savedSettings);
       setSettings(parsedSettings);
     } else {
-      setSettings(settingsBase); // При первом рендере задаем базовые настройки если их нет в local store
+      setSettings(settingsBase);
     }
   }, []);
 
-  // Загрузка изображений с учетом выбранного стиля ============
+  // Загрузка изображений с учетом выбранного стиля ---------------------------
   // Функция для обновления карт с выбранным стилем
   const updateCards = async (styleImg: string) => {
     const newCards = await fetchCards(styleImg);
@@ -103,7 +105,7 @@ export const GameField: React.FC = () => {
     if (!errorLocalStoreImages) setCards(newCards);
   };
 
-  // Функция для изменения фона
+  // Функция для изменения фона -----------------------------------------------
   const changeBackground = (bgStyleName: string) => {
     setBgMain(`url(${bgImgUrlFetch(bgStyleName)})`);
   };
@@ -119,25 +121,25 @@ export const GameField: React.FC = () => {
     };
   }, [styleImage]);
 
-  // Загружаем карты при монтировании компонента и при изменении стиля
+  // Загружаем карты при монтировании компонента и при изменении стиля --------
   useEffect(() => {
     updateCards(styleImage);
   }, [styleImage, bgMain]);
 
-  // Функция для переключения стиля при клике на кнопку
+  // Функция для переключения стиля при клике на кнопку -----------------------
   const handleStyleChange = (newStyle: string) => {
     changeBackground(newStyle);
     setErrorLocalStoreImages(false);
     setStyleImage(newStyle);
   };
 
-  // Функция для переключения стиля при клике на кнопку
+  // Функция для переключения стиля при клике на кнопку -----------------------
   const handleStyleChangeMyImage = (newStyle?: string) => {
     // Проверка local store. Если пустой, то ранее карточки не загружали. Выводить сообщение.
     loadImagesFromLocalStorage(setCards, setErrorLocalStoreImages);
   };
 
-  // Применяем настройки к картам
+  // Применяем настройки к картам ---------------------------------------------
   useEffect(() => {
     // Чтобы при первом рендере не было ошибки
     if (settings && cards) {
@@ -156,7 +158,7 @@ export const GameField: React.FC = () => {
     }
   }, [settings, cards]);
 
-  // Открыли карточку --------------------------------------------
+  // Открыли карточку ---------------------------------------------------------
   const handleChoice = (card: any) => {
     if (!errorsHas && card) {
       card.flipped += 1;
@@ -174,7 +176,7 @@ export const GameField: React.FC = () => {
     }
   };
 
-  // Карточкам ставим matched при совпадении
+  // Карточкам ставим matched при совпадении ----------------------------------
   const matchedCards = (prevCards: Card[]) => {
     return prevCards.map((card: Card) => {
       if (card.src === choiceOne.src) {
@@ -185,7 +187,7 @@ export const GameField: React.FC = () => {
     });
   };
 
-  // Карточкам убираем matched при совпадении
+  // Карточкам убираем matched при совпадении ---------------------------------
   const notMatchedCards = (cards: Card[]) => {
     return cards.map((card: Card) => {
       if (card.matched) {
@@ -199,26 +201,22 @@ export const GameField: React.FC = () => {
     });
   };
 
-  // Открыли 2 карточки, проверка совпадений --------------------------
+  // Открыли 2 карточки, проверка совпадений ----------------------------------
   useEffect(() => {
     if (choiceOne && choiceTwo) {
       setDisabled(true);
 
       if (choiceOne.src === choiceTwo.src) {
         setFetchedCards(matchedCards);
-
         resetTurn();
       } else {
-        if (sessionScore > scoreСomplexity) {
-        }
-
         setMistakes(mistakes + 1);
         setTimeout(() => resetTurn(), 500);
       }
     }
   }, [choiceOne, choiceTwo]);
 
-  // Сброс ------------------------------------------------------------
+  // Сброс -------------------------------------========-----------------------
   const resetTurn = () => {
     setChoiceOne(null);
     setChoiceTwo(null);
@@ -226,7 +224,7 @@ export const GameField: React.FC = () => {
     setDisabled(false);
   };
 
-  // Новая игра Сброс -------------------------------------------------
+  // Новая игра Сброс ---------------------------------------------------------
   const handleNewGame = () => {
     setChoiceOne(null);
     setChoiceTwo(null);
@@ -235,7 +233,7 @@ export const GameField: React.FC = () => {
 
     notMatchedCards(fetchedCards);
 
-    setSessionScore(0);
+    // setSessionScore(0); //!!!
     setMistakes(0);
 
     setAllCardsOpen(false);
@@ -251,7 +249,7 @@ export const GameField: React.FC = () => {
     setFetchedCards(shuffleCards(fetchedCards)); // Перемешиваем карты
   };
 
-  // Проверка. Узнаем что время вышло = 0s
+  // Проверка. Узнаем что время вышло = 0s ------------------------------------
   const zeroTimeFunc = (flag: boolean) => {
     setZeroTime(flag);
   };
@@ -260,20 +258,21 @@ export const GameField: React.FC = () => {
     if (startTime && zeroTime) zeroTimeFunc(false);
   }, [startTime, zeroTime]);
 
-  // Проверка. Все выбранные карточки с matched = true
+  // Проверка. Все выбранные карточки с matched = true -----------------------
   const allMatchedCards = () => {
     return fetchedCards.filter((card) => card.matched).length;
   };
 
-  // Проверка. Все карточки открыты
+  // Проверка. Все карточки открыты ------------------------------------------
   useEffect(() => {
     if (startTime && !zeroTime && allMatchedCards() === fetchedCards.length) {
       setIsSuccess(true);
+      setIsGameFall(true);
       setAllCardsOpen(true);
     }
-  }, [startTime, allCardsOpen, allMatchedCards(), zeroTime, cards]);
+  }, [startTime, allMatchedCards(), zeroTime, cards]);
 
-  // Вычисляем сложность
+  // Вычисляем сложность -----------------------------------------------------
   const gameDifficulty = () => {
     if (settings)
       return calculateDifficulty(
@@ -283,7 +282,7 @@ export const GameField: React.FC = () => {
       );
   };
 
-  // Подсчет выигрышных партий и отправка в Local Session store --------------------
+  // Подсчет выигрышных партий и отправка в Local Session store --------------
   const winningGame = () => {
     if (startTime) {
       if (allCardsOpen && !zeroTime) {
@@ -292,7 +291,10 @@ export const GameField: React.FC = () => {
           setIsGameWinner(isGameWinner + 1);
 
           setStopTime(true);
+          setIsSuccess(true);
           setIsGameFall(true);
+          setErrorTime(false);
+          setErrorNum(false);
           setDifficulty(gameDifficulty());
         }
 
@@ -306,6 +308,8 @@ export const GameField: React.FC = () => {
         setDisabled(true);
         setIsSuccess(false);
         setIsGameFall(true);
+        setErrorTime(true);
+        setErrorNum(false);
         setDifficulty(gameDifficulty());
 
         // console.log("--------- )))game over((( --------");
@@ -314,7 +318,7 @@ export const GameField: React.FC = () => {
     }
   };
 
-  // winner game
+  // winner game -------------------------------------------------------------
   useEffect(() => {
     winningGame();
   }, [startTime, zeroTime, allCardsOpen]);
@@ -326,10 +330,17 @@ export const GameField: React.FC = () => {
     }
   }, [isGame, isGameWinner, isGameOver, isGameFall, allCardsOpen]);
 
-  // Сохраняем продолжительность игры и ошибки
+  // Сохраняем продолжительность игры и ошибки -------------------------------
   useEffect(() => {
     if (settings && allCardsOpen) {
       setDuration(settings.timeLimit - timeInTimer);
+
+      console.log(
+        timeInTimer,
+        isGameFall,
+        allCardsOpen,
+        "timeInTimer, isGameFall,allCardsOpen",
+      );
 
       setSessionScore(
         calculateScore(
@@ -345,12 +356,18 @@ export const GameField: React.FC = () => {
 
   useEffect(() => {
     if (allCardsOpen) {
+      console.log(
+        currentScore,
+        sessionScore,
+        "currentScore, sessionScore --- useEffect(()",
+      );
+
       setErrorsGame(mistakes);
       setCurrentScore(currentScore + sessionScore); // session store
     }
-  }, [allCardsOpen, sessionScore]);
+  }, [allCardsOpen]);
 
-  // Открываем модальное окно если ошибо больше чем в настройках
+  // Открываем модальное окно если ошибо больше чем в настройках -------------
   useEffect(() => {
     if (settings) {
       if (mistakes > settings.maxErrors) {
@@ -359,12 +376,17 @@ export const GameField: React.FC = () => {
         setErrorsGame(mistakes);
         setIsSuccess(false);
         setIsGameFall(true);
+        setErrorTime(false);
+        setErrorNum(true);
       }
     }
   }, [mistakes]);
 
-  // Завершить игру --------------------------------------------------
+  // Завершить игру ----------------------------------------------------------
   const handleGameEnd = () => {
+    setStopTime(true);
+    setDisabled(true);
+
     if (duration !== 0) {
       // Добавляем результат в контекст и localStorage
       const result: GameResult = {
@@ -372,20 +394,35 @@ export const GameField: React.FC = () => {
         duration,
         errorsGame,
         difficulty: gameDifficulty(),
-        score: currentScore,
+        score: sessionScore,
       };
+
       addResult(result);
     }
 
     setMaxScore(maxScore + currentScore); // local store
 
-    if (isSuccess) setIsGameFall(true);
+    sessionStorage.clear(); // очистка session store по завершению игры
+
+    handleNewGame(); // сброс
+
+    if (isSuccess) {
+      setIsGameFall(true);
+      setErrorTime(false);
+      setErrorNum(false);
+    }
   };
 
-  // Если настройки ещё не загружены
+  // Если настройки ещё не загружены -----------------------------------------
   if (!settings) {
     return <Loading />;
   }
+
+  console.log(
+    currentScore,
+    sessionScore,
+    "currentScore, sessionScore --- main",
+  );
 
   return (
     <main className={`game ${styleImage}`}>
@@ -395,11 +432,9 @@ export const GameField: React.FC = () => {
           <p className="score__text games-played">
             Количество сыгранных игр в текущей сессии: {gamesPlayed}
           </p>
-          <p className="score__text max-score">
-            Счет в текущей сессии: {sessionScore}
-          </p>
+
           <p className="score__text games-played-max-score">
-            Общий счет: {sessionScore + currentScore}
+            Общий счет: {currentScore}
           </p>
           <p className="score__text percent">
             Количество верно открытых пар/ всего пар (процент прохождения
@@ -410,7 +445,9 @@ export const GameField: React.FC = () => {
             %)
           </p>
 
-          <p className="score__text session-score">Счет: {sessionScore}</p>
+          <p className="score__text max-score">
+            Счет в текущей сессии: {sessionScore}
+          </p>
           <p className="score__text turns">Количество ходов: {turns}</p>
           <p className="score__text mistakes">Ошибки: {mistakes}</p>
         </div>
@@ -506,6 +543,8 @@ export const GameField: React.FC = () => {
           setTimeInTimer={setTimeInTimer}
           zeroTimeFunc={zeroTimeFunc}
         />
+
+        {/* карточки */}
         <CardsGenerate
           rows={settings.rows}
           cols={settings.cols}
@@ -542,6 +581,8 @@ export const GameField: React.FC = () => {
           {isGameFall && (
             <GameResultModal
               isSuccess={isSuccess}
+              errorTime={errorTime}
+              errorNum={errorNum}
               score={score ? score : sessionScore}
               duration={duration}
               difficulty={difficulty}

@@ -1,9 +1,11 @@
 export interface GameResultModalProps {
   isSuccess: boolean;
+  errorTime?: boolean;
+  errorNum?: boolean;
   score: number;
   duration: number;
   difficulty: string;
-  errors: number;
+  errors?: number;
   onClose?: () => void;
 }
 

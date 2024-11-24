@@ -13,9 +13,10 @@ export const buildWebpack = (options: BuildOptions): webpack.Configuration => {
     mode: mode === "development" ? "development" : "production",
     entry: paths.entry,
     output: {
-      path: paths.output,
+      path: paths.output.path,
       filename: "[name].[contenthash].js",
       clean: true,
+      publicPath: paths.output.publicPath,
     },
     plugins: buildPlugins(options),
     module: {

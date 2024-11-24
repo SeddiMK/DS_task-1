@@ -335,13 +335,6 @@ export const GameField: React.FC = () => {
     if (settings && allCardsOpen) {
       setDuration(settings.timeLimit - timeInTimer);
 
-      console.log(
-        timeInTimer,
-        isGameFall,
-        allCardsOpen,
-        "timeInTimer, isGameFall,allCardsOpen",
-      );
-
       setSessionScore(
         calculateScore(
           timeInTimer, //  duration продолжительность
@@ -356,12 +349,6 @@ export const GameField: React.FC = () => {
 
   useEffect(() => {
     if (allCardsOpen) {
-      console.log(
-        currentScore,
-        sessionScore,
-        "currentScore, sessionScore --- useEffect(()",
-      );
-
       setErrorsGame(mistakes);
       setCurrentScore(currentScore + sessionScore); // session store
     }
@@ -405,6 +392,7 @@ export const GameField: React.FC = () => {
     sessionStorage.clear(); // очистка session store по завершению игры
 
     handleNewGame(); // сброс
+    setCurrentScore(0);
 
     if (isSuccess) {
       setIsGameFall(true);
@@ -417,12 +405,6 @@ export const GameField: React.FC = () => {
   if (!settings) {
     return <Loading />;
   }
-
-  console.log(
-    currentScore,
-    sessionScore,
-    "currentScore, sessionScore --- main",
-  );
 
   return (
     <main className={`game ${styleImage}`}>

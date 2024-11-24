@@ -2,42 +2,25 @@ import React, { useEffect, useState } from "react";
 import { useGameContext } from "@/context/GameContext";
 import { useTimer } from "@/hooks/useTimer";
 import { shuffleCards } from "@/utils/generateCards";
-import { Card, GameResult, Settings } from "@/types/general";
+import { Card, GameResult, Settings, SettingsState } from "@/types/general";
 import { Timer } from "@/containers/Timer";
-import { CardsGenerate } from "../CardsGenerate";
+import { CardsGenerate } from "@/containers/CardsGenerate";
 import { fetchCards } from "@/utils/fetchCards";
 import { cardArrayConvert } from "@/utils/cardArrayConvert";
 import { Loading } from "@/components/Loading";
-import { GameResultModal } from "../GameResultModal";
+import { GameResultModal } from "@/containers/GameResultModal";
 import { calculateDifficulty } from "@/utils/calculateDifficulty";
 import { calculateScore } from "@/utils/calculateScore";
-import "./style.css";
 import { loadImagesFromLocalStorage } from "@/utils/loadImgFromLocalStore";
-import { CardStyle, styleGameForCards } from "@/utils/styleGameForCards3333";
-import { GameImageUpload } from "../GameImageUpload";
-
-export interface Images {
-  src?: string;
-  id?: number;
-  matched: boolean;
-  flipped: number;
-}
-// const cardImages: Images[] = [
-//   { src: "../../public/assets/images/alarm.svg" },
-//   { src: "../../public/assets/images/alert.svg" },
-//   { src: "../../public/assets/images/calendar.svg" },
-//   { src: "../../public/assets/images/crown.svg" },
-// ]; //!!!
-// const cardImages: Images[] = [
-//   // { src: IconAlarm, matched: false, flipped: 0 },
-//   // { src: IconAlert, matched: false, flipped: 0 },
-//   { src: IconCalendar, matched: false, flipped: 0 },
-//   { src: IconCrown, matched: false, flipped: 0 },
-// ]; //!!!
-// const images = [IconAlarm, IconAlert, IconCalendar, IconCrown]; //!!!
+import { GameImageUpload } from "@/containers/GameImageUpload";
+import { bgImgUrlFetch } from "@/utils/bgImgUrlFetch";
+import BgMainImg from "@public/assets/images/bg/dylan_3.jpg";
+import "./style.css";
 
 export const GameField: React.FC = () => {
   const { time, start, stop, reset } = useTimer();
+
+  const [bgMain, setBgMain] = useState<string>(`url(${BgMainImg})`);
 
   const [cards, setCards] = useState([]);
   const [turns, setTurns] = useState(0);
@@ -50,7 +33,7 @@ export const GameField: React.FC = () => {
   const [scoreСomplexity, setScoreСomplexity] = useState(5);
   const [zeroTime, setZeroTime] = useState(false);
 
-  // ---------------------------------------------
+  // --------- context data ------------------------------------
   const {
     mistakes,
     setMistakes,
@@ -64,12 +47,13 @@ export const GameField: React.FC = () => {
     gamesPlayed,
     setGamesPlayed,
 
+    currentScore,
+    setCurrentScore,
+
+    results,
     addResult,
   } = useGameContext();
 
-  const [rows, setRows] = useState(4);
-  const [cols, setCols] = useState(4);
-  const [flippedCards, setFlippedCards] = useState([]);
   const [isGame, setIsGame] = useState(0);
   const [isGameOver, setIsGameOver] = useState(0);
   const [isGameWinner, setIsGameWinner] = useState(0);
@@ -89,6 +73,16 @@ export const GameField: React.FC = () => {
   const [errorsHas, setErrorsHas] = useState(false);
   const [imageBase64, setImageBase64] = useState<string[]>([]);
   const [errorLocalStoreImages, setErrorLocalStoreImages] = useState(false);
+  const [styleImage, setStyleImage] = useState<string>("dylan"); // Стиль по умолчанию
+
+  const [settingsBase, setSettingsBase] = useState<SettingsState>({
+    rows: 4,
+    cols: 4,
+    timeLimit: 60, // 60 секунд
+    maxErrors: 3, // 3 ошибки
+    username: "",
+    avatarImg: "",
+  });
   // ---------------------------------------------
 
   // Получаем настройки из localStorage при первом рендере
@@ -98,35 +92,47 @@ export const GameField: React.FC = () => {
     if (savedSettings) {
       const parsedSettings: Settings = JSON.parse(savedSettings);
       setSettings(parsedSettings);
+    } else {
+      setSettings(settingsBase); // При первом рендере задаем базовые настройки если их нет в local store
     }
   }, []);
 
   // Загрузка изображений с учетом выбранного стиля =========================================
-  const [styleImage, setStyleImage] = useState<string>("dylan"); // Стиль по умолчанию
-
   // Функция для обновления карт с выбранным стилем
   const updateCards = async (styleImg: string) => {
     const newCards = await fetchCards(styleImg);
-    console.log(
-      styleImg,
-      !errorLocalStoreImages,
-      "styleImg,styleImg!errorLocalStoreImages",
-    );
 
     if (!errorLocalStoreImages) setCards(newCards);
 
     // if (styleImg) styleGameForCards(styleImg); !!!???
   };
 
+  // Функция для изменения фона
+  const changeBackground = (bgStyleName: string) => {
+    setBgMain(`url(${bgImgUrlFetch(bgStyleName)})`);
+  };
+
+  useEffect(() => {
+    if (styleImage) {
+      document.body.style.backgroundImage = bgMain;
+    }
+
+    // Возвращаем функцию очистки, чтобы сбросить стили, когда компонент размонтируется или состояние изменится
+    return () => {
+      document.body.style.backgroundImage = "";
+    };
+  }, [styleImage]);
+
   // Загружаем карты при монтировании компонента и при изменении стиля
   useEffect(() => {
     updateCards(styleImage);
-  }, [styleImage]);
+  }, [styleImage, bgMain]);
 
   // Функция для переключения стиля при клике на кнопку
   const handleStyleChange = (newStyle: string) => {
+    changeBackground(newStyle);
     setErrorLocalStoreImages(false);
-    setStyleImage(newStyle); // Обновляем стиль
+    setStyleImage(newStyle);
   };
 
   // Функция для переключения стиля при клике на кнопку
@@ -177,11 +183,6 @@ export const GameField: React.FC = () => {
 
   // Открыли карточку -----------------------------------------------------------
   const handleChoice = (card: any) => {
-    // console.log(card, "card ------ handleChoice ");
-    // console.log(isGameFall, "IsGameFall(); ------ handleChoice ");
-
-    // if(card.src === )
-
     if (!errorsHas && card) {
       card.flipped += 1;
       setStartTime(true);
@@ -286,9 +287,6 @@ export const GameField: React.FC = () => {
   };
 
   useEffect(() => {
-    // console.log(cards, "cards in //");
-    // console.log(settings, "settings in //");
-
     if (startTime && zeroTime) zeroTimeFunc(false);
   }, [startTime, zeroTime]);
 
@@ -297,27 +295,24 @@ export const GameField: React.FC = () => {
     return fetchedCards.filter((card) => card.matched).length;
   };
 
-  // Все карточки открыты ???
-  // const allCardsOpenFunc = () => {
-  //   if (
-  //     startTime &&
-  //     cards.filter((card) => card.matched).length === cards.length
-  //   ) {
-  //     setAllCardsOpen(true);
-  //   }
-  // };
-
   // Сохраняем продолжительность игры и ошибки
-
   useEffect(() => {
-    setErrorsGame(mistakes);
+    if (allCardsOpen) {
+      console.log(mistakes, "mistakes  useEffect(()");
+      console.log(errorsGame, "errorsGame  useEffect(()");
+
+      setErrorsGame(errorsGame + mistakes);
+      setCurrentScore(currentScore + sessionScore);
+      setMaxScore(maxScore + currentScore);
+    }
+
     if (settings && allCardsOpen && settings.timeLimit > timeInTimer) {
       setDuration(settings.timeLimit - timeInTimer);
 
       setSessionScore(
         calculateScore(
           settings.timeLimit - timeInTimer,
-          errorsGame,
+          mistakes,
           settings.rows,
           settings.cols,
           settings.timeLimit,
@@ -352,9 +347,6 @@ export const GameField: React.FC = () => {
 
   // Подсчет выигрышных партий и отправка в Local Session store --------------------
   const winningGame = () => {
-    // console.log(startTime, "startTime winnigs");
-    // console.log(zeroTime, "zeroTime winnigs");
-
     if (startTime) {
       if (allCardsOpen && !zeroTime) {
         if (allMatchedCards() === fetchedCards.length) {
@@ -377,6 +369,7 @@ export const GameField: React.FC = () => {
         setIsSuccess(false);
         setIsGameFall(true);
         setDifficulty(gameDifficulty());
+
         console.log("--------- )))game over((( --------");
         return false;
       }
@@ -390,22 +383,20 @@ export const GameField: React.FC = () => {
 
   // Отправка setGamesPlayed in sessionStorage and setMaxScore in localStore
   useEffect(() => {
-    if (isGame > 0) {
-      console.log(
-        "--------- setGamesPlayed in sessionStorage and setMaxScore in localStore ------------",
-      );
+    if (isGame > 0 && allCardsOpen) {
       setGamesPlayed(isGame);
-
-      setMaxScore(isGame);
     }
-  }, [
-    isGame,
-    isGameWinner,
-    isGameOver,
-    allCardsOpen,
-    allMatchedCards(),
-    isGameFall,
-  ]);
+  }, [isGame, isGameWinner, isGameOver, isGameFall, allCardsOpen]);
+
+  // useEffect(() => {
+  //   if (allCardsOpen) {
+  //     console.log(mistakes, "mistakes  useEffect(()");
+  //     console.log(errorsGame, "errorsGame  useEffect(()");
+  //     setErrorsGame(errorsGame + mistakes);
+  //     setCurrentScore(currentScore + sessionScore);
+  //     setMaxScore(maxScore + currentScore);
+  //   }
+  // }, [allCardsOpen, isGameFall]);
 
   // Завершить игру --------------------------------------------------
   const handleGameEnd = () => {
@@ -435,91 +426,12 @@ export const GameField: React.FC = () => {
     if (isSuccess) setIsGameFall(true);
   };
 
-  // Сохранение результата -------------------------------------------
-  // Пример добавления результата
-  // const result: GameResult = {
-  //   date: new Date().toISOString(),
-  //   duration: 45, // например, игра длилась 45 секунд
-  //   errors: 1,
-  //   difficulty: "medium",
-  //   score: 100,
-  // };
-  // useEffect(() => {
-  //   // Добавление результата
-  //   addResult(result);
-  // },[])
-
-  // const handleCardFlip = (index: number) => {
-  //   if (isGameOver || cards[index].isFlipped || cards[index].isMatched) return;
-
-  //   const newCards = [...cards];
-  //   newCards[index].isFlipped = true;
-  //   setFetchedCards(newCards);
-
-  //   // Обновление flippedCards только в ответ на событие
-  //   setFlippedCards((prevFlippedCards) => {
-  //     const updatedFlippedCards = [...prevFlippedCards, newCards[index]];
-
-  //     // Когда перевернуты 2 карты, проверяем совпадение
-  //     if (updatedFlippedCards.length === 2) {
-  //       // Нужно использовать setTimeout для асинхронной логики
-  //       setTimeout(() => {
-  //         const firstCard = updatedFlippedCards[0];
-  //         const secondCard = updatedFlippedCards[1];
-  //         const updatedCards = [...newCards]; // Это обновление для карт
-
-  //         if (firstCard.image === secondCard.image) {
-  //           console.log(
-  //             firstCard.image === secondCard.image,
-  //             "firstCard.image === secondCard.image",
-  //           );
-
-  //           // Обновляем состояние после того как обе карты перевернуты
-  //           setSessionScore(sessionScore + 10);
-  //           updatedCards[firstCard.id].isMatched = true;
-  //           updatedCards[secondCard.id].isMatched = true;
-  //         } else {
-  //           setMistakes(mistakes + 1);
-  //           updatedCards[firstCard.id].isFlipped = false;
-  //           updatedCards[secondCard.id].isFlipped = false;
-  //         }
-
-  //         // Устанавливаем обновленные карты
-  //         setFetchedCards(updatedCards);
-  //         setFlippedCards([]); // После проверки очищаем flippedCards
-  //       }, 200);
-  //     }
-
-  //     return updatedFlippedCards; // Возвращаем обновленный массив перевернутых карт
-  //   });
-  // };
-
-  // useEffect(() => {
-  //   handleCardFlip(1, cards, isGameOver);
-  // }, []);
-
-  // console.log(fetchedCards, "************* fetchedCards *************");
-
-  // console.log(newCards, "newCards");
-  // console.log(cards, "cards");
-  // console.log(turns, "turns");
-  // console.log(flippedCards, "flippedCards");
-
-  // console.log(isGame, "isGame");
-  // console.log(isGameWinner, "isGameWinner");
-  // console.log(isGameOver, "isGameOver");
-
-  // console.log(allCardsOpen, "allCardsOpen");
-  // console.log(allMatchedCards(), "allMatchedCards()");
-  // console.log(winningGame(), "winningGame()");
-  console.log(
-    isGameFall,
-    isGame,
-
-    "isGameFall isGame",
-  );
-
   // console.log(settings, "`````settings`````");
+  console.log(results, "`````results`````");
+  console.log(score, "`````score`````");
+  console.log(currentScore, "`````currentScore`````");
+  console.log(sessionScore, "`````sessionScore`````");
+  // console.log(fetchedCards, "`````fetchedCards`````");
 
   // Если настройки ещё не загружены
   if (!settings) {
@@ -527,140 +439,174 @@ export const GameField: React.FC = () => {
   }
 
   return (
-    <main className={`game ${styleImage}`}>
-      <h1 className="game__title">Запомни пары</h1>
-      <div className="game__score score">
-        <p className="score__text games-played">
-          Количество сыгранных игр в текущей сессии: {gamesPlayed}
-        </p>
-        <p className="score__text max-score">
-          Счет в текущей сессии: {maxScore}
-        </p>
-        <p className="score__text games-played-max-score">
-          Общий счет: {gamesPlayed + maxScore}{" "}
-        </p>
-        <p className="score__text percent">
-          Количество верно открытых пар/ всего пар (процент прохождения текущей
-          игры): {allMatchedCards() / 2}/{fetchedCards.length / 2} (
-          {(allMatchedCards() / 2 / (fetchedCards.length / 2)) * 100}
-          %)
-        </p>
+    <main
+      className={`game ${styleImage}`}
+      // style={{
+      //   backgroundImage: bgMain,
+      //   backgroundSize: "cover",
+      // }}
+    >
+      <div className="game__container container">
+        <h1 className="game__title">Запомни пары</h1>
+        <div className="game__score score">
+          <p className="score__text games-played">
+            Количество сыгранных игр в текущей сессии: {gamesPlayed}
+          </p>
+          <p className="score__text max-score">
+            Счет в текущей сессии: {currentScore}
+          </p>
+          <p className="score__text games-played-max-score">
+            Общий счет: {sessionScore + currentScore}
+          </p>
+          <p className="score__text percent">
+            Количество верно открытых пар/ всего пар (процент прохождения
+            текущей игры): {allMatchedCards() / 2}/{fetchedCards.length / 2} (
+            {Math.ceil(
+              (allMatchedCards() / 2 / (fetchedCards.length / 2)) * 100,
+            )}
+            %)
+          </p>
 
-        <p className="score__text session-score">Счет: {sessionScore}</p>
-        <p className="score__text turns">Количество ходов: {turns}</p>
-        <p className="score__text mistakes">Ошибки: {mistakes}</p>
-      </div>
-
-      <button
-        className="game__new-game btn btn-new-game"
-        onClick={handleNewGame}
-      >
-        Новая игра
-      </button>
-      <div className="game__setting-link settings-link">
-        <a className="settings-link" href="/settings">
-          Настройки
-        </a>
-      </div>
-      <div className="game__style-cards style-cards">
-        <h3 className="style-cards__title">
-          Вы можете выбрать изображения карточек здесь:
-        </h3>
-
-        {/* Кнопки для переключения стилей */}
-        <button
-          className="style-cards__btn btn btn-style-cards"
-          onClick={() => handleStyleChange("brazil")}
-        >
-          brazil
-        </button>
-        <button
-          className="style-cards__btn btn btn-style-cards"
-          onClick={() => handleStyleChange("dylan")}
-        >
-          dylan
-        </button>
-        <button
-          className="style-cards__btn btn btn-style-cards"
-          onClick={() => handleStyleChange("personas")}
-        >
-          Personas
-        </button>
-        <button
-          className="style-cards__btn btn btn-style-cards"
-          onClick={() => handleStyleChange("icons")}
-        >
-          icons
-        </button>
-        <button
-          className="style-cards__btn btn btn-style-cards"
-          onClick={() => handleStyleChange("pixel-art")}
-        >
-          Pixel Art
-        </button>
-        <div className="game__my-cards my-cards">
-          <button
-            className="style-cards__btn btn btn-style-cards btn-my-cards"
-            onClick={() => handleStyleChangeMyImage()}
-          >
-            {errorLocalStoreImages
-              ? "Пользовательские изображения не были загружены."
-              : "Мои изображения загруженные ранее. Повторно загружать не требуется."}
-          </button>
-
-          <GameImageUpload setImageBase64={setImageBase64} />
+          <p className="score__text session-score">Счет: {sessionScore}</p>
+          <p className="score__text turns">Количество ходов: {turns}</p>
+          <p className="score__text mistakes">Ошибки: {errorsGame}</p>
         </div>
-      </div>
-      <Timer
-        startTime={startTime}
-        stopTime={stopTime}
-        resetTime={resetTime}
-        setTimeInTimer={setTimeInTimer}
-        zeroTimeFunc={zeroTimeFunc}
-      />
-      <CardsGenerate
-        choiceOne={choiceOne}
-        choiceTwo={choiceTwo}
-        cards={fetchedCards}
-        setErrorsHas={setErrorsHas}
-        handleChoice={handleChoice}
-      />
-      <button className="game__end-game" onClick={handleGameEnd}>
-        Завершить игру
-      </button>
-      {/* Расчет сложности игры */}
-      <div className="game__difficulty difficulty-section">
-        <p className="difficulty-section__text">
-          Сложность рассчитывается так:
-        </p>
-        <p className="difficulty-section__text">
-          <span className="difficulty-text">"hard"</span> = количество карточек{" "}
-          <span>больше</span> 36 и время открытия всех карточек{" "}
-          <span>меньше</span> 30c
-        </p>
-        <p className="difficulty-section__text">
-          <span className="difficulty-text">"medium"</span> = количество
-          карточек <span>больше</span> 16 и время открытия всех карточек{" "}
-          <span>меньше</span> 60c
-        </p>
-        <p className="difficulty-section__text">
-          <span className="difficulty-text">"easy"</span> = количество карточек{" "}
-          <span>меньше</span> 16 и время открытия всех карточек{" "}
-          <span>больше</span> 60c
-        </p>
-      </div>
-      {/* Модальное окно с результатом */}
-      <div className="game__modal modal">
-        {isGameFall && (
-          <GameResultModal
-            isSuccess={isSuccess}
-            score={score ? score : sessionScore}
-            duration={duration}
-            difficulty={difficulty}
-            errors={errorsGame}
-            onClose={handleNewGame}
-          />
-        )}
+
+        <div className="game__style-cards style-cards">
+          <h3 className="style-cards__title">
+            Вы можете выбрать изображения карточек здесь:
+          </h3>
+
+          {/* Кнопки для переключения стилей */}
+          <div className="style-cards__buttons">
+            <button
+              className="style-cards__btn btn btn-style-cards"
+              onClick={() => handleStyleChange("brazil")}
+            >
+              brazil
+            </button>
+            <button
+              className="style-cards__btn btn btn-style-cards"
+              onClick={() => handleStyleChange("dylan")}
+            >
+              dylan
+            </button>
+            <button
+              className="style-cards__btn btn btn-style-cards"
+              onClick={() => handleStyleChange("personas")}
+            >
+              Personas
+            </button>
+            <button
+              className="style-cards__btn btn btn-style-cards"
+              onClick={() => handleStyleChange("icons")}
+            >
+              icons
+            </button>
+            <button
+              className="style-cards__btn btn btn-style-cards"
+              onClick={() => handleStyleChange("pixel-art")}
+            >
+              Pixel Art
+            </button>
+          </div>
+
+          <div className="game__my-cards my-cards">
+            <button
+              className="style-cards__btn btn btn-style-cards btn-my-cards"
+              onClick={() => handleStyleChangeMyImage()}
+            >
+              {errorLocalStoreImages
+                ? "Пользовательские изображения не были загружены."
+                : "Мои изображения загруженные ранее. Повторно загружать не требуется."}
+            </button>
+
+            <GameImageUpload setImageBase64={setImageBase64} />
+          </div>
+        </div>
+        <div className="game__setting-links">
+          <div className="game__setting-link-wrp settings-link">
+            <a
+              className="game__setting-link btn btn-settings btn-settings-link"
+              href="/settings"
+            >
+              Настройки
+            </a>
+          </div>
+          <div className="game__setting-link-wrp results-link">
+            <a
+              className="game__setting-link btn btn-settings btn-results-link"
+              href="/results"
+            >
+              Результаты
+            </a>
+          </div>
+
+          <button
+            className="game__end-game  btn btn-settings"
+            onClick={handleGameEnd}
+          >
+            Завершить игру
+          </button>
+          <button
+            className="game__new-game btn btn-new-game btn-settings"
+            onClick={handleNewGame}
+          >
+            Новая игра
+          </button>
+        </div>
+
+        <Timer
+          startTime={startTime}
+          stopTime={stopTime}
+          resetTime={resetTime}
+          setTimeInTimer={setTimeInTimer}
+          zeroTimeFunc={zeroTimeFunc}
+        />
+        <CardsGenerate
+          rows={settings.rows}
+          cols={settings.cols}
+          choiceOne={choiceOne}
+          choiceTwo={choiceTwo}
+          cards={fetchedCards}
+          setErrorsHas={setErrorsHas}
+          handleChoice={handleChoice}
+        />
+
+        {/* Расчет сложности игры */}
+        <div className="game__difficulty difficulty-section">
+          <p className="difficulty-section__text">
+            Сложность рассчитывается так:
+          </p>
+          <p className="difficulty-section__text">
+            <span className="difficulty-span">"hard"</span> = количество
+            карточек <span>больше</span> 36 и время открытия всех карточек{" "}
+            <span>меньше</span> 30c
+          </p>
+          <p className="difficulty-section__text">
+            <span className="difficulty-span">"medium"</span> = количество
+            карточек <span>больше</span> 16 и время открытия всех карточек{" "}
+            <span>меньше</span> 60c
+          </p>
+          <p className="difficulty-section__text">
+            <span className="difficulty-span">"easy"</span> = количество
+            карточек <span>меньше</span> 16 и время открытия всех карточек{" "}
+            <span>больше</span> 60c
+          </p>
+        </div>
+        {/* Модальное окно с результатом */}
+        <div className="game__modal modal">
+          {isGameFall && (
+            <GameResultModal
+              isSuccess={isSuccess}
+              score={score ? score : sessionScore}
+              duration={duration}
+              difficulty={difficulty}
+              errors={errorsGame}
+              onClose={handleNewGame}
+            />
+          )}
+        </div>
       </div>
     </main>
   );

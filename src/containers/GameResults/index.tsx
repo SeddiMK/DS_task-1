@@ -1,15 +1,7 @@
 import { useGameContext } from "@/context/GameContext";
 import { GameResult } from "@/types/general";
 import { useState, useMemo } from "react";
-
-// export interface GameResult {
-//   date: string;
-//   duration: number; // время прохождения игры в секундах
-//   errors: number; // количество ошибок
-//   difficulty: string; // сложность (например, 'easy', 'medium', 'hard')
-//   score: number; // результат игры
-// }
-
+import "./style.css";
 export interface SortOrder {
   key: keyof GameResult;
   order: "asc" | "desc";
@@ -52,49 +44,61 @@ export const GameResults: React.FC = () => {
   const totalPages = Math.ceil(results.length / resultsPerPage);
 
   return (
-    <div>
-      <h2>Game Results</h2>
-      <table>
-        <thead>
-          <tr>
-            <th onClick={() => handleSort("date")}>Дата и время</th>
-            <th onClick={() => handleSort("duration")}>
-              Время прохождения (с)
-            </th>
-            <th onClick={() => handleSort("errorsGame")}>Ошибки</th>
-            <th onClick={() => handleSort("difficulty")}>Сложность</th>
-            <th onClick={() => handleSort("score")}>Счет</th>
-          </tr>
-        </thead>
-        <tbody>
-          {paginatedResults.map((result, index) => (
-            <tr key={index}>
-              <td>{new Date(result.date).toLocaleString()}</td>
-              <td>{result.duration}</td>
-              <td>{result.errorsGame}</td>
-              <td>{result.difficulty}</td>
-              <td>{result.score}</td>
+    <main className="results">
+      <div className="results__container container">
+        <h2 className="results__title">Результаты игры</h2>
+        <table className="results__table">
+          <thead className="results__row">
+            <tr>
+              <th onClick={() => handleSort("date")}>Дата и время</th>
+              <th onClick={() => handleSort("duration")}>
+                Время прохождения (с)
+              </th>
+              <th onClick={() => handleSort("errorsGame")}>Ошибки</th>
+              <th onClick={() => handleSort("difficulty")}>Сложность</th>
+              <th onClick={() => handleSort("score")}>Счет</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody className="results__body">
+            {paginatedResults.map((result, index) => (
+              <tr key={index}>
+                <td>{new Date(result.date).toLocaleString()}</td>
+                <td>{result.duration}</td>
+                <td>{result.errorsGame}</td>
+                <td>{result.difficulty}</td>
+                <td>{result.score}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
 
-      {/* Пагинация */}
-      <div>
-        <button onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}>
-          Prev
-        </button>
-        <span>
-          Page {currentPage} of {totalPages}
-        </span>
-        <button
-          onClick={() =>
-            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-          }
+        {/* Пагинация */}
+        <div className="results__pagination pagination">
+          <button
+            className="pagination__btn btn btn-pagination btn-prev"
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          >
+            Prev
+          </button>
+          <span className="pagination__pages page-span">
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            className="pagination__btn btn btn-pagination btn-next"
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+            }
+          >
+            Next
+          </button>
+        </div>
+        <a
+          className="setting__item item item-back-main btn btn-back-main"
+          href="/"
         >
-          Next
-        </button>
+          Вернуться к игре
+        </a>
       </div>
-    </div>
+    </main>
   );
 };

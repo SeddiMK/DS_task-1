@@ -1,5 +1,3 @@
-import { error } from "console";
-
 // Функция для получения изображений с учетом выбранного источника
 export const fetchCards = async (imageStyle: string): Promise<string[]> => {
   try {

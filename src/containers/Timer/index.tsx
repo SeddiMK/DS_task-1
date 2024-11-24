@@ -74,7 +74,7 @@ export const Timer: React.FC<TimerProps> = ({
   return (
     <div className="game__timer timer">
       <p className="timer__title">
-        Времени осталось: {time ? time : settingsTime}s
+        Времени осталось: <span>{time ? time : settingsTime}</span>c
       </p>
 
       {/* <p>!!!Убрать в продакшене кнопки!!!</p>

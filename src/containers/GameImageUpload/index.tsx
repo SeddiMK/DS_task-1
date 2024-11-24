@@ -1,9 +1,6 @@
-import { compressImgToBase64 } from "@/utils/compressImgToBase64";
 import React, { useState } from "react";
-
-export interface GameImageUploadProps {
-  setImageBase64: (base64: string[]) => void;
-}
+import { GameImageUploadProps } from "@/types/general";
+import { compressImgToBase64 } from "@/utils/compressImgToBase64";
 
 export const GameImageUpload: React.FC<GameImageUploadProps> = ({
   setImageBase64,
@@ -11,59 +8,7 @@ export const GameImageUpload: React.FC<GameImageUploadProps> = ({
   const [error, setError] = useState<string | null>(null);
   const [uploadedImages, setUploadedImages] = useState<string[]>([]);
   const [loadImg, setLoadImg] = useState("");
-
-  // // Функция для сжатия и конвертации изображения в base64
-  // const compressImageToBase64 = (
-  //   file: File,
-  //   maxWidth: number,
-  //   maxHeight: number,
-  // ): Promise<string> => {
-  //   return new Promise((resolve, reject) => {
-  //     const img = new Image();
-  //     const reader = new FileReader();
-
-  //     reader.onload = () => {
-  //       img.src = reader.result as string;
-  //     };
-
-  //     reader.onerror = (err) => reject("Ошибка при чтении файла: " + err);
-
-  //     reader.readAsDataURL(file);
-
-  //     img.onload = () => {
-  //       const canvas = document.createElement("canvas");
-  //       const ctx = canvas.getContext("2d");
-
-  //       if (!ctx) {
-  //         reject("Не удалось создать контекст для холста");
-  //         return;
-  //       }
-
-  //       let width = img.width;
-  //       let height = img.height;
-
-  //       // Сжимаем изображение с учетом максимальной ширины/высоты
-  //       if (width > maxWidth || height > maxHeight) {
-  //         const aspectRatio = width / height;
-  //         if (width > height) {
-  //           width = maxWidth;
-  //           height = maxWidth / aspectRatio;
-  //         } else {
-  //           height = maxHeight;
-  //           width = maxHeight * aspectRatio;
-  //         }
-  //       }
-
-  //       canvas.width = width;
-  //       canvas.height = height;
-
-  //       ctx.drawImage(img, 0, 0, width, height);
-
-  //       const base64 = canvas.toDataURL("image/jpeg", 0.8); // Сжимаем до 80% качества
-  //       resolve(base64);
-  //     };
-  //   });
-  // };
+  const [loadingImgFlag, setLoadingImgFlag] = useState(false);
 
   const handleFileChange = async (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -86,7 +31,7 @@ export const GameImageUpload: React.FC<GameImageUploadProps> = ({
 
       const file = files[i];
       try {
-        const base64 = await compressImgToBase64(file, 300, 300);
+        const base64 = await compressImgToBase64(file, 80, 80);
 
         // Проверяем, есть ли уже это изображение в Set
         if (imageSet.has(base64)) {
@@ -112,6 +57,7 @@ export const GameImageUpload: React.FC<GameImageUploadProps> = ({
     // Сохраняем изображения в localStorage (можно хранить как строку JSON)
     localStorage.setItem("gameImages", JSON.stringify(newUploadedImages));
 
+    setLoadingImgFlag(true);
     setLoadImg(
       `Изображения успешно загружены - ${newUploadedImages.length}шт!`,
     );
@@ -120,38 +66,49 @@ export const GameImageUpload: React.FC<GameImageUploadProps> = ({
 
   return (
     <div className="my-cards__wrp">
-      <input
-        className="my-cards__inp"
-        type="file"
-        accept="image/*"
-        multiple // Разрешаем загрузку нескольких файлов
-        onChange={handleFileChange}
-      />
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <div className="my-cards__wrp-images">
-        <div className="my-cards__title-wrp">
-          <h3 className="my-cards__title">Загруженные изображения</h3>
-          <p className="my-cards__text">
-            Можно загрузить не более 18 изображений.
-          </p>
-          <p className="my-cards__text">{loadImg}</p>
-        </div>
+      <form
+        className="my-cards__form form form-my-cards"
+        method="post"
+        encType="multipart/form-data"
+      >
+        <label className="form__lbl input-file">
+          <input
+            id="file-load"
+            name="file-load"
+            className="my-cards__inp"
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={handleFileChange}
+          />
+          <span className="form__file input-file-btn">Выберите файл</span>
+          <span className="form__max-mb input-file-text">Максимум 10мб</span>
+        </label>
+      </form>
 
-        <div
-          className="my-cards__wrp-images"
-          style={{ display: "flex", flexWrap: "wrap" }}
-        >
-          {uploadedImages.map((image, index) => (
-            <img
-              key={index}
-              src={image}
-              alt={`Загруженная карточка ${index + 1}`}
-              className="my-cards__img"
-              style={{ width: "50px", height: "50px", margin: "5px" }}
-            />
-          ))}
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      {loadingImgFlag && (
+        <div className="my-cards__wrp">
+          <div className="my-cards__title-wrp">
+            <h3 className="my-cards__title">Загруженные изображения</h3>
+            <p className="my-cards__text">
+              Можно загрузить не более 18 изображений.
+            </p>
+            <p className="my-cards__text">{loadImg}</p>
+          </div>
+
+          <div className="my-cards__wrp-images">
+            {uploadedImages.map((image, index) => (
+              <img
+                key={index}
+                src={image}
+                alt={`Загруженная карточка ${index + 1}`}
+                className="my-cards__img"
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

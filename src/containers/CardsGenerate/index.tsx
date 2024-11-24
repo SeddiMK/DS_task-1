@@ -1,22 +1,17 @@
-import { Card, CardsGenerateProps, Settings } from "@/types/general";
+import { CardsGenerateProps } from "@/types/general";
 import { useState } from "react";
-import IconBack from "@public/assets/images/cards/back.svg";
+import IconBack from "@public/assets/images/cards/back-3.jpg";
 import { Loading } from "@/components/Loading";
-import { GameImageUpload } from "../GameImageUpload";
 
 export const CardsGenerate: React.FC<CardsGenerateProps> = ({
+  rows,
+  cols,
   choiceOne,
   choiceTwo,
   cards,
   setErrorsHas,
   handleChoice,
 }) => {
-  // const [settings, setSettings] = useState<Settings | null>(null);
-  // const [cardsGener, setCardsGener] = useState<Card[]>([]);
-  // const [fetchedCardsImgUrl, setFetchedCardsImgUrl] = useState([]);
-  // const [loading, setLoading] = useState(false);
-
-  const [imageBase64, setImageBase64] = useState<string[]>([]);
   const [hasError, setHasError] = useState(false);
 
   const handleError = () => {
@@ -28,42 +23,51 @@ export const CardsGenerate: React.FC<CardsGenerateProps> = ({
     setHasError(false); // картинка загрузилась успешно
   };
 
-  // console.log(settings, "settings in generate");
-  // console.log(cards, "cards in generate");
-
-  // Если настройки ещё не загружены
+  // Если карточки ещё не загружены
   if (cards.length === 0) {
     return <Loading />;
   }
-  // imageBase64;
+
   return (
     <div className="game__cards cards">
-      <div className="cards-grid">
+      <div
+        className="cards-grid"
+        style={{
+          gridTemplateColumns: `repeat(${cols}, 80px)`,
+          gridTemplateRows: `repeat(${rows}, 80px)`,
+          gap: "10px",
+        }}
+      >
         {cards.map((card, index) => (
           <div
             key={index}
             className={`cards__card card card-wrp-image ${card === choiceOne || card === choiceTwo || card.matched ? "flipped" : ""}`}
-            // className={`card ${card.isFlipped ? "flipped" : ""}`}
-            // onClick={() => handleCardFlip(index)} (card.matched ? false :
-
             onClick={() => handleChoice(card)}
           >
-            {/* <img src={card.isFlipped ? card.image : IconBack} alt="card" /> */}
-
-            {/* {hasError ? (
-            <p>Ошибка при загрузке изображения.</p> // Сообщение при ошибке
-          ) : ( */}
-            <img
-              onError={handleError} // Обработчик ошибки при загрузке
-              onLoad={handleLoad} // Обработчик успешной загрузки
-              src={
-                card === choiceOne || card === choiceTwo || card.matched
-                  ? card.src
-                  : IconBack
-              }
-              alt="card__img"
-            />
-            {/* )} */}
+            <div className="card-inner">
+              <div className="card-front">
+                <img
+                  className="card__img img img-front"
+                  onError={handleError} // Обработчик ошибки при загрузке
+                  onLoad={handleLoad} // Обработчик успешной загрузки
+                  src={IconBack}
+                  alt="image card front"
+                />
+              </div>
+              <div className="card-back">
+                <img
+                  onError={handleError} // Обработчик ошибки при загрузке
+                  onLoad={handleLoad} // Обработчик успешной загрузки
+                  className="card__img img img-front"
+                  src={
+                    card === choiceOne || card === choiceTwo || card.matched
+                      ? card.src
+                      : IconBack
+                  }
+                  alt="image card back"
+                />
+              </div>
+            </div>
           </div>
         ))}
       </div>

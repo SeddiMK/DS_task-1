@@ -1,0 +1,313 @@
+.game {
+}
+
+.game .brazil {
+}
+.game .dylan {
+}
+.game .personas {
+}
+.game .icons {
+}
+.game .pixel-art {
+}
+
+.game__container {
+  gap: 0.8rem;
+  padding: 1rem;
+}
+.game__title {
+  font-size: 24px;
+}
+.game__score {
+}
+.score {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--black);
+  padding-bottom: 1rem;
+  /* max-width: 37rem; */
+}
+.score__text {
+}
+.games-played {
+}
+.max-score {
+}
+.games-played-max-score {
+}
+.percent {
+}
+.session-score {
+}
+.turns {
+}
+.mistakes {
+}
+.game__new-game {
+}
+
+.btn-new-game {
+}
+.game__setting-link {
+}
+.settings-link {
+}
+.game__style-cards {
+}
+.style-cards {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  gap: 0.8rem;
+  width: 100%;
+}
+.style-cards__buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+}
+.style-cards__title {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+}
+.style-cards__btn {
+}
+
+.game__my-cards {
+}
+.my-cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.my-cards__wrp {
+}
+.my-cards__inp {
+}
+.my-cards__form {
+  margin-bottom: 1rem;
+}
+.input-file {
+  position: relative;
+  display: inline-block;
+}
+.input-file-btn {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+  font-size: 14px;
+  vertical-align: middle;
+  color: rgb(255 255 255);
+  text-align: center;
+  border-radius: 4px;
+  background-color: #419152;
+  line-height: 22px;
+  height: 40px;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  border: none;
+  margin: 0;
+  transition: background-color 0.2s;
+}
+.input-file-text {
+  padding: 0 10px;
+  line-height: 40px;
+  display: inline-block;
+}
+.input-file input[type="file"] {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  display: block;
+  width: 0;
+  height: 0;
+}
+
+/* Focus */
+.input-file input[type="file"]:focus + .input-file-btn {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Hover/active */
+.input-file:hover .input-file-btn {
+  background-color: var(--green);
+}
+.input-file:active .input-file-btn {
+  background-color: var(--green-active);
+}
+
+/* Disabled */
+.input-file input[type="file"]:disabled + .input-file-btn {
+  background-color: #eee;
+}
+
+/* ------------------- my-cards ------------------- */
+.my-cards__wrp-images {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.8rem;
+  border: 1px solid var(--green);
+  padding: 0.6rem;
+}
+.my-cards__title-wrp {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+}
+.my-cards__title {
+  font-size: 20px;
+  width: 100%;
+
+  text-align: center;
+}
+.my-cards__wrp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: nowrap;
+  width: fit-content;
+
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+.my-cards__wrp-images {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  width: 100%;
+}
+.my-cards__img {
+  border-radius: 0.4rem;
+  width: 3rem;
+  height: 3rem;
+}
+
+/* ------------------- setting-links ------------------- */
+.game__setting-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  text-align: center;
+}
+.settings-link {
+  width: 100%;
+  height: 2rem;
+}
+.btn-settings {
+  width: 153px;
+}
+a.btn-settings {
+  display: inline-block;
+  width: 153px;
+}
+
+a.btn-settings-link {
+  display: inline-block;
+  position: relative;
+  top: 0;
+  left: 0;
+  padding-left: 1.7rem;
+  border: 1px solid var(--green);
+}
+a.btn-settings-link::before {
+  content: "\2699";
+  display: inline-block;
+  position: absolute;
+  top: 2px;
+  left: 8px;
+
+  font-size: 24px;
+  color: #333;
+  margin-right: 8px;
+  transition: transform 0.3s ease;
+  transform-origin: center;
+}
+a.btn-settings-link:hover::before {
+  top: 2px;
+  transform: rotate(90deg);
+}
+.btn-settings-link {
+  display: inline-block;
+  position: relative;
+  top: 0;
+  left: 0;
+  padding-left: 1.9rem;
+  padding-bottom: 0.6rem;
+  border: 1px solid var(--green);
+}
+button.btn-new-game {
+}
+
+/* ------------------- setting-links ------------------- */
+.timer {
+  margin-bottom: 0.8rem;
+}
+.timer__title span {
+  font-size: 18px;
+  font-weight: 700;
+  color: red;
+}
+
+/* ------------------- cards-grid ------------------- */
+.cards {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.cards-grid {
+  display: grid;
+
+  align-items: center;
+  justify-content: center;
+  gap: 1.7rem;
+}
+
+/* ------------------- difficulty-section ------------------- */
+.difficulty-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.difficulty-section p:first-child {
+  margin-bottom: 0.6rem;
+}
+.difficulty-section__text {
+}
+.difficulty-section__text span {
+  font-size: 18px;
+  color: var(--green);
+}
+span.difficulty-span {
+  font-size: 18px;
+}
+.game__end-game {
+}
+.game__difficulty {
+}
+.difficulty-section {
+}
+.difficulty-section__text {
+}
+.difficulty-text {
+}
+.game__modal {
+}
+.modal {
+}

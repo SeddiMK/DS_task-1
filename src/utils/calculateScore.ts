@@ -17,9 +17,9 @@ export const calculateScore = (
   }
 
   // За слишком медленную игру уменьшаем счет (не работает если игра заканчивается после открытия всех карт- опционально ???)
-  if (duration > timeLimit) {
-    score -= (duration - timeLimit) * 5;
-  }
+  // if (duration > timeLimit) {
+  //   score -= (timeLimit - duration) * 5;
+  // }
 
   // Ограничиваем минимальный счет
   return Math.max(score, 0);

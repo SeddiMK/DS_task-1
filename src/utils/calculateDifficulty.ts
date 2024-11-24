@@ -6,8 +6,6 @@ export const calculateDifficulty = (
 ): string => {
   const totalCells = rows * cols;
 
-  console.log(rows, cols, timeInGame, "calculateDifficulty");
-
   if (totalCells > 36 && timeInGame < 30) {
     return "hard";
   } else if (totalCells > 16 && timeInGame < 60) {

@@ -1,0 +1,29 @@
+.results {
+  height: 100vh;
+}
+.results__container {
+  gap: 1rem;
+}
+.results__title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.results__table {
+}
+
+td,
+th {
+  text-align: center;
+  padding: 7px;
+}
+tr,
+th:hover {
+  border: 1px solid var(--black);
+}
+.results__row th {
+  cursor: pointer;
+}
+.page-span {
+  margin: 0 0.5rem;
+}

@@ -15,6 +15,10 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({
   const [gamesPlayed, setGamesPlayed] = useState<number>(
     parseInt(sessionStorage.getItem("gamesPlayed") || "0"),
   );
+  const [currentScore, setCurrentScore] = useState<number>(
+    parseInt(sessionStorage.getItem("currentScore") || "0"),
+  );
+
   const [maxScore, setMaxScore] = useState<number>(
     parseInt(localStorage.getItem("maxScore") || "0"),
   );
@@ -22,6 +26,12 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({
   const [settings, setSettings] = useState<{}>(
     parseInt(localStorage.getItem("settings") || "0"),
   );
+
+  const [results, setResults] = useState<GameResult[]>(() => {
+    // Загружаем результаты из localStorage, если они есть
+    const savedResults = localStorage.getItem("gameResults");
+    return savedResults ? JSON.parse(savedResults) : [];
+  });
 
   const [sessionScore, setSessionScore] = useState<number>(0);
 
@@ -31,21 +41,19 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({
     sessionStorage.setItem("gamesPlayed", gamesPlayed.toString());
   };
 
+  const updateSessionStorageCurrentScore = (gamesPlayed: number) => {
+    sessionStorage.setItem("currentScore", gamesPlayed.toString());
+  };
+
   const updateLocalStorageMaxScore = (maxScore: number) => {
     localStorage.setItem("maxScore", maxScore.toString());
   };
 
   const updateLocalStorageSettings = (settings: {}) => {
     // localStorage.clear(); // Очистка стор для разработки !!!
+    // sessionStorage.clear(); // Очистка стор для разработки !!!
     localStorage.setItem("settingsGame", JSON.stringify(settings));
   };
-
-  // -----------------------------------------------------------------------
-  const [results, setResults] = useState<GameResult[]>(() => {
-    // Загружаем результаты из localStorage, если они есть
-    const savedResults = localStorage.getItem("gameResults");
-    return savedResults ? JSON.parse(savedResults) : [];
-  });
 
   // Функция обновления настроек игры ???
   // const updateSettings = (newSettings: GameSettings) => {
@@ -83,6 +91,12 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({
           updateSessionStorageGamesPlayed(games);
         },
 
+        currentScore,
+        setCurrentScore: (score) => {
+          setCurrentScore(score);
+          updateSessionStorageCurrentScore(score);
+        },
+
         maxScore,
         setMaxScore: (score) => {
           setMaxScore(score);
@@ -97,7 +111,6 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({
 
         results,
         addResult,
-        // updateSettings,
       }}
     >
       {children}

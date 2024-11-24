@@ -1,10 +1,34 @@
+export interface GameResultModalProps {
+  isSuccess: boolean;
+  score: number;
+  duration: number;
+  difficulty: string;
+  errors: number;
+  onClose?: () => void;
+}
+
+export interface SettingsState {
+  rows: number;
+  cols: number;
+  timeLimit: number;
+  maxErrors: number;
+  username: string;
+  avatarImg: string;
+}
 export interface Images {
   src?: string;
   id?: number;
   matched: boolean;
   flipped: number;
 }
+
+export interface GameImageUploadProps {
+  setImageBase64: (base64: string[]) => void;
+}
+
 export interface CardsGenerateProps {
+  rows: number;
+  cols: number;
   choiceOne: Card;
   choiceTwo: Card;
   cards: Card[];
@@ -36,6 +60,7 @@ export interface GameResult {
 }
 export interface GameContextType {
   gamesPlayed: number;
+  currentScore: number;
   maxScore: number;
   sessionScore: number;
   mistakes: number;
@@ -43,6 +68,7 @@ export interface GameContextType {
   results: GameResult[];
   addResult: (result: GameResult) => void;
   setGamesPlayed: (games: number) => void;
+  setCurrentScore: (score: number) => void;
   setMaxScore: (score: number) => void;
   setSessionScore: (score: number) => void;
   setMistakes: (mistakes: number) => void;

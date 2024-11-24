@@ -1,13 +1,6 @@
 import { FC } from "react";
+import { GameResultModalProps } from "@/types/general";
 import "./style.css";
-export interface GameResultModalProps {
-  isSuccess: boolean;
-  score: number;
-  duration: number;
-  difficulty: string;
-  errors: number;
-  onClose?: () => void;
-}
 
 export const GameResultModal: FC<GameResultModalProps> = ({
   isSuccess,

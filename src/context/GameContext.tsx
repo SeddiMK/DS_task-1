@@ -41,8 +41,8 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({
     sessionStorage.setItem("gamesPlayed", gamesPlayed.toString());
   };
 
-  const updateSessionStorageCurrentScore = (gamesPlayed: number) => {
-    sessionStorage.setItem("currentScore", gamesPlayed.toString());
+  const updateSessionStorageCurrentScore = (currentScore: number) => {
+    sessionStorage.setItem("currentScore", currentScore.toString());
   };
 
   const updateLocalStorageMaxScore = (maxScore: number) => {
@@ -54,12 +54,6 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({
     // sessionStorage.clear(); // Очистка стор для разработки !!!
     localStorage.setItem("settingsGame", JSON.stringify(settings));
   };
-
-  // Функция обновления настроек игры ???
-  // const updateSettings = (newSettings: GameSettings) => {
-  //   setSettings(newSettings);
-  //   sessionStorage.setItem("gameSettings", JSON.stringify(newSettings));
-  // };
 
   // Функция добавления нового результата
   const addResult = (result: GameResult) => {

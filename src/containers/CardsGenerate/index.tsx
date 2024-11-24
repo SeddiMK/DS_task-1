@@ -23,10 +23,11 @@ export const CardsGenerate: React.FC<CardsGenerateProps> = ({
     setHasError(false); // картинка загрузилась успешно
   };
 
-  // Если карточки ещё не загружены
+  // Если настройки ещё не загружены
   if (cards.length === 0) {
     return <Loading />;
   }
+  // console.log(hasError, "hasError");
 
   return (
     <div className="game__cards cards">
@@ -44,30 +45,34 @@ export const CardsGenerate: React.FC<CardsGenerateProps> = ({
             className={`cards__card card card-wrp-image ${card === choiceOne || card === choiceTwo || card.matched ? "flipped" : ""}`}
             onClick={() => handleChoice(card)}
           >
-            <div className="card-inner">
-              <div className="card-front">
-                <img
-                  className="card__img img img-front"
-                  onError={handleError} // Обработчик ошибки при загрузке
-                  onLoad={handleLoad} // Обработчик успешной загрузки
-                  src={IconBack}
-                  alt="image card front"
-                />
+            {hasError ? (
+              <p>Ошибка при загрузке изображения.</p> // Сообщение при ошибке
+            ) : (
+              <div className="card-inner">
+                <div className="card-front">
+                  <img
+                    className="card__img img img-front"
+                    onError={handleError} // Обработчик ошибки при загрузке
+                    onLoad={handleLoad} // Обработчик успешной загрузки
+                    src={IconBack}
+                    alt="image card front"
+                  />
+                </div>
+                <div className="card-back">
+                  <img
+                    onError={handleError} // Обработчик ошибки при загрузке
+                    onLoad={handleLoad} // Обработчик успешной загрузки
+                    className="card__img img img-front"
+                    src={
+                      card === choiceOne || card === choiceTwo || card.matched
+                        ? card.src
+                        : IconBack
+                    }
+                    alt="image card back"
+                  />
+                </div>
               </div>
-              <div className="card-back">
-                <img
-                  onError={handleError} // Обработчик ошибки при загрузке
-                  onLoad={handleLoad} // Обработчик успешной загрузки
-                  className="card__img img img-front"
-                  src={
-                    card === choiceOne || card === choiceTwo || card.matched
-                      ? card.src
-                      : IconBack
-                  }
-                  alt="image card back"
-                />
-              </div>
-            </div>
+            )}
           </div>
         ))}
       </div>

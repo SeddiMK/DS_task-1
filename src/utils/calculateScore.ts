@@ -8,8 +8,16 @@ export const calculateScore = (
 ): number => {
   const totalCells = rows * cols;
 
+  // console.log(
+  //   errors,
+  //   timeLimit,
+  //   duration,
+  //   totalCells,
+  //   "errors, timeLimit, duration, totalCells ******** calculateScore ********",
+  // );
+
   // Изначальный базовый счет, который зависит от сложности (больше ячеек - выше сложность + оставшееся время)
-  let score = (timeLimit - duration) * 10 + totalCells * 5;
+  let score = duration * 10 + totalCells * 5;
 
   // Если ошибок больше, уменьшаем счет
   if (errors > 0) {

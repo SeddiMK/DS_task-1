@@ -15,7 +15,7 @@
 td,
 th {
   text-align: center;
-  padding: 7px;
+  padding: 10px;
 }
 tr,
 th:hover {
@@ -26,4 +26,30 @@ th:hover {
 }
 .page-span {
   margin: 0 0.5rem;
+}
+
+/* ---------------- индикация ------------------ */
+.sort-head {
+  position: relative;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+.sort-head.desc::after {
+  content: "\2193"; /* Стрелка вниз (символ Unicode) */
+  font-size: 15px;
+  margin-left: 7px;
+  transform: rotate(180deg);
+  transition:
+    transform 0.3s ease,
+    content 0.3s ease;
+}
+.sort-head.asc::after {
+  content: "\2191"; /* Стрелка вверх (символ Unicode) */
+  font-size: 15px;
+  margin-left: 7px;
+  transform: rotate(180deg);
+  transition:
+    transform 0.3s ease,
+    content 0.3s ease;
 }

@@ -46,6 +46,9 @@ export const Settings: React.FC = () => {
     }
   };
 
+  // Конвертируем и отправляем в local store
+  useEffect(() => {}, [avatar]);
+
   // Обработчик ввода числовых значений
   const handleNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

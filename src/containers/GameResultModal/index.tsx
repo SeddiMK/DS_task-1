@@ -18,7 +18,11 @@ export const GameResultModal: FC<GameResultModalProps> = ({
         </h2>
         <p className="content-modal__text">Сложность: {difficulty}</p>
         <p className="content-modal__text">Затраченное время: {duration}c</p>
-        <p className="content-modal__text">Ошибки: {errors}</p>
+        <p className="content-modal__text">
+          {!isSuccess
+            ? `Вы превысили количество ошибок!!!: ${errors}`
+            : `Ошибки: ${errors}`}
+        </p>
         <p className="content-modal__text">Ваш счет: {score}</p>
         <button
           className="content-modal__btn btn btn-content-modal"

@@ -50,13 +50,36 @@ export const GameResults: React.FC = () => {
         <table className="results__table">
           <thead className="results__row">
             <tr>
-              <th onClick={() => handleSort("date")}>Дата и время</th>
-              <th onClick={() => handleSort("duration")}>
+              <th
+                className={`sort-head date-time ${sortOrder.order}`}
+                onClick={() => handleSort("date")}
+              >
+                Дата и время
+              </th>
+              <th
+                className={`sort-head passage-time ${sortOrder.order}`}
+                onClick={() => handleSort("duration")}
+              >
                 Время прохождения (с)
               </th>
-              <th onClick={() => handleSort("errorsGame")}>Ошибки</th>
-              <th onClick={() => handleSort("difficulty")}>Сложность</th>
-              <th onClick={() => handleSort("score")}>Счет</th>
+              <th
+                className={`sort-head errors ${sortOrder.order}`}
+                onClick={() => handleSort("errorsGame")}
+              >
+                Ошибки
+              </th>
+              <th
+                className={`sort-head difficulty ${sortOrder.order}`}
+                onClick={() => handleSort("difficulty")}
+              >
+                Сложность
+              </th>
+              <th
+                className={`sort-head score-sort ${sortOrder.order}`}
+                onClick={() => handleSort("score")}
+              >
+                Счет
+              </th>
             </tr>
           </thead>
           <tbody className="results__body">

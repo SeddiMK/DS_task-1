@@ -228,8 +228,6 @@ export const GameField: React.FC = () => {
 
   // Открыли 2 карточки, проверка совпадений ------------------------------------
   useEffect(() => {
-    // console.log(choiceOne, "------choiceOne", choiceTwo, "-------choiceTwo");
-
     if (choiceOne && choiceTwo) {
       setDisabled(true);
 
@@ -239,8 +237,9 @@ export const GameField: React.FC = () => {
         resetTurn();
       } else {
         if (sessionScore > scoreСomplexity) {
+          // setSessionScore(sessionScore - scoreСomplexity); // !!!
         }
-        setSessionScore(sessionScore - scoreСomplexity);
+
         setMistakes(mistakes + 1);
         setTimeout(() => resetTurn(), 500);
       }
@@ -255,9 +254,8 @@ export const GameField: React.FC = () => {
     setDisabled(false);
   };
 
-  // Новая игра Сброс ------------------------------------------------------------
+  // Новая игра Сброс -----------------------------------------------
   const handleNewGame = () => {
-    // !!!
     setChoiceOne(null);
     setChoiceTwo(null);
     setTurns(0);
@@ -295,40 +293,8 @@ export const GameField: React.FC = () => {
     return fetchedCards.filter((card) => card.matched).length;
   };
 
-  // Сохраняем продолжительность игры и ошибки
-  useEffect(() => {
-    if (allCardsOpen) {
-      console.log(mistakes, "mistakes  useEffect(()");
-      console.log(errorsGame, "errorsGame  useEffect(()");
-
-      setErrorsGame(errorsGame + mistakes);
-      setCurrentScore(currentScore + sessionScore);
-      setMaxScore(maxScore + currentScore);
-    }
-
-    if (settings && allCardsOpen && settings.timeLimit > timeInTimer) {
-      setDuration(settings.timeLimit - timeInTimer);
-
-      setSessionScore(
-        calculateScore(
-          settings.timeLimit - timeInTimer,
-          mistakes,
-          settings.rows,
-          settings.cols,
-          settings.timeLimit,
-        ),
-      );
-    }
-  }, [timeInTimer, mistakes, allMatchedCards(), allCardsOpen]);
-
   // Проверка. Все карточки открыты
   useEffect(() => {
-    // console.log(
-    //   allMatchedCards(),
-    //   fetchedCards.length,
-    //   "allMatchedCards() === fetchedCards.length",
-    // );
-
     if (startTime && !zeroTime && allMatchedCards() === fetchedCards.length) {
       setIsSuccess(true);
       setAllCardsOpen(true);
@@ -388,29 +354,97 @@ export const GameField: React.FC = () => {
     }
   }, [isGame, isGameWinner, isGameOver, isGameFall, allCardsOpen]);
 
-  // useEffect(() => {
-  //   if (allCardsOpen) {
-  //     console.log(mistakes, "mistakes  useEffect(()");
-  //     console.log(errorsGame, "errorsGame  useEffect(()");
-  //     setErrorsGame(errorsGame + mistakes);
-  //     setCurrentScore(currentScore + sessionScore);
-  //     setMaxScore(maxScore + currentScore);
-  //   }
-  // }, [allCardsOpen, isGameFall]);
+  //  ==============================================================
+  // Сохраняем продолжительность игры и ошибки
+  const saveCalcScoreDuration = () => {
+    if (settings && allCardsOpen) {
+      setDuration(settings.timeLimit - timeInTimer);
+
+      //  && settings.timeLimit > timeInTimer
+
+      console.log(timeInTimer, "+++++++++++++ timeInTimer ++++++++++++");
+      console.log(mistakes, "+++++++++++++ mistakes ++++++++++++");
+
+      setSessionScore(
+        calculateScore(
+          timeInTimer, //  duration продолжительность
+          mistakes,
+          settings.rows,
+          settings.cols,
+          settings.timeLimit,
+        ),
+      );
+    }
+  };
+  useEffect(() => {
+    if (settings && allCardsOpen) {
+      setDuration(settings.timeLimit - timeInTimer);
+
+      //  && settings.timeLimit > timeInTimer
+
+      console.log(timeInTimer, "+++++++++++++ timeInTimer ++++++++++++");
+      console.log(mistakes, "+++++++++++++ mistakes ++++++++++++");
+
+      setSessionScore(
+        calculateScore(
+          timeInTimer, //  duration продолжительность
+          mistakes,
+          settings.rows,
+          settings.cols,
+          settings.timeLimit,
+        ),
+      );
+    }
+  }, [timeInTimer, isGameFall]);
+
+  useEffect(() => {
+    if (allCardsOpen) {
+      console.log(
+        maxScore + currentScore,
+        maxScore,
+        currentScore,
+        sessionScore,
+        "maxScore + currentScore,maxScore,currentScore,sessionScore 7777777777 sessionScore 7777777777777",
+      );
+
+      setErrorsGame(mistakes);
+      setCurrentScore(currentScore + sessionScore); // session store
+    }
+  }, [allCardsOpen, sessionScore]);
+
+  // Открываем модальное окно если ошибо больше чем в настройках
+  useEffect(() => {
+    if (settings) {
+      if (mistakes > settings.maxErrors) {
+        console.log(
+          settings.timeLimit,
+          timeInTimer,
+          "999999999999999999 settings.timeLimit,timeInTimer",
+        );
+
+        setDuration(settings.timeLimit - timeInTimer);
+
+        setStopTime(true);
+        setErrorsGame(mistakes);
+        setIsSuccess(false);
+        setIsGameFall(true);
+      }
+    }
+  }, [mistakes]);
 
   // Завершить игру --------------------------------------------------
   const handleGameEnd = () => {
-    // Вычисляем итоговый счет
-    const finalScore = calculateScore(
-      duration,
-      errorsGame,
-      settings.rows,
-      settings.cols,
-      settings.timeLimit,
-    );
+    // // Вычисляем итоговый счет
+    // const finalScore = calculateScore(
+    //   duration,
+    //   errorsGame,
+    //   settings.rows,
+    //   settings.cols,
+    //   settings.timeLimit,
+    // );
 
     if (duration !== 0) {
-      setScore(finalScore);
+      // setScore(finalScore);
 
       // Добавляем результат в контекст и localStorage
       const result: GameResult = {
@@ -418,10 +452,12 @@ export const GameField: React.FC = () => {
         duration,
         errorsGame,
         difficulty: gameDifficulty(),
-        score: finalScore,
+        score: currentScore,
       };
       addResult(result);
     }
+
+    setMaxScore(maxScore + currentScore); // local store
 
     if (isSuccess) setIsGameFall(true);
   };
@@ -431,6 +467,9 @@ export const GameField: React.FC = () => {
   console.log(score, "`````score`````");
   console.log(currentScore, "`````currentScore`````");
   console.log(sessionScore, "`````sessionScore`````");
+
+  console.log(isGameFall, "`````isGameFall`````");
+  console.log(isGameFall, "`````isGameFall`````");
   // console.log(fetchedCards, "`````fetchedCards`````");
 
   // Если настройки ещё не загружены
@@ -439,13 +478,7 @@ export const GameField: React.FC = () => {
   }
 
   return (
-    <main
-      className={`game ${styleImage}`}
-      // style={{
-      //   backgroundImage: bgMain,
-      //   backgroundSize: "cover",
-      // }}
-    >
+    <main className={`game ${styleImage}`}>
       <div className="game__container container">
         <h1 className="game__title">Запомни пары</h1>
         <div className="game__score score">
@@ -453,7 +486,7 @@ export const GameField: React.FC = () => {
             Количество сыгранных игр в текущей сессии: {gamesPlayed}
           </p>
           <p className="score__text max-score">
-            Счет в текущей сессии: {currentScore}
+            Счет в текущей сессии: {sessionScore}
           </p>
           <p className="score__text games-played-max-score">
             Общий счет: {sessionScore + currentScore}
@@ -469,7 +502,7 @@ export const GameField: React.FC = () => {
 
           <p className="score__text session-score">Счет: {sessionScore}</p>
           <p className="score__text turns">Количество ходов: {turns}</p>
-          <p className="score__text mistakes">Ошибки: {errorsGame}</p>
+          <p className="score__text mistakes">Ошибки: {mistakes}</p>
         </div>
 
         <div className="game__style-cards style-cards">

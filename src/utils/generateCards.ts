@@ -19,8 +19,6 @@ export const generateCards = (rows: number, cols: number, images: string[]) => {
   let totalCards = rows * cols;
   const pairs = images.slice(0, totalCards / 2);
 
-  console.log(pairs, "pairs+++++++generateCards");
-
   const cards: Card[] = [];
 
   //  Создаем пары карт из изображений

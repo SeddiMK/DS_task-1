@@ -6,7 +6,6 @@ import PixelArt from "@public/assets/images/bg/pixel-art_1.jpg";
 
 // export const bgImgUrl: string[] = [Dylan, Icon, Person, PixelArt];
 export const bgImgUrlFetch = (bgStyle: string) => {
-  console.log("------------ bgStyle bgImgUrlFetch-----------------");
   if (bgStyle === "brazil") {
     return Dylan;
   } else if (bgStyle === "dylan") {

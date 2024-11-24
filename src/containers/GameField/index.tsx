@@ -296,7 +296,7 @@ export const GameField: React.FC = () => {
           setDifficulty(gameDifficulty());
         }
 
-        console.log("--------- !!!winner!!! --------");
+        // console.log("--------- !!!winner!!! --------");
         return true;
       }
 
@@ -308,7 +308,7 @@ export const GameField: React.FC = () => {
         setIsGameFall(true);
         setDifficulty(gameDifficulty());
 
-        console.log("--------- )))game over((( --------");
+        // console.log("--------- )))game over((( --------");
         return false;
       }
     }
@@ -326,28 +326,7 @@ export const GameField: React.FC = () => {
     }
   }, [isGame, isGameWinner, isGameOver, isGameFall, allCardsOpen]);
 
-  //  ==============================================================
   // Сохраняем продолжительность игры и ошибки
-  // const saveCalcScoreDuration = () => {
-  //   if (settings && allCardsOpen) {
-  //     setDuration(settings.timeLimit - timeInTimer);
-
-  //     //  && settings.timeLimit > timeInTimer
-
-  //     console.log(timeInTimer, "+++++++++++++ timeInTimer ++++++++++++");
-  //     console.log(mistakes, "+++++++++++++ mistakes ++++++++++++");
-
-  //     setSessionScore(
-  //       calculateScore(
-  //         timeInTimer, //  duration продолжительность
-  //         mistakes,
-  //         settings.rows,
-  //         settings.cols,
-  //         settings.timeLimit,
-  //       ),
-  //     );
-  //   }
-  // };
   useEffect(() => {
     if (settings && allCardsOpen) {
       setDuration(settings.timeLimit - timeInTimer);

@@ -35,7 +35,7 @@ export const GameImageUpload: React.FC<GameImageUploadProps> = ({
 
         // Проверяем, есть ли уже это изображение в Set
         if (imageSet.has(base64)) {
-          console.log("Это изображение уже было загружено.");
+          // console.log("Это изображение уже было загружено.");
           continue; // Пропускаем это изображение, если оно уже есть
         }
 
@@ -61,7 +61,7 @@ export const GameImageUpload: React.FC<GameImageUploadProps> = ({
     setLoadImg(
       `Изображения успешно загружены - ${newUploadedImages.length}шт!`,
     );
-    console.log("Изображения успешно загружены!");
+    // console.log("Изображения успешно загружены!");
   };
 
   return (

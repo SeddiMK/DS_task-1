@@ -539,14 +539,18 @@ export const GameField: React.FC = () => {
             Новая игра
           </button>
         </div>
-
-        <Timer
-          startTime={startTime}
-          stopTime={stopTime}
-          resetTime={resetTime}
-          setTimeInTimer={setTimeInTimer}
-          zeroTimeFunc={zeroTimeFunc}
-        />
+        <div>
+          <p>
+            {settings.username ? `Имя пользователя: ${settings.username}` : ""}
+          </p>
+          <Timer
+            startTime={startTime}
+            stopTime={stopTime}
+            resetTime={resetTime}
+            setTimeInTimer={setTimeInTimer}
+            zeroTimeFunc={zeroTimeFunc}
+          />
+        </div>
 
         {/* карточки */}
         <CardsGenerate

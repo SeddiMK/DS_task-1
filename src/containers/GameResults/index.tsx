@@ -15,7 +15,7 @@ export const GameResults: React.FC = () => {
     order: "desc",
   });
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchQuery, setSearchQuery] = useState(""); // Новое состояние для фильтрации
+  const [searchQuery, setSearchQuery] = useState("");
   const resultsPerPage = 5; // Количество результатов на странице
 
   // Функция для сортировки по столбцам

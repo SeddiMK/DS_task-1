@@ -227,7 +227,8 @@ export const GameField: React.FC = () => {
       if (
         choiceOne.src === choiceTwo.src &&
         choiceOne.flipped < 2 &&
-        choiceOne.matched === false
+        choiceOne.matched === false &&
+        mistakes > 0
       ) {
         setMistakes(mistakes - 1); // Если карточку угадали, то уменьшаем ошибку
       }
@@ -419,6 +420,9 @@ export const GameField: React.FC = () => {
     }
   };
 
+  console.log(mistakes, "mistakes ---- main");
+  console.log(fetchedCards, "fetchedCards ---- main");
+
   // Если настройки ещё не загружены -----------------------------------------
   if (!settings) {
     return <Loading />;
@@ -557,6 +561,9 @@ export const GameField: React.FC = () => {
 
         {/* Расчет сложности игры */}
         <div className="game__difficulty difficulty-section">
+          <p className="difficulty-section__text">
+            Каждая повторно открытая и не разгаданная карточка уменьшает счет.
+          </p>
           <p className="difficulty-section__text">
             Сложность рассчитывается так:
           </p>

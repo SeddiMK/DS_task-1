@@ -1,0 +1,204 @@
+:root {
+  --black: #aaaaaa;
+  --white: #f3f3f3;
+  --green: #59be6e;
+  --green-active: #2e703a;
+
+  --bg-color: #fffbe1;
+  --bg-color-main: #fff193;
+  --bg-color-btn: #fffed2;
+
+  --btn-border: #3f3f3f;
+
+  --max-w: 900px;
+  --max-w-card: 80px;
+}
+
+body {
+  margin: 0;
+  font-family: "Verdana", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  background-color: var(--bg-color-main);
+  background-image: url("../public/assets/images/bg/dylan_3.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-transition: background-image 0.3s ease-in-out;
+  -o-transition: background-image 0.3s ease-in-out;
+  transition: background-image 0.3s ease-in-out;
+}
+
+main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: start;
+  overflow-x: hidden;
+
+  max-width: var(--max-w);
+  background-color: var(--bg-color);
+  border-radius: 1rem;
+
+  padding: 1rem;
+}
+
+/* -------------------- card ------------------- */
+.card {
+  border-radius: 0.7rem;
+  cursor: pointer;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: var(--max-w-card);
+  height: var(--max-w-card);
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+}
+.card:hover {
+  -webkit-box-shadow:
+    rgba(0, 0, 0, 0.19) 0px 10px 20px,
+    rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  box-shadow:
+    rgba(0, 0, 0, 0.19) 0px 10px 20px,
+    rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+.card img {
+  border-radius: 0.6rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  -webkit-transition: -webkit-transform 0.5s ease;
+  transition: -webkit-transform 0.5s ease;
+  -o-transition: transform 0.5s ease;
+  transition: transform 0.5s ease;
+  transition:
+    transform 0.5s ease,
+    -webkit-transform 0.5s ease;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.card.flipped .card-inner {
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(
+    180deg
+  ); /* Переворачиваем карточку на 180 градусов по вертикали */
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden; /* Скрываем заднюю сторону при перевороте */
+  background-color: var(--bg-color-btn);
+  border-radius: 0.6rem;
+}
+
+.card-front {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.card-back {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: white;
+  font-size: 20px;
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+.card-front img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+/* -------------------- btn ------------------- */
+.btn {
+  background-color: var(--bg-color-btn);
+
+  border-radius: 0.6rem;
+  border: 1px solid var(--black);
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  padding: 0.5rem;
+}
+.style-cards__buttons .btn {
+  text-transform: capitalize;
+}
+.btn-style-cards {
+  border: 1px solid var(--btn-border);
+}
+
+.btn:hover {
+  background-color: var(--bg-color);
+  -webkit-box-shadow:
+    rgba(0, 0, 0, 0.19) 0px 10px 20px,
+    rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  box-shadow:
+    rgba(0, 0, 0, 0.19) 0px 10px 20px,
+    rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+.btn:active {
+  color: var(--black);
+  -webkit-box-shadow:
+    rgba(0, 0, 0, 0.16) 0px 3px 6px,
+    rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  box-shadow:
+    rgba(0, 0, 0, 0.16) 0px 3px 6px,
+    rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.btn-my-cards {
+  margin-bottom: 1rem;
+}

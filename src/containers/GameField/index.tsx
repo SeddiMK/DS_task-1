@@ -565,6 +565,10 @@ export const GameField: React.FC = () => {
             Каждая повторно открытая и не разгаданная карточка уменьшает счет.
           </p>
           <p className="difficulty-section__text">
+            Чтобы занести данные в таблицу результаты не забудьте нажать на
+            "Завершить игру".
+          </p>
+          <p className="difficulty-section__text">
             Сложность рассчитывается так:
           </p>
           <p className="difficulty-section__text">

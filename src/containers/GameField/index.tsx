@@ -205,16 +205,34 @@ export const GameField: React.FC = () => {
   useEffect(() => {
     if (choiceOne && choiceTwo) {
       setDisabled(true);
+      if (
+        choiceOne.src !== choiceTwo.src &&
+        (choiceOne.flipped > 1 || choiceTwo.flipped > 1) &&
+        choiceOne.matched === false
+      ) {
+        setMistakes(mistakes + 1); //  Каждая повторно открытая и не разгаданная карточка уменьшает счет.
+      }
 
       if (choiceOne.src === choiceTwo.src) {
         setFetchedCards(matchedCards);
         resetTurn();
       } else {
-        setMistakes(mistakes + 1);
-        setTimeout(() => resetTurn(), 500);
+        setTimeout(() => resetTurn(), 400);
       }
     }
-  }, [choiceOne, choiceTwo]);
+  }, [choiceOne, choiceTwo, fetchedCards]);
+
+  useEffect(() => {
+    if (choiceOne && choiceTwo) {
+      if (
+        choiceOne.src === choiceTwo.src &&
+        choiceOne.flipped < 2 &&
+        choiceOne.matched === false
+      ) {
+        setMistakes(mistakes - 1); // Если карточку угадали, то уменьшаем ошибку
+      }
+    }
+  }, [choiceOne, choiceTwo, mistakes]);
 
   // Сброс -------------------------------------========-----------------------
   const resetTurn = () => {

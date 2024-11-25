@@ -2,6 +2,7 @@ import { useGameContext } from "@/context/GameContext";
 import { GameResult } from "@/types/general";
 import { useState, useMemo } from "react";
 import "./style.css";
+
 export interface SortOrder {
   key: keyof GameResult;
   order: "asc" | "desc";
@@ -14,6 +15,7 @@ export const GameResults: React.FC = () => {
     order: "desc",
   });
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState(""); // Новое состояние для фильтрации
   const resultsPerPage = 5; // Количество результатов на странице
 
   // Функция для сортировки по столбцам
@@ -23,16 +25,30 @@ export const GameResults: React.FC = () => {
     setSortOrder({ key, order: newOrder });
   };
 
+  // Фильтрация данных по запросу
+  const filteredResults = useMemo(() => {
+    return results.filter((result) => {
+      const searchText = searchQuery.toLowerCase();
+      return (
+        result.date.toLowerCase().includes(searchText) ||
+        result.duration.toString().includes(searchText) ||
+        result.errorsGame.toString().includes(searchText) ||
+        result.difficulty.toLowerCase().includes(searchText) ||
+        result.score.toString().includes(searchText)
+      );
+    });
+  }, [results, searchQuery]);
+
   // Мемоизация сортированных данных
   const sortedResults = useMemo(() => {
-    return [...results].sort((a, b) => {
+    return [...filteredResults].sort((a, b) => {
       if (sortOrder.order === "asc") {
         return a[sortOrder.key] > b[sortOrder.key] ? 1 : -1;
       } else {
         return a[sortOrder.key] < b[sortOrder.key] ? 1 : -1;
       }
     });
-  }, [results, sortOrder]);
+  }, [filteredResults, sortOrder]);
 
   // Мемоизация пагинированных данных
   const paginatedResults = useMemo(() => {
@@ -41,12 +57,24 @@ export const GameResults: React.FC = () => {
   }, [currentPage, sortedResults]);
 
   // Общее количество страниц
-  const totalPages = Math.ceil(results.length / resultsPerPage);
+  const totalPages = Math.ceil(filteredResults.length / resultsPerPage);
 
   return (
     <main className="results">
       <div className="results__container container">
         <h2 className="results__title">Результаты игры</h2>
+
+        {/* Поле для поиска */}
+        <div className="results__search">
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Поиск по всем колонкам..."
+            className="results__search-input"
+          />
+        </div>
+
         <table className="results__table">
           <thead className="results__row">
             <tr>
